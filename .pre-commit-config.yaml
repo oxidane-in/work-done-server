@@ -1,0 +1,30 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+      - id: go-vet
+      - id: go-lint
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        additional_dependencies:
+          - prettier@3.1.0
+        args: [--write, --loglevel=warn]
+  - repo: https://github.com/diffplug/spotless
+    rev: v6.25.0
+    hooks:
+      - id: spotless
+        additional_dependencies:
+          - com.diffplug.spotless:spotless-plugin-gradle:6.25.0
+        args: [apply, --files, "src/**/*.java"]
