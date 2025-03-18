@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.25.xsd">
+
+
+    <!--    Material Manufacturer, Vendor, and Type-->
+    <changeSet id="20250318122001" author="prashant">
+        <sqlFile path="001_Master_CREATE_MaterialManufacturer_Vendor_Type.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Project Status and Scope -->
+    <changeSet id="20250318122002" author="prashant">
+        <sqlFile path="003_Master_CREATE_ProjectScope_Status.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Unit Type -->
+    <changeSet id="20250318122003" author="prashant">
+        <sqlFile path="005_Master_CREATE_UnitType.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Worker Type -->
+    <changeSet id="20250318122004" author="prashant">
+        <sqlFile path="007_Master_CREATE_WorkerType.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Unit of Measurement -->
+    <changeSet id="20250318122005" author="prashant">
+        <sqlFile path="009_Master_CREATE_UnitOfMeasurement.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>
