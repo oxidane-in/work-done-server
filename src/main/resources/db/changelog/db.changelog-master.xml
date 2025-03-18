@@ -5,32 +5,31 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.25.xsd">
 
-    <changeSet id="20250315195801" author="prashant">
-        <sqlFile path="../01_CREATE_TABLE_MaterialManufacturer_Vendor_Type.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
+    <!-- Include conditional changelogs -->
+    <include file="../master/db.changelog-master-schema.xml" relativeToChangelogFile="true">
+        <conditions>
+            <condition type="bean" bean="databaseInitializationConfig" property="shouldRunCreateTables"/>
+        </conditions>
+    </include>
 
-    <changeSet id="20250315195802" author="prashant">
-        <sqlFile path="../02_CREATE_TABLE_Material.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
+    <include file="../master/db.changelog-master-data.xml" relativeToChangelogFile="true">
+        <conditions>
+            <condition type="bean" bean="databaseInitializationConfig" property="shouldRunInsertData"/>
+        </conditions>
+    </include>
 
-    <changeSet id="20250315195803" author="prashant">
-        <sqlFile path="../03_INSERT_TABLE_MaterialManufacturer_Vendor_Type.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
+    <!-- Core schema changes -->
+    <include file="../core/db.changelog-core-schema.xml" relativeToChangelogFile="true">
+        <conditions>
+            <condition type="bean" bean="databaseInitializationConfig" property="shouldRunCreateTables"/>
+        </conditions>
+    </include>
 
-    <changeSet id="20250315195804" author="prashant">
-        <sqlFile path="../04_INSERT_TABLE_Material.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
+    <!-- Core data changes -->
+    <include file="../core/db.changelog-core-data.xml" relativeToChangelogFile="true">
+        <conditions>
+            <condition type="bean" bean="databaseInitializationConfig" property="shouldRunInsertData"/>
+        </conditions>
+    </include>
 
-</databaseChangeLog>
+</databaseChangeLog> 
