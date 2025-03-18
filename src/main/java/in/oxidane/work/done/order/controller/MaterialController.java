@@ -20,7 +20,7 @@ import java.util.List;
  * Defines endpoints to manage materials.
  */
 @Tag(name = "Material", description = "Material Management API")
-@RequestMapping("/api/materials")
+@RequestMapping("/api/v1/materials")
 public interface MaterialController {
 
     /**
@@ -155,4 +155,4 @@ public interface MaterialController {
             @Parameter(description = "ID of the material to delete", required = true)
             @PathVariable Integer materialId
     );
-} 
+}
