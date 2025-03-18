@@ -1,6 +1,6 @@
 package in.oxidane.work.done.order.dao;
 
-import in.oxidane.work.done.order.model.Material;
+import in.oxidane.work.done.order.entity.Material;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,4 +58,4 @@ public interface MaterialDao {
      * @return true if a material with the given ID exists, false otherwise
      */
     boolean existsById(Integer materialId);
-} 
+}

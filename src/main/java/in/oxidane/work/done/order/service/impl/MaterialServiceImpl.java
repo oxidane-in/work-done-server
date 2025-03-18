@@ -1,4 +1,4 @@
-package in.oxidane.work.done.order.service;
+package in.oxidane.work.done.order.service.impl;
 
 import in.oxidane.work.done.exception.ResourceNotFoundException;
 import in.oxidane.work.done.order.dao.MaterialDao;
@@ -7,12 +7,12 @@ import in.oxidane.work.done.order.dao.MaterialTypeDao;
 import in.oxidane.work.done.order.dao.MaterialVendorDao;
 import in.oxidane.work.done.order.dto.MaterialRequest;
 import in.oxidane.work.done.order.dto.MaterialResponse;
+import in.oxidane.work.done.order.entity.Material;
 import in.oxidane.work.done.order.mapper.MaterialMapper;
-import in.oxidane.work.done.order.model.Material;
+import in.oxidane.work.done.order.service.MaterialService;
 import in.oxidane.work.done.order.validator.MaterialRequestValidator;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +24,11 @@ import java.util.stream.Collectors;
  * Implementation of the MaterialService interface.
  * Provides business logic for Material operations.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MaterialServiceImpl implements MaterialService {
 
-    private static final Logger logger = LoggerFactory.getLogger(MaterialServiceImpl.class);
     private final MaterialDao materialDao;
     private final MaterialManufacturerDao materialManufacturerDao;
     private final MaterialVendorDao materialVendorDao;
@@ -38,13 +38,13 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional
-    public MaterialResponse create(MaterialRequest request) {
+    public MaterialResponse createMaterial(MaterialRequest request) {
         try {
             MDC.put("operation", "createMaterial");
             MDC.put("materialName", request.getMaterialName());
 
-            logger.info("Creating new material: {}", request.getMaterialName());
-            
+            log.info("Creating new material: {}", request.getMaterialName());
+
             // Validate request
             validator.validateForCreate(request);
 
@@ -56,7 +56,7 @@ public class MaterialServiceImpl implements MaterialService {
             return materialDao.create(material)
                     .map(materialMapper::toResponse)
                     .orElseThrow(() -> {
-                        logger.error("Failed to create material: {}", request.getMaterialName());
+                        log.error("Failed to create material: {}", request.getMaterialName());
                         return new RuntimeException("Failed to create material");
                     });
         } finally {
@@ -67,17 +67,17 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional(readOnly = true)
-    public MaterialResponse getById(Integer materialId) throws ResourceNotFoundException {
+    public MaterialResponse getMaterialById(Integer materialId) throws ResourceNotFoundException {
         try {
             MDC.put("operation", "getMaterial");
             MDC.put("materialId", materialId.toString());
 
-            logger.info("Retrieving material with ID: {}", materialId);
+            log.info("Retrieving material with ID: {}", materialId);
 
             return materialDao.getById(materialId)
                     .map(materialMapper::toResponse)
                     .orElseThrow(() -> {
-                        logger.error("Material not found with ID: {}", materialId);
+                        log.error("Material not found with ID: {}", materialId);
                         return new ResourceNotFoundException("Material not found with ID: " + materialId);
                     });
         } finally {
@@ -88,14 +88,14 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MaterialResponse> getAll() {
+    public List<MaterialResponse> getAllMaterials() {
         try {
             MDC.put("operation", "getAllMaterials");
 
-            logger.info("Retrieving all materials");
+            log.info("Retrieving all materials");
 
             List<Material> materials = materialDao.getAll();
-            logger.info("Found {} materials", materials.size());
+            log.info("Found {} materials", materials.size());
 
             return materials.stream()
                     .map(materialMapper::toResponse)
@@ -107,27 +107,27 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional
-    public MaterialResponse update(Integer materialId, MaterialRequest request) throws ResourceNotFoundException {
+    public MaterialResponse updateMaterial(Integer materialId, MaterialRequest request) throws ResourceNotFoundException {
         try {
             MDC.put("operation", "updateMaterial");
             MDC.put("materialId", materialId.toString());
             MDC.put("materialName", request.getMaterialName());
 
-            logger.info("Updating material with ID: {}", materialId);
-            
+            log.info("Updating material with ID: {}", materialId);
+
             // Validate request
             validator.validateForUpdate(request, materialId);
 
             // Check if material exists
             if (!materialDao.existsById(materialId)) {
-                logger.error("Material not found with ID: {}", materialId);
+                log.error("Material not found with ID: {}", materialId);
                 throw new ResourceNotFoundException("Material not found with ID: " + materialId);
             }
 
             // Get the existing material first
             Material existingMaterial = materialDao.getById(materialId)
                     .orElseThrow(() -> new ResourceNotFoundException("Material not found with ID: " + materialId));
-            
+
             // Update the material using builder
             Material updatedMaterial = materialMapper.updateEntityFromRequest(existingMaterial, request);
             updatedMaterial = setRelatedEntities(updatedMaterial, request);
@@ -136,7 +136,7 @@ public class MaterialServiceImpl implements MaterialService {
             return materialDao.update(materialId, updatedMaterial)
                     .map(materialMapper::toResponse)
                     .orElseThrow(() -> {
-                        logger.error("Failed to update material with ID: {}", materialId);
+                        log.error("Failed to update material with ID: {}", materialId);
                         return new RuntimeException("Failed to update material");
                     });
         } finally {
@@ -148,27 +148,27 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional
-    public void delete(Integer materialId) throws ResourceNotFoundException {
+    public void deleteMaterial(Integer materialId) throws ResourceNotFoundException {
         try {
             MDC.put("operation", "deleteMaterial");
             MDC.put("materialId", materialId.toString());
 
-            logger.info("Deleting material with ID: {}", materialId);
+            log.info("Deleting material with ID: {}", materialId);
 
             // Check if material exists
             if (!materialDao.existsById(materialId)) {
-                logger.error("Material not found with ID: {}", materialId);
+                log.error("Material not found with ID: {}", materialId);
                 throw new ResourceNotFoundException("Material not found with ID: " + materialId);
             }
 
             // Delete the material
             boolean deleted = materialDao.delete(materialId);
             if (!deleted) {
-                logger.error("Failed to delete material with ID: {}", materialId);
+                log.error("Failed to delete material with ID: {}", materialId);
                 throw new RuntimeException("Failed to delete material with ID: " + materialId);
             }
 
-            logger.info("Successfully deleted material with ID: {}", materialId);
+            log.info("Successfully deleted material with ID: {}", materialId);
         } finally {
             MDC.remove("operation");
             MDC.remove("materialId");
@@ -184,7 +184,7 @@ public class MaterialServiceImpl implements MaterialService {
      */
     private Material setRelatedEntities(Material material, MaterialRequest request) {
         Material.MaterialBuilder builder = material.toBuilder();
-        
+
         // Set related entities if IDs are provided
         if (request.getMaterialManufacturerId() != null) {
             materialManufacturerDao.getById(request.getMaterialManufacturerId())
@@ -200,7 +200,7 @@ public class MaterialServiceImpl implements MaterialService {
             materialTypeDao.getById(request.getMaterialTypeId())
                     .ifPresent(builder::materialType);
         }
-        
+
         return builder.build();
     }
 }

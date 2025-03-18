@@ -1,4 +1,4 @@
-package in.oxidane.work.done.order.model;
+package in.oxidane.work.done.order.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "material", schema = "work_done_dbo")
+@Table(name = "material", schema = "core")
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor

@@ -18,7 +18,7 @@ public interface MaterialService {
      * @param request The material data for creation
      * @return The created material response
      */
-    MaterialResponse create(MaterialRequest request);
+    MaterialResponse createMaterial(MaterialRequest request);
 
     /**
      * Retrieves a material by its ID.
@@ -27,14 +27,14 @@ public interface MaterialService {
      * @return The material response
      * @throws ResourceNotFoundException if the material is not found
      */
-    MaterialResponse getById(Integer materialId) throws ResourceNotFoundException;
+    MaterialResponse getMaterialById(Integer materialId) throws ResourceNotFoundException;
 
     /**
      * Retrieves all materials.
      *
      * @return A list of all material responses
      */
-    List<MaterialResponse> getAll();
+    List<MaterialResponse> getAllMaterials();
 
     /**
      * Updates an existing material.
@@ -44,7 +44,7 @@ public interface MaterialService {
      * @return The updated material response
      * @throws ResourceNotFoundException if the material is not found
      */
-    MaterialResponse update(Integer materialId, MaterialRequest request) throws ResourceNotFoundException;
+    MaterialResponse updateMaterial(Integer materialId, MaterialRequest request) throws ResourceNotFoundException;
 
     /**
      * Deletes a material by its ID.
@@ -52,5 +52,5 @@ public interface MaterialService {
      * @param materialId The ID of the material to delete
      * @throws ResourceNotFoundException if the material is not found
      */
-    void delete(Integer materialId) throws ResourceNotFoundException;
-} 
+    void deleteMaterial(Integer materialId) throws ResourceNotFoundException;
+}

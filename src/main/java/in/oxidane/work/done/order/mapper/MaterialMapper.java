@@ -2,10 +2,10 @@ package in.oxidane.work.done.order.mapper;
 
 import in.oxidane.work.done.order.dto.MaterialRequest;
 import in.oxidane.work.done.order.dto.MaterialResponse;
-import in.oxidane.work.done.order.model.Material;
-import in.oxidane.work.done.order.model.MaterialManufacturer;
-import in.oxidane.work.done.order.model.MaterialType;
-import in.oxidane.work.done.order.model.MaterialVendor;
+import in.oxidane.work.done.order.entity.Material;
+import in.oxidane.work.done.order.entity.MaterialManufacturer;
+import in.oxidane.work.done.order.entity.MaterialType;
+import in.oxidane.work.done.order.entity.MaterialVendor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,7 +33,7 @@ public class MaterialMapper {
                 .materialRatePerUnit(request.getMaterialRatePerUnit())
                 .build();
     }
-    
+
     /**
      * Updates an existing Material entity with data from MaterialRequest DTO.
      *
@@ -45,7 +45,7 @@ public class MaterialMapper {
         if (material == null || request == null) {
             return material;
         }
-        
+
         return material.toBuilder()
                 .materialName(request.getMaterialName())
                 .materialUnit(request.getMaterialUnit())
@@ -73,28 +73,28 @@ public class MaterialMapper {
                 .materialPackSize(material.getMaterialPackSize())
                 .materialRatePerPack(material.getMaterialRatePerPack())
                 .materialRatePerUnit(material.getMaterialRatePerUnit());
-        
+
         // Set manufacturer details if available
         MaterialManufacturer manufacturer = material.getMaterialManufacturer();
         if (manufacturer != null) {
             builder.materialManufacturerId(manufacturer.getMaterialManufacturerId())
                    .materialManufacturerName(manufacturer.getMaterialManufacturerName());
         }
-        
+
         // Set vendor details if available
         MaterialVendor vendor = material.getMaterialVendor();
         if (vendor != null) {
             builder.materialVendorId(vendor.getMaterialVendorId())
                    .materialVendorName(vendor.getMaterialVendorName());
         }
-        
+
         // Set type details if available
         MaterialType type = material.getMaterialType();
         if (type != null) {
             builder.materialTypeId(type.getMaterialTypeId())
                    .materialTypeName(type.getMaterialTypeName());
         }
-        
+
         return builder.build();
     }
-} 
+}
