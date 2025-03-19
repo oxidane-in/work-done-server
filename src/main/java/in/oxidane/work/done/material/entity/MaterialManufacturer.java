@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "material_manufacturer", schema = "work_done_dbo")
+@Table(name = "material_manufacturer", schema = "master")
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
