@@ -17,15 +17,6 @@ WHERE NOT EXISTS (
     WHERE ps.project_status_handle = v.project_status_handle
 );
 
--- Create project_scope table if it does not exist
-CREATE TABLE IF NOT EXISTS master.project_scope (
-    project_scope_id SERIAL PRIMARY KEY,
-    project_scope_name VARCHAR(100) NOT NULL,
-    project_scope_handle VARCHAR(50) UNIQUE NOT NULL,
-    project_scope_desc VARCHAR(255) NULL,
-    project_scope_is_active BOOLEAN DEFAULT TRUE
-);
-
 -- Insert sample data into project_scope if they don't exist
 INSERT INTO master.project_scope (project_scope_name, project_scope_handle, project_scope_desc)
 SELECT v.project_scope_name,
