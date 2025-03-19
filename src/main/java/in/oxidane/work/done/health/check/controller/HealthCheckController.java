@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/health")
+@RequestMapping("/api/health/check")
 @Tag(name = "Health", description = "Health check API for service status monitoring")
 public class HealthCheckController {
 
