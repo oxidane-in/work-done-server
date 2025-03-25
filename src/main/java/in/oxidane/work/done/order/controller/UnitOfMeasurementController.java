@@ -60,7 +60,7 @@ public interface UnitOfMeasurementController {
     @GetMapping("/{id}")
     ResponseEntity<UnitOfMeasurementResponse> getUnitOfMeasurementById(
         @Parameter(description = "Unit of measurement ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -98,7 +98,7 @@ public interface UnitOfMeasurementController {
     @PutMapping("/{id}")
     ResponseEntity<UnitOfMeasurementResponse> updateUnitOfMeasurement(
         @Parameter(description = "Unit of measurement ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated unit of measurement details", required = true)
         @RequestBody UnitOfMeasurementRequest request
     );
@@ -120,6 +120,6 @@ public interface UnitOfMeasurementController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteUnitOfMeasurement(
         @Parameter(description = "Unit of measurement ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
-} 
+}

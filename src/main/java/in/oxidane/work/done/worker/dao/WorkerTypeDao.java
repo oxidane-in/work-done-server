@@ -25,7 +25,7 @@ public interface WorkerTypeDao {
      * @param id The ID of the worker type to retrieve
      * @return The worker type if found, otherwise empty Optional
      */
-    Optional<WorkerType> getById(int id);
+    Optional<WorkerType> getById(Long id);
 
     /**
      * Retrieve all worker types
@@ -47,7 +47,7 @@ public interface WorkerTypeDao {
      *
      * @param id The ID of the worker type to delete
      */
-    void delete(int id);
+    void delete(Long id);
 
     /**
      * Check if a worker type exists by its ID
@@ -55,5 +55,5 @@ public interface WorkerTypeDao {
      * @param id The ID of the worker type to check
      * @return True if the worker type exists, false otherwise
      */
-    boolean existsById(int id);
+    boolean existsById(Long id);
 }

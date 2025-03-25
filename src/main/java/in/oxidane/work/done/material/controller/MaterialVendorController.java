@@ -51,7 +51,7 @@ public interface MaterialVendorController {
             @ApiResponse(responseCode = "404", description = "Material vendor not found")
     })
     ResponseEntity<MaterialVendorResponse> getMaterialVendorById(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
 
     /**
      * Get all material vendors
@@ -79,7 +79,7 @@ public interface MaterialVendorController {
             @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     ResponseEntity<MaterialVendorResponse> updateMaterialVendor(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable int id,
+            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id,
             @Valid @RequestBody MaterialVendorRequest request);
 
     /**
@@ -95,5 +95,5 @@ public interface MaterialVendorController {
             @ApiResponse(responseCode = "404", description = "Material vendor not found")
     })
     ResponseEntity<Void> deleteMaterialVendor(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
 }

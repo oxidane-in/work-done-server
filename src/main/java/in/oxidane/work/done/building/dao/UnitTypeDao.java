@@ -10,22 +10,22 @@ import java.util.Optional;
  * Provides methods to interact with the database for UnitType operations.
  */
 public interface UnitTypeDao {
-    
+
     /**
      * Retrieves a unit type by its ID.
      *
      * @param id The ID of the unit type to retrieve
      * @return An Optional containing the unit type if found, or empty if not found
      */
-    Optional<UnitType> getById(Integer id);
-    
+    Optional<UnitType> getById(Long id);
+
     /**
      * Retrieves all unit types.
      *
      * @return A list of all unit types
      */
     List<UnitType> getAll();
-    
+
     /**
      * Creates a new unit type.
      *
@@ -33,7 +33,7 @@ public interface UnitTypeDao {
      * @return The created unit type with generated ID
      */
     UnitType create(UnitType unitType);
-    
+
     /**
      * Updates an existing unit type.
      *
@@ -41,22 +41,22 @@ public interface UnitTypeDao {
      * @return The updated unit type
      */
     UnitType update(UnitType unitType);
-    
+
     /**
      * Deletes a unit type by its ID.
      *
      * @param id The ID of the unit type to delete
      */
-    void delete(Integer id);
-    
+    void delete(Long id);
+
     /**
      * Checks if a unit type with the specified ID exists.
      *
      * @param id The ID to check
      * @return true if the unit type exists, false otherwise
      */
-    boolean existsById(Integer id);
-    
+    boolean existsById(Long id);
+
     /**
      * Checks if a unit type with the specified handle exists.
      *
@@ -64,13 +64,5 @@ public interface UnitTypeDao {
      * @return true if a unit type with the handle exists, false otherwise
      */
     boolean existsByHandle(String handle);
-    
-    /**
-     * Checks if a unit type with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another unit type with the handle exists, false otherwise
-     */
-    boolean existsByHandleAndIdNot(String handle, Integer id);
-} 
+
+}

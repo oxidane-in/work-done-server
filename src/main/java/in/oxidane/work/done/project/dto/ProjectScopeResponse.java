@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProjectScopeResponse {
 
     @Schema(description = "Unique identifier for the project scope", example = "1")
-    private Integer projectScopeId;
+    private Long projectScopeId;
 
     @Schema(description = "Name of the project scope", example = "Commercial Building")
     private String projectScopeName;

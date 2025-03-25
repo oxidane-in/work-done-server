@@ -5,14 +5,6 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
 
-    <!-- Create schemas -->
-    <changeSet id="20250319000001" author="prashant">
-        <sql>
-            CREATE SCHEMA IF NOT EXISTS core;
-            CREATE SCHEMA IF NOT EXISTS master;
-        </sql>
-    </changeSet>
-
     <!-- Master schema changes -->
     <include file="master/db.changelog-master-schema.xml" relativeToChangelogFile="true"/>
 

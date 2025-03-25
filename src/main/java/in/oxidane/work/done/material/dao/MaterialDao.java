@@ -25,7 +25,7 @@ public interface MaterialDao {
      * @param materialId The ID of the material to retrieve
      * @return An Optional containing the material if found, or empty if not found
      */
-    Optional<Material> getById(Integer materialId);
+    Optional<Material> getById(Long materialId);
 
     /**
      * Retrieves all materials from the system.
@@ -41,7 +41,7 @@ public interface MaterialDao {
      * @param material The updated material data
      * @return An Optional containing the updated material if successful, or empty if failed
      */
-    Optional<Material> update(Integer materialId, Material material);
+    Optional<Material> update(Long materialId, Material material);
 
     /**
      * Deletes a material from the system.
@@ -49,7 +49,7 @@ public interface MaterialDao {
      * @param materialId The ID of the material to delete
      * @return true if the material was deleted, false otherwise
      */
-    boolean delete(Integer materialId);
+    boolean delete(Long materialId);
 
     /**
      * Checks if a material exists by its ID.
@@ -57,5 +57,5 @@ public interface MaterialDao {
      * @param materialId The ID to check
      * @return true if a material with the given ID exists, false otherwise
      */
-    boolean existsById(Integer materialId);
+    boolean existsById(Long materialId);
 }

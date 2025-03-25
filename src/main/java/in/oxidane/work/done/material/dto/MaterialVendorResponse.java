@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MaterialVendorResponse {
 
     @Schema(description = "Material vendor ID", example = "1")
-    private int materialVendorId;
+    private Long materialVendorId;
 
     @Schema(description = "Name of the material vendor", example = "ABC Suppliers")
     private String materialVendorName;

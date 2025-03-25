@@ -24,7 +24,7 @@ public interface UnitOfMeasurementService {
      * @param id The ID of the unit of measurement to retrieve
      * @return The unit of measurement
      */
-    UnitOfMeasurementResponse getUnitOfMeasurementById(Integer id);
+    UnitOfMeasurementResponse getUnitOfMeasurementById(Long id);
 
     /**
      * Retrieves all units of measurement.
@@ -40,12 +40,12 @@ public interface UnitOfMeasurementService {
      * @param request The request containing updated unit of measurement details
      * @return The updated unit of measurement
      */
-    UnitOfMeasurementResponse updateUnitOfMeasurement(Integer id, UnitOfMeasurementRequest request);
+    UnitOfMeasurementResponse updateUnitOfMeasurement(Long id, UnitOfMeasurementRequest request);
 
     /**
      * Deletes a unit of measurement by its ID.
      *
      * @param id The ID of the unit of measurement to delete
      */
-    void deleteUnitOfMeasurement(Integer id);
-} 
+    void deleteUnitOfMeasurement(Long id);
+}

@@ -28,7 +28,6 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      */
     @Override
     public ResponseEntity<UnitOfMeasurementResponse> createUnitOfMeasurement(UnitOfMeasurementRequest request) {
-        log.info("REST request to create unit of measurement");
         UnitOfMeasurementResponse response = unitOfMeasurementService.createUnitOfMeasurement(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -37,8 +36,7 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitOfMeasurementResponse> getUnitOfMeasurementById(Integer id) {
-        log.info("REST request to get unit of measurement with id: {}", id);
+    public ResponseEntity<UnitOfMeasurementResponse> getUnitOfMeasurementById(Long id) {
         UnitOfMeasurementResponse response = unitOfMeasurementService.getUnitOfMeasurementById(id);
         return ResponseEntity.ok(response);
     }
@@ -48,7 +46,6 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      */
     @Override
     public ResponseEntity<List<UnitOfMeasurementResponse>> getAllUnitsOfMeasurement() {
-        log.info("REST request to get all units of measurement");
         List<UnitOfMeasurementResponse> response = unitOfMeasurementService.getAllUnitsOfMeasurement();
         return ResponseEntity.ok(response);
     }
@@ -57,8 +54,7 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitOfMeasurementResponse> updateUnitOfMeasurement(Integer id, UnitOfMeasurementRequest request) {
-        log.info("REST request to update unit of measurement with id: {}", id);
+    public ResponseEntity<UnitOfMeasurementResponse> updateUnitOfMeasurement(Long id, UnitOfMeasurementRequest request) {
         UnitOfMeasurementResponse response = unitOfMeasurementService.updateUnitOfMeasurement(id, request);
         return ResponseEntity.ok(response);
     }
@@ -67,9 +63,8 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<Void> deleteUnitOfMeasurement(Integer id) {
-        log.info("REST request to delete unit of measurement with id: {}", id);
+    public ResponseEntity<Void> deleteUnitOfMeasurement(Long id) {
         unitOfMeasurementService.deleteUnitOfMeasurement(id);
         return ResponseEntity.noContent().build();
     }
-} 
+}

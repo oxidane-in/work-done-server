@@ -17,7 +17,7 @@ public interface ProjectScopeDao {
      * @param id The ID of the project scope to retrieve
      * @return An Optional containing the project scope if found, or empty if not found
      */
-    Optional<ProjectScope> getById(Integer id);
+    Optional<ProjectScope> getById(Long id);
 
     /**
      * Retrieves all project scopes.
@@ -47,7 +47,7 @@ public interface ProjectScopeDao {
      *
      * @param id The ID of the project scope to delete
      */
-    void delete(Integer id);
+    void delete(Long id);
 
     /**
      * Checks if a project scope with the specified ID exists.
@@ -55,7 +55,7 @@ public interface ProjectScopeDao {
      * @param id The ID to check
      * @return true if the project scope exists, false otherwise
      */
-    boolean existsById(Integer id);
+    boolean existsById(Long id);
 
     /**
      * Checks if a project scope with the specified handle exists.
@@ -64,13 +64,4 @@ public interface ProjectScopeDao {
      * @return true if a project scope with the handle exists, false otherwise
      */
     boolean existsByHandle(String handle);
-
-    /**
-     * Checks if a project scope with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another project scope with the handle exists, false otherwise
-     */
-    boolean existsByHandleAndIdNot(String handle, Integer id);
 }

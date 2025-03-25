@@ -1,6 +1,6 @@
 package in.oxidane.work.done.worker.service.impl;
 
-import in.oxidane.work.done.exception.ResourceNotFoundException;
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.worker.dao.WorkerTypeDao;
 import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Implementation of the WorkerTypeService interface.
@@ -33,13 +32,13 @@ public class WorkerTypeServiceImpl implements WorkerTypeService {
     @Transactional
     public WorkerTypeResponse createWorkerType(WorkerTypeRequest request) {
         log.debug("Service - Creating worker type: {}", request.getWorkerTypeName());
-        
+
         // Validate request
         validator.validateForCreate(request);
-        
+
         // Map request to entity
         WorkerType workerType = mapper.toEntity(request);
-        
+
         // Save entity
         return workerTypeDao.create(workerType)
                 .map(mapper::toResponse)
@@ -48,9 +47,9 @@ public class WorkerTypeServiceImpl implements WorkerTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public WorkerTypeResponse getWorkerTypeById(int id) {
+    public WorkerTypeResponse getWorkerTypeById(Long id) {
         log.debug("Service - Fetching worker type with ID: {}", id);
-        
+
         return workerTypeDao.getById(id)
                 .map(mapper::toResponse)
                 .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
@@ -60,24 +59,22 @@ public class WorkerTypeServiceImpl implements WorkerTypeService {
     @Transactional(readOnly = true)
     public List<WorkerTypeResponse> getAllWorkerTypes() {
         log.debug("Service - Fetching all worker types");
-        
-        return workerTypeDao.getAll().stream()
-                .map(mapper::toResponse)
-                .collect(Collectors.toList());
+
+        return mapper.toResponse(workerTypeDao.getAll());
     }
 
     @Override
     @Transactional
-    public WorkerTypeResponse updateWorkerType(int id, WorkerTypeRequest request) {
+    public WorkerTypeResponse updateWorkerType(Long id, WorkerTypeRequest request) {
         log.debug("Service - Updating worker type with ID: {}", id);
-        
+
         // Validate request
         validator.validateForUpdate(request, id);
-        
+
         // Map request to entity
         WorkerType workerType = mapper.toEntity(request);
-        workerType.setWorkerTypeId(id);
-        
+        workerType.toBuilder().workerTypeId(id).build();
+
         // Update entity
         return workerTypeDao.update(workerType)
                 .map(mapper::toResponse)
@@ -86,13 +83,13 @@ public class WorkerTypeServiceImpl implements WorkerTypeService {
 
     @Override
     @Transactional
-    public void deleteWorkerType(int id) {
+    public void deleteWorkerType(Long id) {
         log.debug("Service - Deleting worker type with ID: {}", id);
-        
+
         if (!workerTypeDao.existsById(id)) {
             throw new ResourceNotFoundException("Worker type not found with ID: " + id);
         }
-        
+
         workerTypeDao.delete(id);
     }
-} 
+}

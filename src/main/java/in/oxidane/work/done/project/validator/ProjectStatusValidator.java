@@ -1,6 +1,6 @@
 package in.oxidane.work.done.project.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.project.dto.ProjectStatusRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class ProjectStatusValidator {
      * @param id The ID of the project status being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(ProjectStatusRequest request, Integer id) {
+    public void validateForUpdate(ProjectStatusRequest request, Long id) {
         log.debug("Validating project status update request for id: {}", id);
         if (id == null) {
             throw new ValidationException("Project status ID cannot be null for update");

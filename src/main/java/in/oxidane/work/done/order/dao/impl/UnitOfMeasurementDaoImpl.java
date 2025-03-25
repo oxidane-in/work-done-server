@@ -25,7 +25,7 @@ public class UnitOfMeasurementDaoImpl implements UnitOfMeasurementDao {
      * {@inheritDoc}
      */
     @Override
-    public Optional<UnitOfMeasurement> getById(Integer id) {
+    public Optional<UnitOfMeasurement> getById(Long id) {
         log.debug("Fetching unit of measurement with id: {}", id);
         return unitOfMeasurementRepository.findById(id);
     }
@@ -61,7 +61,7 @@ public class UnitOfMeasurementDaoImpl implements UnitOfMeasurementDao {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         log.debug("Deleting unit of measurement with id: {}", id);
         unitOfMeasurementRepository.deleteById(id);
     }
@@ -70,7 +70,7 @@ public class UnitOfMeasurementDaoImpl implements UnitOfMeasurementDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         log.debug("Checking if unit of measurement exists with id: {}", id);
         return unitOfMeasurementRepository.existsById(id);
     }
@@ -83,13 +83,4 @@ public class UnitOfMeasurementDaoImpl implements UnitOfMeasurementDao {
         log.debug("Checking if unit of measurement exists with handle: {}", handle);
         return unitOfMeasurementRepository.existsByUomHandle(handle);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean existsByHandleAndIdNot(String handle, Integer id) {
-        log.debug("Checking if unit of measurement exists with handle: {} excluding id: {}", handle, id);
-        return unitOfMeasurementRepository.existsByUomHandleAndUomIdNot(handle, id);
-    }
-} 
+}

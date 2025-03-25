@@ -60,7 +60,7 @@ public interface ProjectStatusController {
     @GetMapping("/{id}")
     ResponseEntity<ProjectStatusResponse> getProjectStatusById(
         @Parameter(description = "Project status ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -98,7 +98,7 @@ public interface ProjectStatusController {
     @PutMapping("/{id}")
     ResponseEntity<ProjectStatusResponse> updateProjectStatus(
         @Parameter(description = "Project status ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated project status details", required = true)
         @RequestBody ProjectStatusRequest request
     );
@@ -120,6 +120,6 @@ public interface ProjectStatusController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteProjectStatus(
         @Parameter(description = "Project status ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 }

@@ -1,6 +1,4 @@
-BEGIN;
-
-INSERT INTO core.material
+INSERT INTO core_schema.material
     (material_id, material_name, material_manufacturer_id, material_vendor_id, material_type_id, material_unit, material_pack_size, material_rate_per_pack)
 SELECT
     v.material_id,
@@ -63,9 +61,7 @@ FROM (
         (48, 'Hybrid Silicone Waterproofing', 8, 9, 2, 'Liters', 12.00, 5800.00),
         (49, 'Corrosion-resistant Waterproofing', 9, 10, 2, 'Liters', 15.00, 7200.00),
         (50, 'Multi-purpose Waterproofing Sealant', 10, 1, 2, 'Liters', 18.00, 7500.00)
-) AS v(material_id, material_name, material_manufacturer_id, material_vendor_id, material_type_id, material_unit, material_pack_size, material_rate_per_pack)
+    ) AS v(material_id, material_name, material_manufacturer_id, material_vendor_id, material_type_id, material_unit, material_pack_size, material_rate_per_pack)
 WHERE NOT EXISTS (
-    SELECT 1 FROM core.material m WHERE m.material_id = v.material_id
+    SELECT 1 FROM core_schema.material m WHERE m.material_id = v.material_id
 );
-
-COMMIT;

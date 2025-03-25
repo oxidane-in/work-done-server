@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MaterialManufacturerResponse {
 
     @Schema(description = "Material manufacturer ID", example = "1")
-    private int id;
+    private Long id;
 
     @Schema(description = "Material manufacturer name", example = "ABC Industries")
     private String name;

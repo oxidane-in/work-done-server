@@ -51,7 +51,7 @@ public interface MaterialTypeController {
             @ApiResponse(responseCode = "404", description = "Material type not found")
     })
     ResponseEntity<MaterialTypeResponse> getMaterialTypeById(
-            @Parameter(description = "Material type ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material type ID", required = true) @PathVariable Long id);
 
     /**
      * Get all material types
@@ -79,7 +79,7 @@ public interface MaterialTypeController {
             @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     ResponseEntity<MaterialTypeResponse> updateMaterialType(
-            @Parameter(description = "Material type ID", required = true) @PathVariable int id,
+            @Parameter(description = "Material type ID", required = true) @PathVariable Long id,
             @Valid @RequestBody MaterialTypeRequest request);
 
     /**
@@ -95,5 +95,5 @@ public interface MaterialTypeController {
             @ApiResponse(responseCode = "404", description = "Material type not found")
     })
     ResponseEntity<Void> deleteMaterialType(
-            @Parameter(description = "Material type ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material type ID", required = true) @PathVariable Long id);
 }

@@ -39,7 +39,7 @@ public interface WorkerTypeController {
     @GetMapping("/{id}")
     ResponseEntity<WorkerTypeResponse> getWorkerTypeById(
             @Parameter(description = "ID of worker type to fetch", required = true)
-            @PathVariable int id);
+            @PathVariable Long id);
 
     @Operation(summary = "Get all worker types")
     @ApiResponses(value = {
@@ -59,7 +59,7 @@ public interface WorkerTypeController {
     @PutMapping("/{id}")
     ResponseEntity<WorkerTypeResponse> updateWorkerType(
             @Parameter(description = "ID of worker type to update", required = true)
-            @PathVariable int id,
+            @PathVariable Long id,
             @Parameter(description = "Updated worker type details", required = true)
             @RequestBody WorkerTypeRequest request);
 
@@ -71,5 +71,5 @@ public interface WorkerTypeController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteWorkerType(
             @Parameter(description = "ID of worker type to delete", required = true)
-            @PathVariable int id);
-} 
+            @PathVariable Long id);
+}

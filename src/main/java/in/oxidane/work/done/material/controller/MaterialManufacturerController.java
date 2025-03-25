@@ -58,7 +58,7 @@ public interface MaterialManufacturerController {
             @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
     })
     ResponseEntity<MaterialManufacturerResponse> getMaterialManufacturerById(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id);
 
     /**
      * Get all material manufacturers
@@ -86,7 +86,7 @@ public interface MaterialManufacturerController {
             @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     ResponseEntity<MaterialManufacturerResponse> updateMaterialManufacturer(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id,
+            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id,
             @Valid @RequestBody MaterialManufacturerRequest request);
 
     /**
@@ -102,5 +102,5 @@ public interface MaterialManufacturerController {
             @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
     })
     ResponseEntity<Void> deleteMaterialManufacturer(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id);
+            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id);
 }

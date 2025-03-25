@@ -1,4 +1,4 @@
-package in.oxidane.work.done.config;
+package in.oxidane.work.done.common.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -14,6 +14,9 @@ import java.util.List;
 @Configuration
 public class OpenApiConfig {
 
+    @Value("${spring.application.name}")
+    private String applicationName;
+
     @Value("${application.version:v0.0.1-SNAPSHOT}")
     private String applicationVersion;
 
@@ -21,7 +24,7 @@ public class OpenApiConfig {
     public OpenAPI workDoneOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Work Done Server API Documentation")
+                        .title(applicationName + " API Documentation")
                         .description("API documentation for the Work Done application")
                         .version(applicationVersion)
                         .contact(new Contact()

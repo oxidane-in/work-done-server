@@ -1,5 +1,7 @@
 package in.oxidane.work.done.worker.entity;
 
+import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,35 +10,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "worker_type", schema = "master")
-@Data
+@Getter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkerType {
+@Table(name = DbConstants.WORKER_TYPE, schema = DbConstants.MASTER_SCHEMA)
+public class WorkerType extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "worker_type_id")
-    private int workerTypeId;
+    @Column(name = DbConstants.WORKER_TYPE_ID)
+    private Long workerTypeId;
 
-    @Column(name = "worker_type_name", nullable = false)
+    @Column(name = DbConstants.WORKER_TYPE_NAME, nullable = false, length = 50)
     private String workerTypeName;
 
-    @Column(name = "worker_type_rate", nullable = false, precision = 10, scale = 2)
+    @Column(name = DbConstants.WORKER_TYPE_RATE, nullable = false, precision = 10, scale = 2)
     private BigDecimal workerTypeRate;
 
-    @Column(name = "worker_type_handle", nullable = false, unique = true)
+    @Column(name = DbConstants.WORKER_TYPE_HANDLE, nullable = false, unique = true, length = 50)
     private String workerTypeHandle;
 
-    @Column(name = "worker_type_desc")
+    @Column(name = DbConstants.WORKER_TYPE_DESC)
     private String workerTypeDesc;
 
-    @Column(name = "worker_type_is_active", columnDefinition = "boolean default true")
-    private Boolean workerTypeIsActive;
+    @Override
+    protected void prePersistOrUpdate() {
+        this.workerTypeHandle = workerTypeName.toLowerCase().replace(" ", "-");
+    }
 }

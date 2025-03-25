@@ -1,4 +1,4 @@
-package in.oxidane.work.done.exception;
+package in.oxidane.work.done.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

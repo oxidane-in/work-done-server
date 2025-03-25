@@ -1,54 +1,19 @@
 package in.oxidane.work.done.worker.mapper;
 
+import in.oxidane.work.done.common.config.MapstructMapperConfig;
 import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
 import in.oxidane.work.done.worker.entity.WorkerType;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-/**
- * Mapper class for converting between WorkerType entity and DTOs.
- */
-@Component
-public class WorkerTypeMapper {
+import java.util.List;
 
-    /**
-     * Convert WorkerType entity to WorkerTypeResponse DTO
-     *
-     * @param entity The WorkerType entity
-     * @return WorkerTypeResponse DTO
-     */
-    public WorkerTypeResponse toResponse(WorkerType entity) {
-        if (entity == null) {
-            return null;
-        }
+@Mapper(config = MapstructMapperConfig.class)
+public interface WorkerTypeMapper {
 
-        return WorkerTypeResponse.builder()
-                .workerTypeId(entity.getWorkerTypeId())
-                .workerTypeName(entity.getWorkerTypeName())
-                .workerTypeRate(entity.getWorkerTypeRate())
-                .workerTypeHandle(entity.getWorkerTypeHandle())
-                .workerTypeDesc(entity.getWorkerTypeDesc())
-                .workerTypeIsActive(entity.getWorkerTypeIsActive())
-                .build();
-    }
+    WorkerTypeResponse toResponse(WorkerType entity);
 
-    /**
-     * Convert WorkerTypeRequest DTO to WorkerType entity
-     *
-     * @param request The WorkerTypeRequest DTO
-     * @return WorkerType entity
-     */
-    public WorkerType toEntity(WorkerTypeRequest request) {
-        if (request == null) {
-            return null;
-        }
+    WorkerType toEntity(WorkerTypeRequest request);
 
-        return WorkerType.builder()
-                .workerTypeName(request.getWorkerTypeName())
-                .workerTypeRate(request.getWorkerTypeRate())
-                .workerTypeHandle(request.getWorkerTypeHandle())
-                .workerTypeDesc(request.getWorkerTypeDesc())
-                .workerTypeIsActive(request.getWorkerTypeIsActive())
-                .build();
-    }
-} 
+    List<WorkerTypeResponse> toResponse(List<WorkerType> workerTypes);
+}

@@ -1,6 +1,6 @@
 package in.oxidane.work.done.order.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class UnitOfMeasurementValidator {
      * @param id The ID of the unit of measurement being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(UnitOfMeasurementRequest request, Integer id) {
+    public void validateForUpdate(UnitOfMeasurementRequest request, Long id) {
         log.debug("Validating unit of measurement update request for id: {}", id);
         if (id == null) {
             throw new ValidationException("Unit of measurement ID cannot be null for update");
@@ -69,16 +69,8 @@ public class UnitOfMeasurementValidator {
             throw new ValidationException("Unit of measurement symbol must be less than " + MAX_SYMBOL_LENGTH + " characters");
         }
 
-        if (!StringUtils.hasText(request.getUomHandle())) {
-            throw new ValidationException("Unit of measurement handle is required");
-        }
-
-        if (request.getUomHandle().length() > MAX_HANDLE_LENGTH) {
-            throw new ValidationException("Unit of measurement handle must be less than " + MAX_HANDLE_LENGTH + " characters");
-        }
-
-        if (request.getUomHandleDesc() != null && request.getUomHandleDesc().length() > MAX_DESC_LENGTH) {
+        if (request.getUomDesc() != null && request.getUomDesc().length() > MAX_DESC_LENGTH) {
             throw new ValidationException("Unit of measurement description must be less than " + MAX_DESC_LENGTH + " characters");
         }
     }
-} 
+}

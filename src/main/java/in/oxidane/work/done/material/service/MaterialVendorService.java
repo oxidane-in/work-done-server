@@ -1,5 +1,6 @@
 package in.oxidane.work.done.material.service;
 
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
 
@@ -25,9 +26,9 @@ public interface MaterialVendorService {
      *
      * @param id The ID of the material vendor to retrieve
      * @return The MaterialVendorResponse if found
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if vendor not found
+     * @throws ResourceNotFoundException if vendor not found
      */
-    MaterialVendorResponse getMaterialVendorById(int id);
+    MaterialVendorResponse getMaterialVendorById(Long id);
 
     /**
      * Get all material vendors
@@ -42,16 +43,16 @@ public interface MaterialVendorService {
      * @param id The ID of the material vendor to update
      * @param request The MaterialVendorRequest containing updated information
      * @return The updated MaterialVendorResponse
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if vendor not found
+     * @throws ResourceNotFoundException if vendor not found
      * @throws RuntimeException if update fails
      */
-    MaterialVendorResponse updateMaterialVendor(int id, MaterialVendorRequest request);
+    MaterialVendorResponse updateMaterialVendor(Long id, MaterialVendorRequest request);
 
     /**
      * Delete material vendor by ID
      *
      * @param id The ID of the material vendor to delete
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if vendor not found
+     * @throws ResourceNotFoundException if vendor not found
      */
-    void deleteMaterialVendor(int id);
+    void deleteMaterialVendor(Long id);
 }

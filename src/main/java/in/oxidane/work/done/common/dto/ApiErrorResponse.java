@@ -1,4 +1,4 @@
-package in.oxidane.work.done.dto;
+package in.oxidane.work.done.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,11 +23,11 @@ public class ApiErrorResponse {
     private String error;
     private String message;
     private String path;
-    
+
     /**
      * List of specific error messages.
      * Only populated for validation errors.
      * For non-validation errors, this will be null or empty.
      */
     private List<String> errorMessages;
-} 
+}

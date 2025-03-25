@@ -1,6 +1,4 @@
-BEGIN;
-
-INSERT INTO master.unit_of_measurement (uom_name, uom_symbol, uom_handle, uom_handle_desc)
+INSERT INTO master_schema.unit_of_measurement (uom_name, uom_symbol, uom_handle, uom_handle_desc)
 SELECT v.uom_name, v.uom_symbol, v.uom_handle, v.uom_handle_desc
 FROM (
     VALUES
@@ -30,7 +28,5 @@ FROM (
         ('Celsius', '°C', 'celsius', 'Measurement in degrees Celsius')
 ) AS v(uom_name, uom_symbol, uom_handle, uom_handle_desc)
 WHERE NOT EXISTS (
-    SELECT 1 FROM master.unit_of_measurement WHERE uom_handle = v.uom_handle
+    SELECT 1 FROM master_schema.unit_of_measurement WHERE uom_handle = v.uom_handle
 );
-
-COMMIT;

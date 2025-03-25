@@ -25,7 +25,7 @@ public interface MaterialTypeDao {
      * @param id The ID of the material type to retrieve
      * @return The material type if found, otherwise empty Optional
      */
-    Optional<MaterialType> getById(int id);
+    Optional<MaterialType> getById(Long id);
 
     /**
      * Retrieve all material types
@@ -47,7 +47,7 @@ public interface MaterialTypeDao {
      *
      * @param id The ID of the material type to delete
      */
-    void delete(int id);
+    void delete(Long id);
 
     /**
      * Check if a material type exists by its ID
@@ -55,5 +55,5 @@ public interface MaterialTypeDao {
      * @param id The ID of the material type to check
      * @return True if the material type exists, false otherwise
      */
-    boolean existsById(int id);
+    boolean existsById(Long id);
 }

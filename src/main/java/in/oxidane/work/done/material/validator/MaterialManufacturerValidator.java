@@ -1,6 +1,6 @@
 package in.oxidane.work.done.material.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.material.dto.MaterialManufacturerRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

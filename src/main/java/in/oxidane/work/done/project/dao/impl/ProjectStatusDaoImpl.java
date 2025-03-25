@@ -25,7 +25,7 @@ public class ProjectStatusDaoImpl implements ProjectStatusDao {
      * {@inheritDoc}
      */
     @Override
-    public Optional<ProjectStatus> getById(Integer id) {
+    public Optional<ProjectStatus> getById(Long id) {
         log.debug("Fetching project status with id: {}", id);
         return projectStatusRepository.findById(id);
     }
@@ -61,7 +61,7 @@ public class ProjectStatusDaoImpl implements ProjectStatusDao {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         log.debug("Deleting project status with id: {}", id);
         projectStatusRepository.deleteById(id);
     }
@@ -70,7 +70,7 @@ public class ProjectStatusDaoImpl implements ProjectStatusDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         log.debug("Checking if project status exists with id: {}", id);
         return projectStatusRepository.existsById(id);
     }
@@ -82,14 +82,5 @@ public class ProjectStatusDaoImpl implements ProjectStatusDao {
     public boolean existsByHandle(String handle) {
         log.debug("Checking if project status exists with handle: {}", handle);
         return projectStatusRepository.existsByProjectStatusHandle(handle);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean existsByHandleAndIdNot(String handle, Integer id) {
-        log.debug("Checking if project status exists with handle: {} excluding id: {}", handle, id);
-        return projectStatusRepository.existsByProjectStatusHandleAndProjectStatusIdNot(handle, id);
     }
 }

@@ -21,13 +21,12 @@ public class ProjectScopeMapper {
         if (entity == null) {
             return null;
         }
-        
+
         return ProjectScopeResponse.builder()
             .projectScopeId(entity.getProjectScopeId())
             .projectScopeName(entity.getProjectScopeName())
             .projectScopeHandle(entity.getProjectScopeHandle())
             .projectScopeDesc(entity.getProjectScopeDesc())
-            .projectScopeIsActive(entity.getProjectScopeIsActive())
             .build();
     }
 
@@ -41,12 +40,11 @@ public class ProjectScopeMapper {
         if (request == null) {
             return null;
         }
-        
+
         return ProjectScope.builder()
             .projectScopeName(request.getProjectScopeName())
             .projectScopeHandle(request.getProjectScopeHandle())
             .projectScopeDesc(request.getProjectScopeDesc())
-            .projectScopeIsActive(request.getProjectScopeIsActive() != null ? request.getProjectScopeIsActive() : true)
             .build();
     }
-} 
+}

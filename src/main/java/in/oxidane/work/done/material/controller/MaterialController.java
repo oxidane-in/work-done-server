@@ -74,7 +74,7 @@ public interface MaterialController {
     @GetMapping("/{materialId}")
     ResponseEntity<MaterialResponse> getMaterialById(
             @Parameter(description = "ID of the material to retrieve", required = true)
-            @PathVariable Integer materialId
+            @PathVariable Long materialId
     );
 
     /**
@@ -125,7 +125,7 @@ public interface MaterialController {
     @PutMapping("/{materialId}")
     ResponseEntity<MaterialResponse> updateMaterial(
             @Parameter(description = "ID of the material to update", required = true)
-            @PathVariable Integer materialId,
+            @PathVariable Long materialId,
             @Valid @RequestBody MaterialRequest request
     );
 
@@ -153,6 +153,6 @@ public interface MaterialController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     ResponseEntity<Void> deleteMaterial(
             @Parameter(description = "ID of the material to delete", required = true)
-            @PathVariable Integer materialId
+            @PathVariable Long materialId
     );
 }

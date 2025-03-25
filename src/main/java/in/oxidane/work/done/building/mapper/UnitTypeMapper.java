@@ -3,13 +3,16 @@ package in.oxidane.work.done.building.mapper;
 import in.oxidane.work.done.building.dto.UnitTypeRequest;
 import in.oxidane.work.done.building.dto.UnitTypeResponse;
 import in.oxidane.work.done.building.entity.UnitType;
-import org.springframework.stereotype.Component;
+import in.oxidane.work.done.common.config.MapstructMapperConfig;
+import org.mapstruct.Mapper;
+
+import java.util.List;
 
 /**
  * Mapper class for converting between UnitType entity and its DTOs.
  */
-@Component
-public class UnitTypeMapper {
+@Mapper(config = MapstructMapperConfig.class)
+public interface UnitTypeMapper {
 
     /**
      * Converts a UnitType entity to a UnitTypeResponse DTO.
@@ -17,19 +20,7 @@ public class UnitTypeMapper {
      * @param entity The UnitType entity to convert
      * @return The corresponding UnitTypeResponse DTO, or null if the entity is null
      */
-    public UnitTypeResponse toResponse(UnitType entity) {
-        if (entity == null) {
-            return null;
-        }
-        
-        return UnitTypeResponse.builder()
-            .unitTypeId(entity.getUnitTypeId())
-            .unitTypeName(entity.getUnitTypeName())
-            .unitTypeHandle(entity.getUnitTypeHandle())
-            .unitTypeDesc(entity.getUnitTypeDesc())
-            .isActive(entity.getIsActive())
-            .build();
-    }
+    UnitTypeResponse toResponse(UnitType entity);
 
     /**
      * Converts a UnitTypeRequest DTO to a UnitType entity.
@@ -37,17 +28,7 @@ public class UnitTypeMapper {
      * @param request The UnitTypeRequest DTO to convert
      * @return The corresponding UnitType entity, or null if the request is null
      */
-    public UnitType toEntity(UnitTypeRequest request) {
-        if (request == null) {
-            return null;
-        }
-        
-        UnitType entity = new UnitType();
-        entity.setUnitTypeName(request.getUnitTypeName());
-        entity.setUnitTypeHandle(request.getUnitTypeHandle());
-        entity.setUnitTypeDesc(request.getUnitTypeDesc());
-        entity.setIsActive(request.getIsActive() != null ? request.getIsActive() : true);
-        
-        return entity;
-    }
-} 
+    UnitType toEntity(UnitTypeRequest request);
+
+    List<UnitTypeResponse> toResponse(List<UnitType> unitTypes);
+}

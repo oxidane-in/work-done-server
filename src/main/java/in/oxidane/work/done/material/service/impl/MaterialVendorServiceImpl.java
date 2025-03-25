@@ -1,6 +1,6 @@
 package in.oxidane.work.done.material.service.impl;
 
-import in.oxidane.work.done.exception.ResourceNotFoundException;
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.material.dao.MaterialVendorDao;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
@@ -49,7 +49,7 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
     @Override
     @Transactional(readOnly = true)
-    public MaterialVendorResponse getMaterialVendorById(int id) {
+    public MaterialVendorResponse getMaterialVendorById(Long id) {
         log.info("Fetching material vendor with ID: {}", id);
 
         MaterialVendor materialVendor = materialVendorDao.getById(id)
@@ -80,7 +80,7 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
     @Override
     @Transactional
-    public MaterialVendorResponse updateMaterialVendor(int id, MaterialVendorRequest request) {
+    public MaterialVendorResponse updateMaterialVendor(Long id, MaterialVendorRequest request) {
         log.info("Updating material vendor with ID: {}", id);
         log.debug("Update request details: {}", request);
 
@@ -92,7 +92,7 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
         // Create entity from request and set the ID
         MaterialVendor materialVendor = materialVendorMapper.toEntity(request);
-        materialVendor.setMaterialVendorId(id);
+        materialVendor.toBuilder().materialVendorId(id).build();
 
         // Update the entity
         MaterialVendor updatedVendor = materialVendorDao.update(materialVendor)
@@ -109,7 +109,7 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
     @Override
     @Transactional
-    public void deleteMaterialVendor(int id) {
+    public void deleteMaterialVendor(Long id) {
         log.info("Deleting material vendor with ID: {}", id);
 
         // Check if entity exists

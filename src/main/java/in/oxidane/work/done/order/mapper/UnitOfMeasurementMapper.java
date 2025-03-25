@@ -21,14 +21,13 @@ public class UnitOfMeasurementMapper {
         if (entity == null) {
             return null;
         }
-        
+
         return UnitOfMeasurementResponse.builder()
             .uomId(entity.getUomId())
             .uomName(entity.getUomName())
             .uomSymbol(entity.getUomSymbol())
             .uomHandle(entity.getUomHandle())
-            .uomHandleDesc(entity.getUomHandleDesc())
-            .uomHandleIsActive(entity.getUomHandleIsActive())
+            .uomDesc(entity.getUomDesc())
             .build();
     }
 
@@ -42,14 +41,14 @@ public class UnitOfMeasurementMapper {
         if (request == null) {
             return null;
         }
-        
+
         UnitOfMeasurement entity = new UnitOfMeasurement();
-        entity.setUomName(request.getUomName());
-        entity.setUomSymbol(request.getUomSymbol());
-        entity.setUomHandle(request.getUomHandle());
-        entity.setUomHandleDesc(request.getUomHandleDesc());
-        entity.setUomHandleIsActive(request.getUomHandleIsActive() != null ? request.getUomHandleIsActive() : true);
-        
+        entity.toBuilder()
+            .uomName(request.getUomName())
+            .uomSymbol(request.getUomSymbol())
+            .uomDesc(request.getUomDesc())
+            .build();
+
         return entity;
     }
-} 
+}

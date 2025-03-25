@@ -1,6 +1,6 @@
 package in.oxidane.work.done.material.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.material.dao.MaterialManufacturerDao;
 import in.oxidane.work.done.material.dao.MaterialTypeDao;
 import in.oxidane.work.done.material.dao.MaterialVendorDao;
@@ -49,7 +49,7 @@ public class MaterialRequestValidator {
      * @param materialId The ID of the material being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(MaterialRequest request, Integer materialId) {
+    public void validateForUpdate(MaterialRequest request, Long materialId) {
         List<String> errors = validateCommon(request);
 
         if (materialId == null || materialId <= 0) {

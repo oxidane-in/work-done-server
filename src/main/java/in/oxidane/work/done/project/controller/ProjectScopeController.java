@@ -60,7 +60,7 @@ public interface ProjectScopeController {
     @GetMapping("/{id}")
     ResponseEntity<ProjectScopeResponse> getProjectScopeById(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -98,7 +98,7 @@ public interface ProjectScopeController {
     @PutMapping("/{id}")
     ResponseEntity<ProjectScopeResponse> updateProjectScope(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated project scope details", required = true)
         @RequestBody ProjectScopeRequest request
     );
@@ -120,6 +120,6 @@ public interface ProjectScopeController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteProjectScope(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 }

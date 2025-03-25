@@ -25,7 +25,7 @@ public interface MaterialManufacturerDao {
      * @param id The ID of the material manufacturer to retrieve
      * @return The material manufacturer if found, otherwise empty Optional
      */
-    Optional<MaterialManufacturer> getById(int id);
+    Optional<MaterialManufacturer> getById(Long id);
 
     /**
      * Retrieve all material manufacturers
@@ -47,7 +47,7 @@ public interface MaterialManufacturerDao {
      *
      * @param id The ID of the material manufacturer to delete
      */
-    void delete(int id);
+    void delete(Long id);
 
     /**
      * Check if a material manufacturer exists by its ID
@@ -55,5 +55,5 @@ public interface MaterialManufacturerDao {
      * @param id The ID of the material manufacturer to check
      * @return True if the material manufacturer exists, false otherwise
      */
-    boolean existsById(int id);
+    boolean existsById(Long id);
 }

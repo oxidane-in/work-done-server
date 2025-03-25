@@ -29,13 +29,13 @@ public class MaterialRequest {
     private String materialName;
 
     @Schema(description = "ID of the material manufacturer", example = "1")
-    private Integer materialManufacturerId;
+    private Long materialManufacturerId;
 
     @Schema(description = "ID of the material vendor", example = "1")
-    private Integer materialVendorId;
+    private Long materialVendorId;
 
     @Schema(description = "ID of the material type", example = "1")
-    private Integer materialTypeId;
+    private Long materialTypeId;
 
     @Size(max = 20, message = "Material unit must be less than 20 characters")
     @Schema(description = "Unit of measurement for the material", example = "kg")

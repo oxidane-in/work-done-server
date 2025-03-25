@@ -17,7 +17,7 @@ public interface ProjectStatusDao {
      * @param id The ID of the project status to retrieve
      * @return An Optional containing the project status if found, or empty if not found
      */
-    Optional<ProjectStatus> getById(Integer id);
+    Optional<ProjectStatus> getById(Long id);
 
     /**
      * Retrieves all project statuses.
@@ -47,7 +47,7 @@ public interface ProjectStatusDao {
      *
      * @param id The ID of the project status to delete
      */
-    void delete(Integer id);
+    void delete(Long id);
 
     /**
      * Checks if a project status with the specified ID exists.
@@ -55,7 +55,7 @@ public interface ProjectStatusDao {
      * @param id The ID to check
      * @return true if the project status exists, false otherwise
      */
-    boolean existsById(Integer id);
+    boolean existsById(Long id);
 
     /**
      * Checks if a project status with the specified handle exists.
@@ -64,13 +64,4 @@ public interface ProjectStatusDao {
      * @return true if a project status with the handle exists, false otherwise
      */
     boolean existsByHandle(String handle);
-
-    /**
-     * Checks if a project status with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another project status with the handle exists, false otherwise
-     */
-    boolean existsByHandleAndIdNot(String handle, Integer id);
 }

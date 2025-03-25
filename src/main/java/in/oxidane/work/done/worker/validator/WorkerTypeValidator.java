@@ -1,6 +1,6 @@
 package in.oxidane.work.done.worker.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WorkerTypeValidator {
 
-    private static final int MAX_NAME_LENGTH = 50;
-    private static final int MAX_HANDLE_LENGTH = 50;
+    private static final int MAX_NAME_LENGTH = 90;
     private static final int MAX_DESC_LENGTH = 255;
 
     /**
@@ -43,7 +42,7 @@ public class WorkerTypeValidator {
      * @param workerTypeId The ID of the worker type being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(WorkerTypeRequest request, Integer workerTypeId) {
+    public void validateForUpdate(WorkerTypeRequest request, Long workerTypeId) {
         List<String> errors = validateCommon(request);
 
         if (workerTypeId == null || workerTypeId <= 0) {
@@ -74,13 +73,6 @@ public class WorkerTypeValidator {
             errors.add("Worker type name is required");
         } else if (request.getWorkerTypeName().length() > MAX_NAME_LENGTH) {
             errors.add("Worker type name must be less than " + MAX_NAME_LENGTH + " characters");
-        }
-
-        // Validate handle
-        if (!StringUtils.hasText(request.getWorkerTypeHandle())) {
-            errors.add("Worker type handle is required");
-        } else if (request.getWorkerTypeHandle().length() > MAX_HANDLE_LENGTH) {
-            errors.add("Worker type handle must be less than " + MAX_HANDLE_LENGTH + " characters");
         }
 
         // Validate rate

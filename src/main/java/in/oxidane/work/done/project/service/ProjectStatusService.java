@@ -24,7 +24,7 @@ public interface ProjectStatusService {
      * @param id The ID of the project status to retrieve
      * @return The project status
      */
-    ProjectStatusResponse getProjectStatusById(Integer id);
+    ProjectStatusResponse getProjectStatusById(Long id);
 
     /**
      * Retrieves all project statuses.
@@ -40,12 +40,12 @@ public interface ProjectStatusService {
      * @param request The request containing updated project status details
      * @return The updated project status
      */
-    ProjectStatusResponse updateProjectStatus(Integer id, ProjectStatusRequest request);
+    ProjectStatusResponse updateProjectStatus(Long id, ProjectStatusRequest request);
 
     /**
      * Deletes a project status by its ID.
      *
      * @param id The ID of the project status to delete
      */
-    void deleteProjectStatus(Integer id);
+    void deleteProjectStatus(Long id);
 }

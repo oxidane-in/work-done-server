@@ -24,7 +24,7 @@ public interface UnitTypeService {
      * @param id The ID of the unit type to retrieve
      * @return The unit type
      */
-    UnitTypeResponse getUnitTypeById(Integer id);
+    UnitTypeResponse getUnitTypeById(Long id);
 
     /**
      * Retrieves all unit types.
@@ -40,12 +40,12 @@ public interface UnitTypeService {
      * @param request The request containing updated unit type details
      * @return The updated unit type
      */
-    UnitTypeResponse updateUnitType(Integer id, UnitTypeRequest request);
+    UnitTypeResponse updateUnitType(Long id, UnitTypeRequest request);
 
     /**
      * Deletes a unit type by its ID.
      *
      * @param id The ID of the unit type to delete
      */
-    void deleteUnitType(Integer id);
-} 
+    void deleteUnitType(Long id);
+}
