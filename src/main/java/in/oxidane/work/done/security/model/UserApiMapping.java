@@ -9,15 +9,16 @@ import lombok.Data;
 public class UserApiMapping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_api_mapping_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
+    @Column(name ="user_api_mapping_api_pattern",nullable = false)
     private String apiPattern;
 
-    @Column(nullable = false)
+    @Column(name ="user_api_mapping_http_method", nullable = false)
     private String httpMethod;
 }

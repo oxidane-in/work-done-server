@@ -7,16 +7,17 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "user_username", unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "user_password", nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
