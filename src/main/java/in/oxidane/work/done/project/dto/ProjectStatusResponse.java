@@ -24,7 +24,4 @@ public class ProjectStatusResponse {
 
     @Schema(description = "Description of the project status", example = "Project is currently in progress")
     private String projectStatusDesc;
-
-    @Schema(description = "Whether the project status is active", example = "true")
-    private Boolean projectStatusIsActive;
 }

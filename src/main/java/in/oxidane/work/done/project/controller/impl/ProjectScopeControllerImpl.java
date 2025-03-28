@@ -52,9 +52,9 @@ public class ProjectScopeControllerImpl implements ProjectScopeController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<ProjectScopeResponse> updateProjectScope(Long id, ProjectScopeRequest request) {
-        ProjectScopeResponse response = projectScopeService.updateProjectScope(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateProjectScope(Long id, ProjectScopeRequest request) {
+        projectScopeService.updateProjectScope(id, request);
+        return ResponseEntity.ok().build();
     }
 
     /**

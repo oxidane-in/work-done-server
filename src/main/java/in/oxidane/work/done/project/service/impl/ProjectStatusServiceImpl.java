@@ -7,11 +7,9 @@ import in.oxidane.work.done.project.dto.ProjectStatusResponse;
 import in.oxidane.work.done.project.entity.ProjectStatus;
 import in.oxidane.work.done.project.mapper.ProjectStatusMapper;
 import in.oxidane.work.done.project.service.ProjectStatusService;
-import in.oxidane.work.done.project.validator.ProjectStatusValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,18 +25,14 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
 
     private final ProjectStatusDao projectStatusDao;
     private final ProjectStatusMapper projectStatusMapper;
-    private final ProjectStatusValidator projectStatusValidator;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public ProjectStatusResponse createProjectStatus(ProjectStatusRequest request) {
         log.info("Creating new project status");
         log.debug("Project status request: {}", request);
-
-        projectStatusValidator.validateForCreate(request);
 
         ProjectStatus projectStatus = projectStatusMapper.toEntity(request);
         ProjectStatus savedProjectStatus = projectStatusDao.create(projectStatus);
@@ -51,7 +45,6 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public ProjectStatusResponse getProjectStatusById(Long id) {
         log.info("Fetching project status with id: {}", id);
 
@@ -69,7 +62,6 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public List<ProjectStatusResponse> getAllProjectStatuses() {
         log.info("Fetching all project statuses");
 
@@ -85,22 +77,19 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public ProjectStatusResponse updateProjectStatus(Long id, ProjectStatusRequest request) {
         log.info("Updating project status with id: {}", id);
         log.debug("Update request: {}", request);
 
-        projectStatusValidator.validateForUpdate(request, id);
+        ProjectStatus existingProjectStatus = projectStatusDao.getById(id)
+            .orElseThrow(() -> {
+                log.warn("Project status not found with id: {}", id);
+                return new ResourceNotFoundException("Project status not found with id: " + id);
+            });
 
-        // Check if the resource exists first
-        if (!projectStatusDao.existsById(id)) {
-            log.warn("Project status not found with id: {}", id);
-            throw new ResourceNotFoundException("Project status not found with id: " + id);
-        }
+        ProjectStatus projectStatus = projectStatusMapper.toUpdateEntityFromRequest(request, existingProjectStatus);
 
-        // Map request to entity and set the ID
-        ProjectStatus projectStatus = projectStatusMapper.toEntity(request);
-        projectStatus.toBuilder().projectStatusId(id).build();
+        log.debug("Updating project status: {}", projectStatus);
 
         // Update and convert response
         ProjectStatus updatedProjectStatus = projectStatusDao.update(projectStatus);
@@ -113,7 +102,6 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public void deleteProjectStatus(Long id) {
         log.info("Deleting project status with id: {}", id);
 

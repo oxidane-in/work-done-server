@@ -52,9 +52,9 @@ public class ProjectStatusControllerImpl implements ProjectStatusController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<ProjectStatusResponse> updateProjectStatus(Long id, ProjectStatusRequest request) {
-        ProjectStatusResponse response = projectStatusService.updateProjectStatus(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateProjectStatus(Long id, ProjectStatusRequest request) {
+        projectStatusService.updateProjectStatus(id, request);
+        return ResponseEntity.ok().build();
     }
 
     /**

@@ -19,3 +19,19 @@ CREATE TABLE mdm_schema.worker_type
     worker_type_handle VARCHAR(50) UNIQUE NOT NULL,
     worker_type_desc   VARCHAR(255)
 );
+
+CREATE TABLE mdm_schema.project_scope
+(
+    project_scope_id     BIGSERIAL PRIMARY KEY,
+    project_scope_name   VARCHAR(100) UNIQUE NOT NULL,
+    project_scope_handle VARCHAR(100) UNIQUE NOT NULL,
+    project_scope_desc   VARCHAR(255)
+);
+
+CREATE TABLE mdm_schema.project_status
+(
+    project_status_id     BIGSERIAL PRIMARY KEY,
+    project_status_name   VARCHAR(50) UNIQUE NOT NULL,
+    project_status_handle VARCHAR(50) UNIQUE NOT NULL,
+    project_status_desc   VARCHAR(255)
+);

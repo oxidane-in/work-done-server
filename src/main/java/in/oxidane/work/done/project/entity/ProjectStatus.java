@@ -1,24 +1,34 @@
 package in.oxidane.work.done.project.entity;
 
-import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @Builder(toBuilder = true)
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = DbConstants.PROJECT_STATUS, schema = DbConstants.MASTER_SCHEMA)
+@EqualsAndHashCode(callSuper = true)
+@Table(name = DbConstants.PROJECT_STATUS,
+    schema = DbConstants.MDM_SCHEMA,
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = DbConstants.PROJECT_STATUS_NAME),
+        @UniqueConstraint(columnNames = DbConstants.PROJECT_STATUS_HANDLE)
+    })
 public class ProjectStatus extends Auditable {
 
     @Id
@@ -26,7 +36,7 @@ public class ProjectStatus extends Auditable {
     @Column(name = DbConstants.PROJECT_STATUS_ID)
     private Long projectStatusId;
 
-    @Column(name = DbConstants.PROJECT_STATUS_NAME, nullable = false, length = 50)
+    @Column(name = DbConstants.PROJECT_STATUS_NAME, nullable = false, length = 50, unique = true)
     private String projectStatusName;
 
     @Column(name = DbConstants.PROJECT_STATUS_HANDLE, nullable = false, length = 50, unique = true)
@@ -35,7 +45,8 @@ public class ProjectStatus extends Auditable {
     @Column(name = DbConstants.PROJECT_STATUS_DESC)
     private String projectStatusDesc;
 
-    @Override
+    @PrePersist
+    @PreUpdate
     protected void prePersistOrUpdate() {
         this.projectStatusHandle = projectStatusName.toLowerCase().replace(" ", "-");
     }

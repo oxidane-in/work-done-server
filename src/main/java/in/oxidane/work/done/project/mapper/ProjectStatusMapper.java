@@ -5,6 +5,7 @@ import in.oxidane.work.done.project.dto.ProjectStatusRequest;
 import in.oxidane.work.done.project.dto.ProjectStatusResponse;
 import in.oxidane.work.done.project.entity.ProjectStatus;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 /**
  * Mapper class for converting between ProjectStatus entity and its DTOs.
@@ -18,7 +19,7 @@ public interface ProjectStatusMapper {
      * @param entity The ProjectStatus entity to convert
      * @return The corresponding ProjectStatusResponse DTO, or null if the entity is null
      */
-    public ProjectStatusResponse toResponse(ProjectStatus entity);
+    ProjectStatusResponse toResponse(ProjectStatus entity);
 
     /**
      * Converts a ProjectStatusRequest DTO to a ProjectStatus entity.
@@ -26,5 +27,7 @@ public interface ProjectStatusMapper {
      * @param request The ProjectStatusRequest DTO to convert
      * @return The corresponding ProjectStatus entity, or null if the request is null
      */
-    public ProjectStatus toEntity(ProjectStatusRequest request);
+    ProjectStatus toEntity(ProjectStatusRequest request);
+
+    ProjectStatus toUpdateEntityFromRequest(ProjectStatusRequest request, @MappingTarget ProjectStatus entity);
 }

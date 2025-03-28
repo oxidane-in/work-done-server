@@ -7,11 +7,9 @@ import in.oxidane.work.done.project.dto.ProjectScopeResponse;
 import in.oxidane.work.done.project.entity.ProjectScope;
 import in.oxidane.work.done.project.mapper.ProjectScopeMapper;
 import in.oxidane.work.done.project.service.ProjectScopeService;
-import in.oxidane.work.done.project.validator.ProjectScopeValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,18 +25,14 @@ public class ProjectScopeServiceImpl implements ProjectScopeService {
 
     private final ProjectScopeDao projectScopeDao;
     private final ProjectScopeMapper projectScopeMapper;
-    private final ProjectScopeValidator projectScopeValidator;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public ProjectScopeResponse createProjectScope(ProjectScopeRequest request) {
         log.info("Creating new project scope");
         log.debug("Project scope request: {}", request);
-
-        projectScopeValidator.validateForCreate(request);
 
         ProjectScope projectScope = projectScopeMapper.toEntity(request);
         ProjectScope savedProjectScope = projectScopeDao.create(projectScope);
@@ -51,7 +45,6 @@ public class ProjectScopeServiceImpl implements ProjectScopeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public ProjectScopeResponse getProjectScopeById(Long id) {
         log.info("Fetching project scope with id: {}", id);
 
@@ -69,7 +62,6 @@ public class ProjectScopeServiceImpl implements ProjectScopeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public List<ProjectScopeResponse> getAllProjectScopes() {
         log.info("Fetching all project scopes");
 
@@ -85,22 +77,19 @@ public class ProjectScopeServiceImpl implements ProjectScopeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public ProjectScopeResponse updateProjectScope(Long id, ProjectScopeRequest request) {
         log.info("Updating project scope with id: {}", id);
-        log.debug("Update request: {}", request);
-
-        projectScopeValidator.validateForUpdate(request, id);
-
-        // Check if the resource exists first
-        if (!projectScopeDao.existsById(id)) {
-            log.warn("Project scope not found with id: {}", id);
-            throw new ResourceNotFoundException("Project scope not found with id: " + id);
-        }
 
         // Map request to entity and set the ID
-        ProjectScope projectScope = projectScopeMapper.toEntity(request);
-        projectScope.toBuilder().projectScopeId(id).build();
+        ProjectScope existingProjectScope = projectScopeDao.getById(id)
+            .orElseThrow(() -> {
+                log.warn("Project scope not found with id: {}", id);
+                return new ResourceNotFoundException("Project scope not found with id: " + id);
+            });
+
+        ProjectScope projectScope = projectScopeMapper.toUpdateEntityFromRequest(request, existingProjectScope);
+
+        log.debug("Updating project scope: {}", projectScope);
 
         // Update and convert response
         ProjectScope updatedProjectScope = projectScopeDao.update(projectScope);
@@ -113,7 +102,6 @@ public class ProjectScopeServiceImpl implements ProjectScopeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public void deleteProjectScope(Long id) {
         log.info("Deleting project scope with id: {}", id);
 
