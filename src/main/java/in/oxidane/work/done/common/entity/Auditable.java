@@ -1,11 +1,9 @@
 package in.oxidane.work.done.common.entity;
 
-import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.constant.DbConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
@@ -38,14 +36,4 @@ public abstract class Auditable {
     @LastModifiedDate
     @Column(name = DbConstants.UPDATED_ON, insertable = false)
     private LocalDateTime updatedOn;
-
-//    @PrePersist
-//    @PreUpdate
-//    private void setup() {
-//        prePersistOrUpdate();
-//    }
-
-    protected void prePersistOrUpdate() {
-        // This method can be overridden by subclasses to add additional logic
-    }
 }

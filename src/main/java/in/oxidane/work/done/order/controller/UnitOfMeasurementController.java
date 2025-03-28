@@ -1,5 +1,6 @@
 package in.oxidane.work.done.order.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementRequest;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,8 +9,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -17,7 +26,8 @@ import java.util.List;
  * REST API endpoints for UnitOfMeasurement operations.
  */
 @Tag(name = "Unit of Measurement", description = "APIs for unit of measurement management")
-@RequestMapping("/api/v1/units-of-measurement")
+@Validated
+@RequestMapping(Endpoints.UNIT_OF_MEASUREMENT_V1)
 public interface UnitOfMeasurementController {
 
     /**
@@ -39,7 +49,7 @@ public interface UnitOfMeasurementController {
     @PostMapping
     ResponseEntity<UnitOfMeasurementResponse> createUnitOfMeasurement(
         @Parameter(description = "Unit of measurement details", required = true)
-        @RequestBody UnitOfMeasurementRequest request
+        @Valid @RequestBody UnitOfMeasurementRequest request
     );
 
     /**
@@ -81,7 +91,7 @@ public interface UnitOfMeasurementController {
     /**
      * Updates an existing unit of measurement.
      *
-     * @param id The ID of the unit of measurement to update
+     * @param id      The ID of the unit of measurement to update
      * @param request The request containing updated unit of measurement details
      * @return The updated unit of measurement
      */
@@ -96,11 +106,11 @@ public interface UnitOfMeasurementController {
         }
     )
     @PutMapping("/{id}")
-    ResponseEntity<UnitOfMeasurementResponse> updateUnitOfMeasurement(
+    ResponseEntity<Void> updateUnitOfMeasurement(
         @Parameter(description = "Unit of measurement ID", required = true)
         @PathVariable("id") Long id,
         @Parameter(description = "Updated unit of measurement details", required = true)
-        @RequestBody UnitOfMeasurementRequest request
+        @Valid @RequestBody UnitOfMeasurementRequest request
     );
 
     /**

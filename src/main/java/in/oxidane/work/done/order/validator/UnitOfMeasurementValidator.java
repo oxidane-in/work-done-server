@@ -17,7 +17,6 @@ public class UnitOfMeasurementValidator {
 
     private static final int MAX_NAME_LENGTH = 50;
     private static final int MAX_SYMBOL_LENGTH = 20;
-    private static final int MAX_HANDLE_LENGTH = 50;
     private static final int MAX_DESC_LENGTH = 255;
 
     /**

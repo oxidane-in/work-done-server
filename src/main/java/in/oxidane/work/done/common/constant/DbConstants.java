@@ -1,9 +1,9 @@
-package in.oxidane.work.done.common;
+package in.oxidane.work.done.common.constant;
 
 public class DbConstants {
 
     // Database schema name
-    public static final String MASTER_SCHEMA = "master_schema";
+    public static final String MDM_SCHEMA = "mdm_schema";
     public static final String CORE_SCHEMA = "core_schema";
 
     // Database table names - master_schema
@@ -17,7 +17,7 @@ public class DbConstants {
     public static final String MATERIAL_MANUFACTURER = "material_manufacturer";
 
     // Database table names - core_schema
-    public static final String CUSTOMER = "customer";
+    public static final String CLIENT = "client";
     public static final String PROJECT = "project";
     public static final String MATERIAL = "material";
     public static final String LINE_ITEM = "line_item";
@@ -32,7 +32,7 @@ public class DbConstants {
     public static final String UPDATED_ON = "updated_on";
 
     //Foreign key constraints
-    public static final String FK_PROJECT_CUSTOMER = "fk_project_customer";
+    public static final String FK_PROJECT_CLIENT = "fk_project_client";
     public static final String FK_PROJECT_PROJECT_STATUS = "fk_project_projectstatus";
     public static final String FK_LINE_ITEM_MATERIAL_LINE_ITEM = "fk_lineitemmaterial_lineitem";
     public static final String FK_LINE_ITEM_MATERIAL_MATERIAL = "fk_lineitemmaterial_material";
@@ -53,15 +53,15 @@ public class DbConstants {
     public static final String WORKER_TYPE_DESC = "worker_type_desc";
 
 
-    // Column names for customer table
-    public static final String CUSTOMER_ID = "customer_id";
-    public static final String CUSTOMER_NAME = "customer_name";
-    public static final String CUSTOMER_CONTACT_PERSON = "customer_contact_person";
-    public static final String CUSTOMER_CONTACT_NUMBER = "customer_contact_number";
-    public static final String CUSTOMER_EMAIL = "customer_email";
-    public static final String CUSTOMER_ADDRESS = "customer_address";
-    public static final String CUSTOMER_HANDLE = "customer_handle";
-    public static final String CUSTOMER_DESC = "customer_desc";
+    // Column names for client table
+    public static final String CLIENT_ID = "client_id";
+    public static final String CLIENT_NAME = "client_name";
+    public static final String CLIENT_CONTACT_PERSON = "client_contact_person";
+    public static final String CLIENT_CONTACT_NUMBER = "client_contact_number";
+    public static final String CLIENT_EMAIL = "client_email";
+    public static final String CLIENT_ADDRESS = "client_address";
+    public static final String CLIENT_HANDLE = "client_handle";
+    public static final String CLIENT_DESC = "client_desc";
 
     // Column names for project table
     public static final String PROJECT_ID = "project_id";

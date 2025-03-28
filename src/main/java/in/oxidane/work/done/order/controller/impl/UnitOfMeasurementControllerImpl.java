@@ -5,7 +5,6 @@ import in.oxidane.work.done.order.dto.UnitOfMeasurementRequest;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import in.oxidane.work.done.order.service.UnitOfMeasurementService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ import java.util.List;
  * Implementation of the UnitOfMeasurementController interface.
  * Handles HTTP requests related to unit of measurement operations.
  */
-@Slf4j
+
 @RestController
 @RequiredArgsConstructor
 public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementController {
@@ -54,9 +53,9 @@ public class UnitOfMeasurementControllerImpl implements UnitOfMeasurementControl
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitOfMeasurementResponse> updateUnitOfMeasurement(Long id, UnitOfMeasurementRequest request) {
-        UnitOfMeasurementResponse response = unitOfMeasurementService.updateUnitOfMeasurement(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateUnitOfMeasurement(Long id, UnitOfMeasurementRequest request) {
+        unitOfMeasurementService.updateUnitOfMeasurement(id, request);
+        return ResponseEntity.ok().build();
     }
 
     /**

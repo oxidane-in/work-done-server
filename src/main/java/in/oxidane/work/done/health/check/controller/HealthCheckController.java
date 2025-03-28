@@ -1,5 +1,6 @@
 package in.oxidane.work.done.health.check.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.health.check.dto.HealthResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/health/check")
+@RequestMapping(Endpoints.HEALTH_CHECK)
 @Tag(name = "Health", description = "Health check API for service status monitoring")
 public class HealthCheckController {
 
