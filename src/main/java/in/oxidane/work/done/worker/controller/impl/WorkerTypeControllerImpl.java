@@ -41,9 +41,9 @@ public class WorkerTypeControllerImpl implements WorkerTypeController {
     }
 
     @Override
-    public ResponseEntity<WorkerTypeResponse> updateWorkerType(Long id, @Valid WorkerTypeRequest request) {
-        WorkerTypeResponse response = workerTypeService.updateWorkerType(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateWorkerType(Long id, @Valid WorkerTypeRequest request) {
+        workerTypeService.updateWorkerType(id, request);
+        return ResponseEntity.ok().build();
     }
 
     @Override

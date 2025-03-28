@@ -10,3 +10,12 @@ CREATE TABLE mdm_schema.unit_of_measurement
     uom_handle      VARCHAR(50) UNIQUE NOT NULL,
     uom_handle_desc VARCHAR(255)
 );
+
+CREATE TABLE mdm_schema.worker_type
+(
+    worker_type_id     BIGSERIAL PRIMARY KEY,
+    worker_type_name   VARCHAR(50) UNIQUE NOT NULL,
+    worker_type_rate   DECIMAL(10, 2)     NOT NULL,
+    worker_type_handle VARCHAR(50) UNIQUE NOT NULL,
+    worker_type_desc   VARCHAR(255)
+);

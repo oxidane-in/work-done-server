@@ -9,11 +9,11 @@
 
     <!-- Define base log pattern -->
     <property name="BASE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{requestId}][%X{user}][%X{endpoint}] %logger{36}: %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread][%X{requestId}][%X{user}][%X{endpoint}] %logger{36}: %msg%n"/>
 
     <!-- Define colored log pattern for console -->
     <property name="COLORED_LOG_PATTERN"
-              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){yellow} %highlight(%-5level) %clr(--){faint} [%X{requestId}][%green(%X{user})][%cyan(%X{endpoint})] %yellow(%logger{36}): %msg%n"/>
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){yellow} %highlight(%-5level) %clr(---){faint} [%thread][%X{requestId}][%green(%X{user})][%cyan(%X{endpoint})] %yellow(%logger{36}): %msg%n"/>
 
     <!-- Console appender with color -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">

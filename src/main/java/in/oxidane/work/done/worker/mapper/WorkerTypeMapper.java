@@ -5,6 +5,7 @@ import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
 import in.oxidane.work.done.worker.entity.WorkerType;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface WorkerTypeMapper {
     WorkerType toEntity(WorkerTypeRequest request);
 
     List<WorkerTypeResponse> toResponse(List<WorkerType> workerTypes);
+
+    WorkerType toUpdateEntityFromRequest(WorkerTypeRequest request, @MappingTarget WorkerType entity);
 }

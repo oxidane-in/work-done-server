@@ -37,7 +37,7 @@ public interface WorkerTypeService {
     /**
      * Update an existing worker type
      *
-     * @param id The ID of the worker type to update
+     * @param id      The ID of the worker type to update
      * @param request The updated worker type data
      * @return The updated worker type response
      */
