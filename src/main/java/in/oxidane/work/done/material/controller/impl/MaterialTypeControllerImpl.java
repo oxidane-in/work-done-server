@@ -6,12 +6,10 @@ import in.oxidane.work.done.material.dto.MaterialTypeResponse;
 import in.oxidane.work.done.material.service.MaterialTypeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.List;
  * Provides REST API endpoints for managing material types.
  */
 @RestController
-@RequestMapping("/api/v1/material-types")
 @RequiredArgsConstructor
 public class MaterialTypeControllerImpl implements MaterialTypeController {
 
@@ -46,9 +43,9 @@ public class MaterialTypeControllerImpl implements MaterialTypeController {
     }
 
     @Override
-    public ResponseEntity<MaterialTypeResponse> updateMaterialType(@PathVariable Long id, @Valid @RequestBody MaterialTypeRequest request) {
-        MaterialTypeResponse response = materialTypeService.updateMaterialType(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateMaterialType(@PathVariable Long id, @Valid @RequestBody MaterialTypeRequest request) {
+        materialTypeService.updateMaterialType(id, request);
+        return ResponseEntity.ok().build();
     }
 
     @Override

@@ -71,17 +71,18 @@ public class MaterialTypeServiceImpl implements MaterialTypeService {
     @Override
     public MaterialTypeResponse updateMaterialType(Long id, MaterialTypeRequest request) {
         log.info("Updating material type with id: {}", id);
-        log.debug("Update request: {}", request);
 
         // Check if the resource exists first
-        materialTypeDao.getById(id)
+        MaterialType existingMaterialType = materialTypeDao.getById(id)
             .orElseThrow(() -> {
                 log.warn("Material type not found with id: {}", id);
                 return new ResourceNotFoundException("Material type not found with id: " + id);
             });
 
         // Map request to entity and set the ID
-        MaterialType materialType = materialTypeMapper.toEntity(request).toBuilder().materialTypeId(id).build();
+        MaterialType materialType = materialTypeMapper.toUpdateEntityFromRequest(request, existingMaterialType);
+
+        log.debug("Updating material type: {}", materialType);
 
         // Update and convert response
         MaterialType updatedMaterialType = materialTypeDao.update(materialType)

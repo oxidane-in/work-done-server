@@ -7,7 +7,6 @@ import in.oxidane.work.done.material.dto.MaterialManufacturerResponse;
 import in.oxidane.work.done.material.entity.MaterialManufacturer;
 import in.oxidane.work.done.material.mapper.MaterialManufacturerMapper;
 import in.oxidane.work.done.material.service.MaterialManufacturerService;
-import in.oxidane.work.done.material.validator.MaterialManufacturerValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,14 +21,11 @@ public class MaterialManufacturerServiceImpl implements MaterialManufacturerServ
 
     private final MaterialManufacturerDao materialManufacturerDao;
     private final MaterialManufacturerMapper materialManufacturerMapper;
-    private final MaterialManufacturerValidator materialManufacturerValidator;
 
     @Override
     public MaterialManufacturerResponse createMaterialManufacturer(MaterialManufacturerRequest request) {
         log.info("Creating new material manufacturer");
         log.debug("Material manufacturer request: {}", request);
-
-        materialManufacturerValidator.validateForCreate(request);
 
         MaterialManufacturer materialManufacturer = materialManufacturerMapper.toEntity(request);
         MaterialManufacturer savedMaterialManufacturer = materialManufacturerDao.create(materialManufacturer)
@@ -74,27 +70,16 @@ public class MaterialManufacturerServiceImpl implements MaterialManufacturerServ
     @Override
     public MaterialManufacturerResponse updateMaterialManufacturer(Long id, MaterialManufacturerRequest request) {
         log.info("Updating material manufacturer with id: {}", id);
-        log.debug("Update request: {}", request);
 
-        materialManufacturerValidator.validateForUpdate(request);
-
-        // Check if the resource exists first
-        materialManufacturerDao.getById(id)
+        MaterialManufacturer existingMaterialManufacturer = materialManufacturerDao.getById(id)
             .orElseThrow(() -> {
                 log.warn("Material manufacturer not found with id: {}", id);
                 return new ResourceNotFoundException("Material manufacturer not found with id: " + id);
             });
 
-        // Map request to entity and set the ID
-        MaterialManufacturer materialManufacturer = materialManufacturerMapper.toEntity(request)
-            .toBuilder()
-            .materialManufacturerId(id)
-            .build();
+        MaterialManufacturer materialManufacturer = materialManufacturerMapper.toUpdateEntityFromRequest(request, existingMaterialManufacturer);
 
-        if (materialManufacturerDao.existsById(id)) {
-            log.warn("Cannot update - material manufacturer not found with id: {}", id);
-            throw new ResourceNotFoundException("Material manufacturer not found with id: " + id);
-        }
+        log.debug("Updating material manufacturer: {}", materialManufacturer);
 
         // Update and convert response
         MaterialManufacturer updatedMaterialManufacturer = materialManufacturerDao.update(materialManufacturer)
@@ -113,7 +98,7 @@ public class MaterialManufacturerServiceImpl implements MaterialManufacturerServ
         log.info("Deleting material manufacturer with id: {}", id);
 
         // Check if the resource exists first
-        if (materialManufacturerDao.existsById(id)) {
+        if (!materialManufacturerDao.existsById(id)) {
             log.warn("Cannot delete - material manufacturer not found with id: {}", id);
             throw new ResourceNotFoundException("Material manufacturer not found with id: " + id);
         }

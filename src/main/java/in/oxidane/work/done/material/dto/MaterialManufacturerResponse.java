@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 public class MaterialManufacturerResponse {
 
     @Schema(description = "Material manufacturer ID", example = "1")
-    private Long id;
+    private Long materialManufacturerId;
 
     @Schema(description = "Material manufacturer name", example = "ABC Industries")
-    private String name;
+    private String materialManufacturerName;
 
     @Schema(description = "Material manufacturer description", example = "Leading provider of industrial materials")
-    private String description;
+    private String materialManufacturerDesc;
 
     @Schema(description = "Material manufacturer handle or code", example = "ABC-IND")
-    private String handle;
+    private String materialManufacturerHandle;
 }

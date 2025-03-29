@@ -39,9 +39,9 @@ public class MaterialManufacturerControllerImpl implements MaterialManufacturerC
     }
 
     @Override
-    public ResponseEntity<MaterialManufacturerResponse> updateMaterialManufacturer(@PathVariable Long id, @RequestBody MaterialManufacturerRequest request) {
-        MaterialManufacturerResponse response = materialManufacturerService.updateMaterialManufacturer(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateMaterialManufacturer(@PathVariable Long id, @RequestBody MaterialManufacturerRequest request) {
+        materialManufacturerService.updateMaterialManufacturer(id, request);
+        return ResponseEntity.ok().build();
     }
 
     @Override

@@ -35,3 +35,27 @@ CREATE TABLE mdm_schema.project_status
     project_status_handle VARCHAR(50) UNIQUE NOT NULL,
     project_status_desc   VARCHAR(255)
 );
+
+CREATE TABLE mdm_schema.material_manufacturer
+(
+    material_manufacturer_id     BIGSERIAL PRIMARY KEY,
+    material_manufacturer_name   VARCHAR(255) UNIQUE NOT NULL,
+    material_manufacturer_desc   VARCHAR(255),
+    material_manufacturer_handle VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE mdm_schema.material_type
+(
+    material_type_id     BIGSERIAL PRIMARY KEY,
+    material_type_name   VARCHAR(255) UNIQUE NOT NULL,
+    material_type_desc   VARCHAR(255),
+    material_type_handle VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE mdm_schema.material_vendor
+(
+    material_vendor_id     BIGSERIAL PRIMARY KEY,
+    material_vendor_name   VARCHAR(255) UNIQUE NOT NULL,
+    material_vendor_desc   VARCHAR(255),
+    material_vendor_handle VARCHAR(255) UNIQUE NOT NULL
+);

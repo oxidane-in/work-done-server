@@ -1,5 +1,6 @@
 package in.oxidane.work.done.material.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +12,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -20,6 +28,8 @@ import java.util.List;
  * Defines REST operations for managing material vendors.
  */
 @Tag(name = "Material Vendor", description = "Material Vendor management APIs")
+@Validated
+@RequestMapping(Endpoints.MATERIAL_VENDOR_V1)
 public interface MaterialVendorController {
 
     /**
@@ -31,9 +41,9 @@ public interface MaterialVendorController {
     @PostMapping
     @Operation(summary = "Create a new material vendor", description = "Creates a new material vendor in the system")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Material vendor created successfully",
-                    content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+        @ApiResponse(responseCode = "201", description = "Material vendor created successfully",
+            content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
+        @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     ResponseEntity<MaterialVendorResponse> createMaterialVendor(@Valid @RequestBody MaterialVendorRequest request);
 
@@ -46,12 +56,12 @@ public interface MaterialVendorController {
     @GetMapping("/{id}")
     @Operation(summary = "Get material vendor by ID", description = "Retrieves a material vendor by its ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Material vendor found",
-                    content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Material vendor not found")
+        @ApiResponse(responseCode = "200", description = "Material vendor found",
+            content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "Material vendor not found")
     })
     ResponseEntity<MaterialVendorResponse> getMaterialVendorById(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
+        @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
 
     /**
      * Get all material vendors
@@ -66,21 +76,21 @@ public interface MaterialVendorController {
     /**
      * Update a material vendor by ID
      *
-     * @param id The ID of the material vendor to update
+     * @param id      The ID of the material vendor to update
      * @param request The MaterialVendorRequest containing updated information
      * @return ResponseEntity with updated MaterialVendorResponse if found, or HTTP 404
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update a material vendor", description = "Updates an existing material vendor by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Material vendor updated successfully",
-                    content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Material vendor not found"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+        @ApiResponse(responseCode = "200", description = "Material vendor updated successfully",
+            content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "Material vendor not found"),
+        @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialVendorResponse> updateMaterialVendor(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id,
-            @Valid @RequestBody MaterialVendorRequest request);
+    ResponseEntity<Void> updateMaterialVendor(
+        @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id,
+        @Valid @RequestBody MaterialVendorRequest request);
 
     /**
      * Delete a material vendor by ID
@@ -91,9 +101,9 @@ public interface MaterialVendorController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a material vendor", description = "Deletes a material vendor by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Material vendor deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Material vendor not found")
+        @ApiResponse(responseCode = "204", description = "Material vendor deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Material vendor not found")
     })
     ResponseEntity<Void> deleteMaterialVendor(
-            @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
+        @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id);
 }
