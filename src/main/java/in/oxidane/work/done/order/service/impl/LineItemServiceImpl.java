@@ -12,12 +12,9 @@ import in.oxidane.work.done.order.mapper.LineItemMapper;
 import in.oxidane.work.done.order.service.LineItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Implementation of the LineItemService interface.
@@ -62,7 +59,7 @@ public class LineItemServiceImpl implements LineItemService {
      * {@inheritDoc}
      */
     @Override
-    public LineItemResponse getLineItemById(Integer id) {
+    public LineItemResponse getLineItemById(Long id) {
         log.info("Fetching line item with id: {}", id);
 
         LineItem lineItem = lineItemDao.getById(id)
@@ -92,7 +89,7 @@ public class LineItemServiceImpl implements LineItemService {
      * {@inheritDoc}
      */
     @Override
-    public LineItemResponse updateLineItem(Integer id, LineItemRequest request) {
+    public LineItemResponse updateLineItem(Long id, LineItemRequest request) {
         log.info("Updating line item with id: {}", id);
         log.debug("Update request: {}", request);
 
@@ -125,7 +122,7 @@ public class LineItemServiceImpl implements LineItemService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteLineItem(Integer id) {
+    public void deleteLineItem(Long id) {
         log.info("Deleting line item with id: {}", id);
 
         // Check if the resource exists first
@@ -142,9 +139,9 @@ public class LineItemServiceImpl implements LineItemService {
      * Validates a line item request.
      *
      * @param request The request to validate
-     * @param id The ID of the line item being updated, or null for creation
+     * @param id      The ID of the line item being updated, or null for creation
      */
-    private void validateRequest(LineItemRequest request, Integer id) {
+    private void validateRequest(LineItemRequest request, Long id) {
         if (request == null) {
             throw new ValidationException("Line item request cannot be null");
         }

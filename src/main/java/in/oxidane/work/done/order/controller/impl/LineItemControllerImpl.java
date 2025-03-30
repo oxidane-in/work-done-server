@@ -5,7 +5,6 @@ import in.oxidane.work.done.order.dto.LineItemRequest;
 import in.oxidane.work.done.order.dto.LineItemResponse;
 import in.oxidane.work.done.order.service.LineItemService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +34,7 @@ public class LineItemControllerImpl implements LineItemController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<LineItemResponse> getLineItemById(Integer id) {
+    public ResponseEntity<LineItemResponse> getLineItemById(Long id) {
         LineItemResponse response = lineItemService.getLineItemById(id);
         return ResponseEntity.ok(response);
     }
@@ -53,7 +52,7 @@ public class LineItemControllerImpl implements LineItemController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<LineItemResponse> updateLineItem(Integer id, LineItemRequest request) {
+    public ResponseEntity<LineItemResponse> updateLineItem(Long id, LineItemRequest request) {
         LineItemResponse response = lineItemService.updateLineItem(id, request);
         return ResponseEntity.ok(response);
     }
@@ -62,7 +61,7 @@ public class LineItemControllerImpl implements LineItemController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<Void> deleteLineItem(Integer id) {
+    public ResponseEntity<Void> deleteLineItem(Long id) {
         lineItemService.deleteLineItem(id);
         return ResponseEntity.noContent().build();
     }

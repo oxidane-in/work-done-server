@@ -25,7 +25,7 @@ public class LineItemDaoImpl implements LineItemDao {
      * {@inheritDoc}
      */
     @Override
-    public Optional<LineItem> getById(Integer id) {
+    public Optional<LineItem> getById(Long id) {
         log.debug("Fetching line item with id: {}", id);
         return lineItemRepository.findById(id);
     }
@@ -61,7 +61,7 @@ public class LineItemDaoImpl implements LineItemDao {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         log.debug("Deleting line item with id: {}", id);
         lineItemRepository.deleteById(id);
     }
@@ -70,7 +70,7 @@ public class LineItemDaoImpl implements LineItemDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         log.debug("Checking if line item exists with id: {}", id);
         return lineItemRepository.existsById(id);
     }
@@ -88,7 +88,7 @@ public class LineItemDaoImpl implements LineItemDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsByHandleAndIdNot(String handle, Integer id) {
+    public boolean existsByHandleAndIdNot(String handle, Long id) {
         log.debug("Checking if line item exists with handle: {} excluding id: {}", handle, id);
         return lineItemRepository.existsByLineItemHandleAndLineItemIdNot(handle, id);
     }
@@ -97,8 +97,8 @@ public class LineItemDaoImpl implements LineItemDao {
      * {@inheritDoc}
      */
     @Override
-    public List<LineItem> getByUnitOfMeasurementId(Integer uomId) {
+    public List<LineItem> getByUnitOfMeasurementId(Long uomId) {
         log.debug("Fetching line items by unit of measurement id: {}", uomId);
         return lineItemRepository.findByUnitOfMeasurement_UomId(uomId);
     }
-} 
+}

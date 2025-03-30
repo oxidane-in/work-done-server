@@ -24,7 +24,7 @@ public interface LineItemService {
      * @param id The ID of the line item to retrieve
      * @return The line item
      */
-    LineItemResponse getLineItemById(Integer id);
+    LineItemResponse getLineItemById(Long id);
 
     /**
      * Retrieves all line items.
@@ -36,16 +36,16 @@ public interface LineItemService {
     /**
      * Updates an existing line item.
      *
-     * @param id The ID of the line item to update
+     * @param id      The ID of the line item to update
      * @param request The request containing updated line item details
      * @return The updated line item
      */
-    LineItemResponse updateLineItem(Integer id, LineItemRequest request);
+    LineItemResponse updateLineItem(Long id, LineItemRequest request);
 
     /**
      * Deletes a line item by its ID.
      *
      * @param id The ID of the line item to delete
      */
-    void deleteLineItem(Integer id);
+    void deleteLineItem(Long id);
 }

@@ -10,7 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -61,7 +67,7 @@ public interface LineItemController {
     @GetMapping("/{id}")
     ResponseEntity<LineItemResponse> getLineItemById(
         @Parameter(description = "Line item ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -82,7 +88,7 @@ public interface LineItemController {
     /**
      * Updates an existing line item.
      *
-     * @param id The ID of the line item to update
+     * @param id      The ID of the line item to update
      * @param request The request containing updated line item details
      * @return The updated line item
      */
@@ -99,7 +105,7 @@ public interface LineItemController {
     @PutMapping("/{id}")
     ResponseEntity<LineItemResponse> updateLineItem(
         @Parameter(description = "Line item ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated line item details", required = true)
         @Valid @RequestBody LineItemRequest request
     );
@@ -121,6 +127,6 @@ public interface LineItemController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteLineItem(
         @Parameter(description = "Line item ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 }
