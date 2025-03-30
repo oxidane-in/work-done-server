@@ -35,7 +35,7 @@ public class MaterialTypeDaoImpl implements MaterialTypeDao {
     }
 
     @Override
-    public Optional<MaterialType> getById(int id) {
+    public Optional<MaterialType> getById(Long id) {
         log.debug("DAO - Fetching material type with ID: {}", id);
         Optional<MaterialType> result = materialTypeRepository.findById(id);
         if (result.isPresent()) {
@@ -75,7 +75,7 @@ public class MaterialTypeDaoImpl implements MaterialTypeDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         log.debug("DAO - Deleting material type with ID: {}", id);
 
         // Check if the entity exists before deleting
@@ -93,7 +93,7 @@ public class MaterialTypeDaoImpl implements MaterialTypeDao {
     }
 
     @Override
-    public boolean existsById(int id) {
+    public boolean existsById(Long id) {
         log.debug("DAO - Checking if material type exists with ID: {}", id);
         boolean exists = materialTypeRepository.existsById(id);
         log.debug("DAO - Material type with ID {} exists: {}", id, exists);

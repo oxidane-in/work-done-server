@@ -1,6 +1,6 @@
-package in.oxidane.work.done.exception;
+package in.oxidane.work.done.common.exception;
 
-import in.oxidane.work.done.dto.ApiErrorResponse;
+import in.oxidane.work.done.common.dto.ApiErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;

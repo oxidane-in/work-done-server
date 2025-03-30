@@ -35,7 +35,7 @@ public class MaterialDaoImpl implements MaterialDao {
     }
 
     @Override
-    public Optional<Material> getById(Integer materialId) {
+    public Optional<Material> getById(Long materialId) {
         log.debug("Fetching material with ID: {}", materialId);
         Optional<Material> material = materialRepository.findById(materialId);
         if (material.isPresent()) {
@@ -55,7 +55,7 @@ public class MaterialDaoImpl implements MaterialDao {
     }
 
     @Override
-    public Optional<Material> update(Integer materialId, Material material) {
+    public Optional<Material> update(Long materialId, Material material) {
         log.debug("Updating material with ID: {}", materialId);
         if (!existsById(materialId)) {
             log.debug("Cannot update - material with ID {} does not exist", materialId);
@@ -63,7 +63,7 @@ public class MaterialDaoImpl implements MaterialDao {
         }
 
         try {
-            material.setMaterialId(materialId);
+            material.toBuilder().materialId(materialId).build();
             Material updatedMaterial = materialRepository.save(material);
             log.debug("Successfully updated material: {}", updatedMaterial.getMaterialName());
             return Optional.of(updatedMaterial);
@@ -74,7 +74,7 @@ public class MaterialDaoImpl implements MaterialDao {
     }
 
     @Override
-    public boolean delete(Integer materialId) {
+    public boolean delete(Long materialId) {
         log.debug("Deleting material with ID: {}", materialId);
         if (!existsById(materialId)) {
             log.debug("Cannot delete - material with ID {} does not exist", materialId);
@@ -92,7 +92,7 @@ public class MaterialDaoImpl implements MaterialDao {
     }
 
     @Override
-    public boolean existsById(Integer materialId) {
+    public boolean existsById(Long materialId) {
         boolean exists = materialRepository.existsById(materialId);
         log.debug("Checking if material with ID {} exists: {}", materialId, exists);
         return exists;

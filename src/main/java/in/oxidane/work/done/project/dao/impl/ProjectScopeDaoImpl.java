@@ -25,7 +25,7 @@ public class ProjectScopeDaoImpl implements ProjectScopeDao {
      * {@inheritDoc}
      */
     @Override
-    public Optional<ProjectScope> getById(Integer id) {
+    public Optional<ProjectScope> getById(Long id) {
         log.debug("Fetching project scope with id: {}", id);
         return projectScopeRepository.findById(id);
     }
@@ -61,7 +61,7 @@ public class ProjectScopeDaoImpl implements ProjectScopeDao {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         log.debug("Deleting project scope with id: {}", id);
         projectScopeRepository.deleteById(id);
     }
@@ -70,7 +70,7 @@ public class ProjectScopeDaoImpl implements ProjectScopeDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         log.debug("Checking if project scope exists with id: {}", id);
         return projectScopeRepository.existsById(id);
     }
@@ -82,14 +82,5 @@ public class ProjectScopeDaoImpl implements ProjectScopeDao {
     public boolean existsByHandle(String handle) {
         log.debug("Checking if project scope exists with handle: {}", handle);
         return projectScopeRepository.existsByProjectScopeHandle(handle);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean existsByHandleAndIdNot(String handle, Integer id) {
-        log.debug("Checking if project scope exists with handle: {} excluding id: {}", handle, id);
-        return projectScopeRepository.existsByProjectScopeHandleAndProjectScopeIdNot(handle, id);
     }
 }

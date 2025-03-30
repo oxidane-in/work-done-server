@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class WorkerTypeResponse {
 
     @Schema(description = "Worker type ID", example = "1")
-    private int workerTypeId;
+    private Long workerTypeId;
 
     @Schema(description = "Name of the worker type", example = "Carpenter")
     private String workerTypeName;
@@ -29,7 +29,4 @@ public class WorkerTypeResponse {
 
     @Schema(description = "Description of the worker type", example = "Senior carpenter with 5+ years experience")
     private String workerTypeDesc;
-
-    @Schema(description = "Whether the worker type is active", example = "true")
-    private Boolean workerTypeIsActive;
-} 
+}

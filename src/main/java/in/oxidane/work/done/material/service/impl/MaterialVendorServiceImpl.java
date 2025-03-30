@@ -1,6 +1,6 @@
 package in.oxidane.work.done.material.service.impl;
 
-import in.oxidane.work.done.exception.ResourceNotFoundException;
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.material.dao.MaterialVendorDao;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
@@ -49,7 +49,7 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
     @Override
     @Transactional(readOnly = true)
-    public MaterialVendorResponse getMaterialVendorById(int id) {
+    public MaterialVendorResponse getMaterialVendorById(Long id) {
         log.info("Fetching material vendor with ID: {}", id);
 
         MaterialVendor materialVendor = materialVendorDao.getById(id)
@@ -80,19 +80,19 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
     @Override
     @Transactional
-    public MaterialVendorResponse updateMaterialVendor(int id, MaterialVendorRequest request) {
+    public MaterialVendorResponse updateMaterialVendor(Long id, MaterialVendorRequest request) {
         log.info("Updating material vendor with ID: {}", id);
-        log.debug("Update request details: {}", request);
 
-        // Check if entity exists
-        if (!materialVendorDao.existsById(id)) {
-            log.info("Material vendor not found with ID: {}", id);
-            throw new ResourceNotFoundException("Material vendor not found with ID: " + id);
-        }
+        // Check if the resource exists first
+        MaterialVendor existingMaterialVendor = materialVendorDao.getById(id)
+                .orElseThrow(() -> {
+                    log.info("Material vendor not found with ID: {}", id);
+                    return new ResourceNotFoundException("Material vendor not found with ID: " + id);
+                });
 
-        // Create entity from request and set the ID
-        MaterialVendor materialVendor = materialVendorMapper.toEntity(request);
-        materialVendor.setMaterialVendorId(id);
+        MaterialVendor materialVendor = materialVendorMapper.toUpdateEntityFromRequest(request, existingMaterialVendor);
+
+        log.debug("Updating material vendor: {}", materialVendor);
 
         // Update the entity
         MaterialVendor updatedVendor = materialVendorDao.update(materialVendor)
@@ -102,14 +102,12 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
                 });
 
         log.info("Material vendor updated successfully with ID: {}", id);
-        log.debug("Updated material vendor details: {}", updatedVendor);
-
         return materialVendorMapper.toResponse(updatedVendor);
     }
 
     @Override
     @Transactional
-    public void deleteMaterialVendor(int id) {
+    public void deleteMaterialVendor(Long id) {
         log.info("Deleting material vendor with ID: {}", id);
 
         // Check if entity exists

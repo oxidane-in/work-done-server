@@ -1,5 +1,6 @@
 package in.oxidane.work.done.project.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.project.dto.ProjectScopeRequest;
 import in.oxidane.work.done.project.dto.ProjectScopeResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,8 +9,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -17,7 +26,8 @@ import java.util.List;
  * REST API endpoints for ProjectScope operations.
  */
 @Tag(name = "Project Scope", description = "APIs for project scope management")
-@RequestMapping("/api/v1/project-scopes")
+@Validated
+@RequestMapping(Endpoints.PROJECT_SCOPE_V1)
 public interface ProjectScopeController {
 
     /**
@@ -39,7 +49,7 @@ public interface ProjectScopeController {
     @PostMapping
     ResponseEntity<ProjectScopeResponse> createProjectScope(
         @Parameter(description = "Project scope details", required = true)
-        @RequestBody ProjectScopeRequest request
+        @Valid @RequestBody ProjectScopeRequest request
     );
 
     /**
@@ -60,7 +70,7 @@ public interface ProjectScopeController {
     @GetMapping("/{id}")
     ResponseEntity<ProjectScopeResponse> getProjectScopeById(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -81,7 +91,7 @@ public interface ProjectScopeController {
     /**
      * Updates an existing project scope.
      *
-     * @param id The ID of the project scope to update
+     * @param id      The ID of the project scope to update
      * @param request The request containing updated project scope details
      * @return The updated project scope
      */
@@ -96,11 +106,11 @@ public interface ProjectScopeController {
         }
     )
     @PutMapping("/{id}")
-    ResponseEntity<ProjectScopeResponse> updateProjectScope(
+    ResponseEntity<Void> updateProjectScope(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated project scope details", required = true)
-        @RequestBody ProjectScopeRequest request
+        @Valid @RequestBody ProjectScopeRequest request
     );
 
     /**
@@ -120,6 +130,6 @@ public interface ProjectScopeController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteProjectScope(
         @Parameter(description = "Project scope ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 }

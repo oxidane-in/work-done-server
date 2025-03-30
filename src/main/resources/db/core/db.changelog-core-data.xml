@@ -3,11 +3,35 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.25.xsd">
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
 
-    <!-- Waterproofing Materials Data -->
+    <!-- Material Data -->
     <changeSet id="20250318123101" author="prashant">
         <sqlFile path="002_Core_INSERT_Material.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Customer Data -->
+    <changeSet id="20250320090001" author="prashant">
+        <sqlFile path="004_Core_INSERT_Customer.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Project Data -->
+    <changeSet id="20250320090002" author="prashant">
+        <sqlFile path="006_Core_INSERT_Project.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Worker Data -->
+    <changeSet id="20250320090003" author="prashant">
+        <sqlFile path="008_Core_INSERT_Worker.sql"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>

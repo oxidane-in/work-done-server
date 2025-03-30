@@ -1,7 +1,7 @@
 BEGIN;
 
 -- Insert sample data into project_status if they don't exist
-INSERT INTO master.project_status (project_status_name, project_status_handle, project_status_desc)
+INSERT INTO master_schema.project_status (project_status_name, project_status_handle, project_status_desc)
 SELECT v.project_status_name,
        v.project_status_handle,
        v.project_status_desc
@@ -13,12 +13,12 @@ FROM (
         ('Maintenance', 'maintenance', 'Project is under maintenance phase')
 ) AS v(project_status_name, project_status_handle, project_status_desc)
 WHERE NOT EXISTS (
-    SELECT 1 FROM master.project_status ps
+    SELECT 1 FROM master_schema.project_status ps
     WHERE ps.project_status_handle = v.project_status_handle
 );
 
 -- Insert sample data into project_scope if they don't exist
-INSERT INTO master.project_scope (project_scope_name, project_scope_handle, project_scope_desc)
+INSERT INTO master_schema.project_scope (project_scope_name, project_scope_handle, project_scope_desc)
 SELECT v.project_scope_name,
        v.project_scope_handle,
        v.project_scope_desc
@@ -31,7 +31,7 @@ FROM (
         ('Roofing', 'roofing', 'Scope includes all roofing-related activities')
 ) AS v(project_scope_name, project_scope_handle, project_scope_desc)
 WHERE NOT EXISTS (
-    SELECT 1 FROM master.project_scope ps
+    SELECT 1 FROM master_schema.project_scope ps
     WHERE ps.project_scope_handle = v.project_scope_handle
 );
 

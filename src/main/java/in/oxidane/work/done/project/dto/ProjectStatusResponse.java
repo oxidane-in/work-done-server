@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProjectStatusResponse {
 
     @Schema(description = "Unique identifier for the project status", example = "1")
-    private Integer projectStatusId;
+    private Long projectStatusId;
 
     @Schema(description = "Name of the project status", example = "In Progress")
     private String projectStatusName;
@@ -24,7 +24,4 @@ public class ProjectStatusResponse {
 
     @Schema(description = "Description of the project status", example = "Project is currently in progress")
     private String projectStatusDesc;
-
-    @Schema(description = "Whether the project status is active", example = "true")
-    private Boolean projectStatusIsActive;
 }

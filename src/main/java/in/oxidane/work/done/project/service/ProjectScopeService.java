@@ -24,7 +24,7 @@ public interface ProjectScopeService {
      * @param id The ID of the project scope to retrieve
      * @return The project scope
      */
-    ProjectScopeResponse getProjectScopeById(Integer id);
+    ProjectScopeResponse getProjectScopeById(Long id);
 
     /**
      * Retrieves all project scopes.
@@ -40,12 +40,12 @@ public interface ProjectScopeService {
      * @param request The request containing updated project scope details
      * @return The updated project scope
      */
-    ProjectScopeResponse updateProjectScope(Integer id, ProjectScopeRequest request);
+    ProjectScopeResponse updateProjectScope(Long id, ProjectScopeRequest request);
 
     /**
      * Deletes a project scope by its ID.
      *
      * @param id The ID of the project scope to delete
      */
-    void deleteProjectScope(Integer id);
+    void deleteProjectScope(Long id);
 }

@@ -1,5 +1,6 @@
 package in.oxidane.work.done.material.service;
 
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.material.dto.MaterialTypeRequest;
 import in.oxidane.work.done.material.dto.MaterialTypeResponse;
 import java.util.List;
@@ -24,9 +25,9 @@ public interface MaterialTypeService {
      *
      * @param id The ID of the material type to retrieve
      * @return The MaterialTypeResponse if found
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if type not found
+     * @throws ResourceNotFoundException if type not found
      */
-    MaterialTypeResponse getMaterialTypeById(int id);
+    MaterialTypeResponse getMaterialTypeById(Long id);
 
     /**
      * Get all material types
@@ -41,16 +42,16 @@ public interface MaterialTypeService {
      * @param id The ID of the material type to update
      * @param request The MaterialTypeRequest containing updated information
      * @return The updated MaterialTypeResponse
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if type not found
+     * @throws ResourceNotFoundException if type not found
      * @throws RuntimeException if update fails
      */
-    MaterialTypeResponse updateMaterialType(int id, MaterialTypeRequest request);
+    MaterialTypeResponse updateMaterialType(Long id, MaterialTypeRequest request);
 
     /**
      * Delete material type by ID
      *
      * @param id The ID of the material type to delete
-     * @throws in.oxidane.work.done.exception.ResourceNotFoundException if type not found
+     * @throws ResourceNotFoundException if type not found
      */
-    void deleteMaterialType(int id);
+    void deleteMaterialType(Long id);
 }

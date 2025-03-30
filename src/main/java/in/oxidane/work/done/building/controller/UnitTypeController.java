@@ -60,7 +60,7 @@ public interface UnitTypeController {
     @GetMapping("/{id}")
     ResponseEntity<UnitTypeResponse> getUnitTypeById(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -98,7 +98,7 @@ public interface UnitTypeController {
     @PutMapping("/{id}")
     ResponseEntity<UnitTypeResponse> updateUnitType(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated unit type details", required = true)
         @RequestBody UnitTypeRequest request
     );
@@ -120,6 +120,6 @@ public interface UnitTypeController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteUnitType(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
-} 
+}

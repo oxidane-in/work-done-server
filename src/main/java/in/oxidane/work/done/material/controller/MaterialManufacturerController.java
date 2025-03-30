@@ -1,5 +1,6 @@
 package in.oxidane.work.done.material.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.material.dto.MaterialManufacturerRequest;
 import in.oxidane.work.done.material.dto.MaterialManufacturerResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +28,8 @@ import java.util.List;
  * Defines REST operations for managing material manufacturers.
  */
 @Tag(name = "Material Manufacturer", description = "Material Manufacturer management APIs")
-@RequestMapping("/api/v1/material-manufacturers")
+@Validated
+@RequestMapping(Endpoints.MATERIAL_MANUFACTURER_V1)
 public interface MaterialManufacturerController {
 
     /**
@@ -38,9 +41,9 @@ public interface MaterialManufacturerController {
     @PostMapping
     @Operation(summary = "Create a new material manufacturer", description = "Creates a new material manufacturer in the system")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Material manufacturer created successfully",
-                    content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+        @ApiResponse(responseCode = "201", description = "Material manufacturer created successfully",
+            content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
+        @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@Valid @RequestBody MaterialManufacturerRequest request);
 
@@ -53,12 +56,12 @@ public interface MaterialManufacturerController {
     @GetMapping("/{id}")
     @Operation(summary = "Get material manufacturer by ID", description = "Retrieves a material manufacturer by its ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Material manufacturer found",
-                    content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
+        @ApiResponse(responseCode = "200", description = "Material manufacturer found",
+            content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
+        @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
     })
     ResponseEntity<MaterialManufacturerResponse> getMaterialManufacturerById(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id);
+        @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id);
 
     /**
      * Get all material manufacturers
@@ -73,21 +76,21 @@ public interface MaterialManufacturerController {
     /**
      * Update a material manufacturer by ID
      *
-     * @param id The ID of the material manufacturer to update
+     * @param id      The ID of the material manufacturer to update
      * @param request The MaterialManufacturerRequest containing updated information
      * @return ResponseEntity with updated MaterialManufacturerResponse if found, or HTTP 404
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update a material manufacturer", description = "Updates an existing material manufacturer by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Material manufacturer updated successfully",
-                    content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Material manufacturer not found"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+        @ApiResponse(responseCode = "200", description = "Material manufacturer updated successfully",
+            content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
+        @ApiResponse(responseCode = "404", description = "Material manufacturer not found"),
+        @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialManufacturerResponse> updateMaterialManufacturer(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id,
-            @Valid @RequestBody MaterialManufacturerRequest request);
+    ResponseEntity<Void> updateMaterialManufacturer(
+        @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id,
+        @Valid @RequestBody MaterialManufacturerRequest request);
 
     /**
      * Delete a material manufacturer by ID
@@ -98,9 +101,9 @@ public interface MaterialManufacturerController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a material manufacturer", description = "Deletes a material manufacturer by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Material manufacturer deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
+        @ApiResponse(responseCode = "204", description = "Material manufacturer deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Material manufacturer not found")
     })
     ResponseEntity<Void> deleteMaterialManufacturer(
-            @Parameter(description = "Material manufacturer ID", required = true) @PathVariable int id);
+        @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id);
 }

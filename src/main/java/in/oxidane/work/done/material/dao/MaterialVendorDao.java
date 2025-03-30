@@ -25,7 +25,7 @@ public interface MaterialVendorDao {
      * @param id The ID of the material vendor to retrieve
      * @return The material vendor if found, otherwise empty Optional
      */
-    Optional<MaterialVendor> getById(int id);
+    Optional<MaterialVendor> getById(Long id);
 
     /**
      * Retrieve all material vendors
@@ -47,7 +47,7 @@ public interface MaterialVendorDao {
      *
      * @param id The ID of the material vendor to delete
      */
-    void delete(int id);
+    void delete(Long id);
 
     /**
      * Check if a material vendor exists by its ID
@@ -55,5 +55,5 @@ public interface MaterialVendorDao {
      * @param id The ID of the material vendor to check
      * @return True if the material vendor exists, false otherwise
      */
-    boolean existsById(int id);
+    boolean existsById(Long id);
 }

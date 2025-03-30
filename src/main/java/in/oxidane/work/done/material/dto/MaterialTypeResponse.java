@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MaterialTypeResponse {
 
     @Schema(description = "Material type ID", example = "1")
-    private int materialTypeId;
+    private Long materialTypeId;
 
     @Schema(description = "Name of the material type", example = "Raw Material")
     private String materialTypeName;

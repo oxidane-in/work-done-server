@@ -1,27 +1,18 @@
 package in.oxidane.work.done.material.mapper;
 
+import in.oxidane.work.done.common.config.MapstructMapperConfig;
 import in.oxidane.work.done.material.dto.MaterialTypeRequest;
 import in.oxidane.work.done.material.dto.MaterialTypeResponse;
 import in.oxidane.work.done.material.entity.MaterialType;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-@Component
-public class MaterialTypeMapper {
+@Mapper(config = MapstructMapperConfig.class)
+public interface MaterialTypeMapper {
 
-    public MaterialType toEntity(MaterialTypeRequest request) {
-        return MaterialType.builder()
-                .materialTypeName(request.getMaterialTypeName())
-                .materialTypeDesc(request.getMaterialTypeDesc())
-                .materialTypeHandle(request.getMaterialTypeHandle())
-                .build();
-    }
+    MaterialType toEntity(MaterialTypeRequest request);
 
-    public MaterialTypeResponse toResponse(MaterialType entity) {
-        return MaterialTypeResponse.builder()
-                .materialTypeId(entity.getMaterialTypeId())
-                .materialTypeName(entity.getMaterialTypeName())
-                .materialTypeDesc(entity.getMaterialTypeDesc())
-                .materialTypeHandle(entity.getMaterialTypeHandle())
-                .build();
-    }
+    MaterialTypeResponse toResponse(MaterialType entity);
+
+    MaterialType toUpdateEntityFromRequest(MaterialTypeRequest request, @MappingTarget MaterialType entity);
 }

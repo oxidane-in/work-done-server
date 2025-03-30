@@ -1,4 +1,4 @@
-package in.oxidane.work.done.exception;
+package in.oxidane.work.done.common.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

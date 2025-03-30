@@ -29,15 +29,7 @@ public class WorkerTypeRequest {
     @Schema(description = "Hourly rate for the worker type", example = "25.50")
     private BigDecimal workerTypeRate;
 
-    @NotBlank(message = "Worker type handle is required")
-    @Size(max = 50, message = "Worker type handle must be less than 50 characters")
-    @Schema(description = "Handle or unique identifier for the worker type", example = "carpenter_senior")
-    private String workerTypeHandle;
-
     @Size(max = 255, message = "Worker type description must be less than 255 characters")
     @Schema(description = "Description of the worker type", example = "Senior carpenter with 5+ years experience")
     private String workerTypeDesc;
-
-    @Schema(description = "Whether the worker type is active", example = "true")
-    private Boolean workerTypeIsActive;
-} 
+}

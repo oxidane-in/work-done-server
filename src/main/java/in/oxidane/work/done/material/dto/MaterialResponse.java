@@ -21,25 +21,25 @@ import java.time.LocalDateTime;
 public class MaterialResponse {
 
     @Schema(description = "ID of the material", example = "1")
-    private Integer materialId;
+    private Long materialId;
 
     @Schema(description = "Name of the material", example = "Cement")
     private String materialName;
 
     @Schema(description = "ID of the material manufacturer", example = "1")
-    private Integer materialManufacturerId;
+    private Long materialManufacturerId;
 
     @Schema(description = "Name of the material manufacturer", example = "ABC Manufacturing")
     private String materialManufacturerName;
 
     @Schema(description = "ID of the material vendor", example = "1")
-    private Integer materialVendorId;
+    private Long materialVendorId;
 
     @Schema(description = "Name of the material vendor", example = "XYZ Suppliers")
     private String materialVendorName;
 
     @Schema(description = "ID of the material type", example = "1")
-    private Integer materialTypeId;
+    private Long materialTypeId;
 
     @Schema(description = "Name of the material type", example = "Construction")
     private String materialTypeName;

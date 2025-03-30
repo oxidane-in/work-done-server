@@ -67,7 +67,6 @@ public class MaterialMapper {
         }
 
         MaterialResponse.MaterialResponseBuilder builder = MaterialResponse.builder()
-                .materialId(material.getMaterialId())
                 .materialName(material.getMaterialName())
                 .materialUnit(material.getMaterialUnit())
                 .materialPackSize(material.getMaterialPackSize())

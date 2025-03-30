@@ -1,6 +1,6 @@
 package in.oxidane.work.done.project.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.project.dto.ProjectScopeRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import org.springframework.util.StringUtils;
 public class ProjectScopeValidator {
 
     private static final int MAX_NAME_LENGTH = 100;
-    private static final int MAX_HANDLE_LENGTH = 50;
     private static final int MAX_DESC_LENGTH = 255;
 
     /**
@@ -34,10 +33,10 @@ public class ProjectScopeValidator {
      * Validates a request for updating a project scope.
      *
      * @param request The request to validate
-     * @param id The ID of the project scope being updated
+     * @param id      The ID of the project scope being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(ProjectScopeRequest request, Integer id) {
+    public void validateForUpdate(ProjectScopeRequest request, Long id) {
         log.debug("Validating project scope update request for id: {}", id);
         if (id == null) {
             throw new ValidationException("Project scope ID cannot be null for update");
@@ -62,10 +61,6 @@ public class ProjectScopeValidator {
 
         if (request.getProjectScopeName().length() > MAX_NAME_LENGTH) {
             throw new ValidationException("Project scope name must be less than " + MAX_NAME_LENGTH + " characters");
-        }
-
-        if (request.getProjectScopeHandle() != null && request.getProjectScopeHandle().length() > MAX_HANDLE_LENGTH) {
-            throw new ValidationException("Project scope handle must be less than " + MAX_HANDLE_LENGTH + " characters");
         }
 
         if (request.getProjectScopeDesc() != null && request.getProjectScopeDesc().length() > MAX_DESC_LENGTH) {

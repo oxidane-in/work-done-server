@@ -28,7 +28,6 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      */
     @Override
     public ResponseEntity<UnitTypeResponse> createUnitType(UnitTypeRequest request) {
-        log.info("REST request to create unit type");
         UnitTypeResponse response = unitTypeService.createUnitType(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -37,8 +36,7 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitTypeResponse> getUnitTypeById(Integer id) {
-        log.info("REST request to get unit type with id: {}", id);
+    public ResponseEntity<UnitTypeResponse> getUnitTypeById(Long id) {
         UnitTypeResponse response = unitTypeService.getUnitTypeById(id);
         return ResponseEntity.ok(response);
     }
@@ -48,7 +46,6 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      */
     @Override
     public ResponseEntity<List<UnitTypeResponse>> getAllUnitTypes() {
-        log.info("REST request to get all unit types");
         List<UnitTypeResponse> response = unitTypeService.getAllUnitTypes();
         return ResponseEntity.ok(response);
     }
@@ -57,8 +54,7 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitTypeResponse> updateUnitType(Integer id, UnitTypeRequest request) {
-        log.info("REST request to update unit type with id: {}", id);
+    public ResponseEntity<UnitTypeResponse> updateUnitType(Long id, UnitTypeRequest request) {
         UnitTypeResponse response = unitTypeService.updateUnitType(id, request);
         return ResponseEntity.ok(response);
     }
@@ -67,9 +63,8 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<Void> deleteUnitType(Integer id) {
-        log.info("REST request to delete unit type with id: {}", id);
+    public ResponseEntity<Void> deleteUnitType(Long id) {
         unitTypeService.deleteUnitType(id);
         return ResponseEntity.noContent().build();
     }
-} 
+}

@@ -1,6 +1,6 @@
 package in.oxidane.work.done.building.validator;
 
-import in.oxidane.work.done.exception.ValidationException;
+import in.oxidane.work.done.common.exception.ValidationException;
 import in.oxidane.work.done.building.dto.UnitTypeRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import org.springframework.util.StringUtils;
 public class UnitTypeValidator {
 
     private static final int MAX_NAME_LENGTH = 100;
-    private static final int MAX_HANDLE_LENGTH = 50;
     private static final int MAX_DESC_LENGTH = 255;
 
     /**
@@ -37,11 +36,12 @@ public class UnitTypeValidator {
      * @param id The ID of the unit type being updated
      * @throws ValidationException if validation fails
      */
-    public void validateForUpdate(UnitTypeRequest request, Integer id) {
+    public void validateForUpdate(UnitTypeRequest request, Long id) {
         log.debug("Validating unit type update request for id: {}", id);
         if (id == null) {
             throw new ValidationException("Unit type ID cannot be null for update");
         }
+
         validateCommon(request);
     }
 
@@ -64,16 +64,8 @@ public class UnitTypeValidator {
             throw new ValidationException("Unit type name must be less than " + MAX_NAME_LENGTH + " characters");
         }
 
-        if (!StringUtils.hasText(request.getUnitTypeHandle())) {
-            throw new ValidationException("Unit type handle is required");
-        }
-
-        if (request.getUnitTypeHandle().length() > MAX_HANDLE_LENGTH) {
-            throw new ValidationException("Unit type handle must be less than " + MAX_HANDLE_LENGTH + " characters");
-        }
-
         if (request.getUnitTypeDesc() != null && request.getUnitTypeDesc().length() > MAX_DESC_LENGTH) {
             throw new ValidationException("Unit type description must be less than " + MAX_DESC_LENGTH + " characters");
         }
     }
-} 
+}

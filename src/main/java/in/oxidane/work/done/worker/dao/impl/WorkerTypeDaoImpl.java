@@ -35,7 +35,7 @@ public class WorkerTypeDaoImpl implements WorkerTypeDao {
     }
 
     @Override
-    public Optional<WorkerType> getById(int id) {
+    public Optional<WorkerType> getById(Long id) {
         log.debug("DAO - Fetching worker type with ID: {}", id);
         Optional<WorkerType> result = workerTypeRepository.findById(id);
         if (result.isPresent()) {
@@ -75,7 +75,7 @@ public class WorkerTypeDaoImpl implements WorkerTypeDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         log.debug("DAO - Deleting worker type with ID: {}", id);
 
         // Check if the entity exists before deleting
@@ -93,7 +93,7 @@ public class WorkerTypeDaoImpl implements WorkerTypeDao {
     }
 
     @Override
-    public boolean existsById(int id) {
+    public boolean existsById(Long id) {
         log.debug("DAO - Checking if worker type exists with ID: {}", id);
         boolean exists = workerTypeRepository.existsById(id);
         log.debug("DAO - Worker type with ID {} exists: {}", id, exists);

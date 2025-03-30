@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * Provides JPA CRUD operations for Material data.
  */
 @Repository
-public interface MaterialRepository extends JpaRepository<Material, Integer> {
+public interface MaterialRepository extends JpaRepository<Material, Long> {
     // Add custom query methods if needed
 }
