@@ -6,10 +6,11 @@ public class DbConstants {
     public static final String MDM_SCHEMA = "mdm_schema";
     public static final String CORE_SCHEMA = "core_schema";
 
-    // Database table names - master_schema
+    // Database table names - mdm_schema
     public static final String PROJECT_STATUS = "project_status";
     public static final String PROJECT_SCOPE = "project_scope";
     public static final String WORKER_TYPE = "worker_type";
+    public static final String WORKER = "worker";
     public static final String UNIT_OF_MEASUREMENT = "unit_of_measurement";
     public static final String UNIT_TYPE = "unit_type";
     public static final String MATERIAL_TYPE = "material_type";
@@ -52,6 +53,16 @@ public class DbConstants {
     public static final String WORKER_TYPE_HANDLE = "worker_type_handle";
     public static final String WORKER_TYPE_DESC = "worker_type_desc";
 
+    // Column names for worker table
+    public static final String WORKER_ID = "worker_id";
+    public static final String WORKER_NAME = "worker_name";
+    public static final String WORKER_RATE = "worker_rate";
+    public static final String WORKER_BANK_ACCOUNT = "worker_bank_account";
+    public static final String WORKER_IFSC = "worker_ifsc";
+    public static final String WORKER_BIRTH_DATE = "worker_birth_date";
+    public static final String WORKER_MOBILE_NUMBER = "worker_mobile_number";
+    public static final String WORKER_STATE = "worker_state";
+    public static final String WORKER_DOJ = "worker_doj";
 
     // Column names for client table
     public static final String CLIENT_ID = "client_id";
@@ -149,7 +160,6 @@ public class DbConstants {
     // Column names for LineItem_Labor table
     public static final String LINE_ITEM_WORKER_ID = "line_item_worker_id";
     public static final String WORKER_REQUIRED = "worker_required";
-    public static final String WORKER_RATE = "worker_rate";
     public static final String TOTAL_WORKER_COST = "total_worker_cost";
 }
 
