@@ -1,6 +1,6 @@
 package in.oxidane.work.done.material.entity;
 
-import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -86,6 +86,7 @@ public class MaterialServiceImpl implements MaterialService {
     @Transactional
     public MaterialResponse updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException {
 
+        //TODO: Check this flow
         log.info("Updating material with ID: {}", materialId);
 
         // Validate request
@@ -97,16 +98,12 @@ public class MaterialServiceImpl implements MaterialService {
             throw new ResourceNotFoundException("Material not found with ID: " + materialId);
         }
 
-        // Get the existing material first
-        Material existingMaterial = materialDao.getById(materialId)
-            .orElseThrow(() -> new ResourceNotFoundException("Material not found with ID: " + materialId));
-
-        // Update the material using builder
-        Material updatedMaterial = materialMapper.updateEntityFromRequest(existingMaterial, request);
-        updatedMaterial = setRelatedEntities(updatedMaterial, request);
+//        // Update the material using builder
+//        Material updatedMaterial = materialMapper.updateEntityFromRequest(existingMaterial, request);
+//        updatedMaterial = setRelatedEntities(updatedMaterial, request);
 
         // Update the material
-        return materialDao.update(materialId, updatedMaterial)
+        return materialDao.update(materialId, materialMapper.toEntity(request))
             .map(materialMapper::toResponse)
             .orElseThrow(() -> {
                 log.error("Failed to update material with ID: {}", materialId);

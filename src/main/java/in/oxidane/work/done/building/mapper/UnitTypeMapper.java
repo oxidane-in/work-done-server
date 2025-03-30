@@ -5,6 +5,7 @@ import in.oxidane.work.done.building.dto.UnitTypeResponse;
 import in.oxidane.work.done.building.entity.UnitType;
 import in.oxidane.work.done.common.config.MapstructMapperConfig;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -31,4 +32,6 @@ public interface UnitTypeMapper {
     UnitType toEntity(UnitTypeRequest request);
 
     List<UnitTypeResponse> toResponse(List<UnitType> unitTypes);
+
+    UnitType updateEntityFromDto(UnitTypeRequest request, @MappingTarget UnitType entity);
 }

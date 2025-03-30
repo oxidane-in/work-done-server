@@ -40,9 +40,9 @@ public class MaterialControllerImpl implements MaterialController {
     }
 
     @Override
-    public ResponseEntity<MaterialResponse> updateMaterial(Long materialId, MaterialRequest request) {
-        MaterialResponse response = materialService.updateMaterial(materialId, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateMaterial(Long materialId, MaterialRequest request) {
+        materialService.updateMaterial(materialId, request);
+        return ResponseEntity.ok().build();
     }
 
     @Override
