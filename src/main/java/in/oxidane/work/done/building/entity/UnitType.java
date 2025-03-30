@@ -1,6 +1,6 @@
 package in.oxidane.work.done.building.entity;
 
-import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,9 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -24,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = DbConstants.UNIT_TYPE, schema = DbConstants.MASTER_SCHEMA)
+@Table(name = DbConstants.UNIT_TYPE, schema = DbConstants.MDM_SCHEMA)
 public class UnitType extends Auditable {
 
     @Id

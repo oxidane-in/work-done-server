@@ -11,7 +11,6 @@ import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +32,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public UnitTypeResponse createUnitType(UnitTypeRequest request) {
         log.info("Creating new unit type");
         log.debug("Unit type request: {}", request);
@@ -51,7 +49,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public UnitTypeResponse getUnitTypeById(Long id) {
         log.info("Fetching unit type with id: {}", id);
 
@@ -69,7 +66,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public List<UnitTypeResponse> getAllUnitTypes() {
         log.info("Fetching all unit types");
 
@@ -85,22 +81,20 @@ public class UnitTypeServiceImpl implements UnitTypeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public UnitTypeResponse updateUnitType(Long id, UnitTypeRequest request) {
         log.info("Updating unit type with id: {}", id);
         log.debug("Update request: {}", request);
 
-        // Check if the resource exists first
-        if (!unitTypeDao.existsById(id)) {
-            log.warn("Unit type not found with id: {}", id);
-            throw new ResourceNotFoundException("Unit type not found with id: " + id);
-        }
+        UnitType existingUnitType = unitTypeDao.getById(id)
+            .orElseThrow(() -> {
+                log.warn("Unit type not found with id: {}", id);
+                return new ResourceNotFoundException("Unit type not found with id: " + id);
+            });
+
+        log.debug("Existing unit type: {}", existingUnitType);
 
         // Map request to entity and set the ID
-        UnitType unitType = unitTypeMapper.toEntity(request);
-        unitType = unitType.toBuilder().unitTypeId(id).build();
-
-        unitTypeValidator.validateForUpdate(request, id);
+        UnitType unitType = unitTypeMapper.updateEntityFromDto(request, existingUnitType);
 
         // Update and convert response
         UnitType updatedUnitType = unitTypeDao.update(unitType);
@@ -113,7 +107,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public void deleteUnitType(Long id) {
         log.info("Deleting unit type with id: {}", id);
 

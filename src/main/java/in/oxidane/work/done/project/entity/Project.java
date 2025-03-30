@@ -1,6 +1,6 @@
 package in.oxidane.work.done.project.entity;
 
-import in.oxidane.work.done.common.DbConstants;
+import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,9 +46,9 @@ public class Project extends Auditable {
     private String projectState;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.CUSTOMER_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_CUSTOMER))
-    private Customer customer;
+    @JoinColumn(name = DbConstants.CLIENT_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_CLIENT))
+    private Client customer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.PROJECT_STATUS_ID, nullable = false,

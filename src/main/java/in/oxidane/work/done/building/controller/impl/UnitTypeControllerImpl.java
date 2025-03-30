@@ -5,7 +5,6 @@ import in.oxidane.work.done.building.dto.UnitTypeRequest;
 import in.oxidane.work.done.building.dto.UnitTypeResponse;
 import in.oxidane.work.done.building.service.UnitTypeService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,6 @@ import java.util.List;
  * Implementation of the UnitTypeController interface.
  * Handles HTTP requests related to unit type operations.
  */
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UnitTypeControllerImpl implements UnitTypeController {
@@ -54,9 +52,9 @@ public class UnitTypeControllerImpl implements UnitTypeController {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<UnitTypeResponse> updateUnitType(Long id, UnitTypeRequest request) {
-        UnitTypeResponse response = unitTypeService.updateUnitType(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateUnitType(Long id, UnitTypeRequest request) {
+        unitTypeService.updateUnitType(id, request);
+        return ResponseEntity.ok().build();
     }
 
     /**
