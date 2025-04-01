@@ -1,5 +1,6 @@
 package in.oxidane.work.done.worker.service.impl;
 
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.worker.dao.WorkerDao;
 import in.oxidane.work.done.worker.dto.WorkerRequest;
 import in.oxidane.work.done.worker.dto.WorkerResponse;
@@ -9,7 +10,6 @@ import in.oxidane.work.done.worker.service.WorkerService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,10 +28,9 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public WorkerResponse getWorkerById(Long id) {
         Worker worker = workerDao.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Worker not found with ID: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Worker not found with ID: " + id));
         return workerMapper.toResponse(worker);
     }
 

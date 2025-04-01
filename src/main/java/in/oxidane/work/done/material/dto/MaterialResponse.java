@@ -57,8 +57,8 @@ public class MaterialResponse {
     private BigDecimal materialRatePerUnit;
 
     @Schema(description = "Creation timestamp", example = "2023-09-15T10:30:00")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdOn;
 
     @Schema(description = "Last update timestamp", example = "2023-09-15T10:30:00")
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedOn;
 }

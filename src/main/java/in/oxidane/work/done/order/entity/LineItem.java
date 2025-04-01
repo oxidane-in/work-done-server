@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = DbConstants.LINE_ITEM,
-    schema = DbConstants.CORE_SCHEMA,
+    schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
         @UniqueConstraint(columnNames = DbConstants.LINE_ITEM_NAME),
         @UniqueConstraint(columnNames = DbConstants.LINE_ITEM_HANDLE)
