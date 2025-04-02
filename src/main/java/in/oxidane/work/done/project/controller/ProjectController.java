@@ -38,7 +38,6 @@ public interface ProjectController {
         }
     )
     @PostMapping
-    @GetMapping("/{id}")
     ResponseEntity<ProjectResponse> createProject(
         @Parameter(description = "Project details", required = true)
         @Valid @RequestBody ProjectRequest request);

@@ -1,9 +1,10 @@
-package in.oxidane.work.done.order.mapper;
+package in.oxidane.work.done.lineitem.mapper;
 
 import in.oxidane.work.done.common.config.MapstructMapperConfig;
-import in.oxidane.work.done.order.dto.LineItemRequest;
-import in.oxidane.work.done.order.dto.LineItemResponse;
-import in.oxidane.work.done.order.entity.LineItem;
+import in.oxidane.work.done.lineitem.dto.LineItemRequest;
+import in.oxidane.work.done.lineitem.dto.LineItemResponse;
+import in.oxidane.work.done.lineitem.entity.LineItem;
+import in.oxidane.work.done.order.mapper.UnitOfMeasurementMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -24,4 +25,4 @@ public interface LineItemMapper {
     @Mapping(target = "unitOfMeasurement", ignore = true)
     @Mapping(target = "lineItemId", ignore = true)
     LineItem toUpdateEntityFromRequest(LineItemRequest request, @MappingTarget LineItem entity);
-} 
+}

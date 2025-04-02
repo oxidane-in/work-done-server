@@ -1,4 +1,4 @@
-package in.oxidane.work.done.order.entity;
+package in.oxidane.work.done.lineitem.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;

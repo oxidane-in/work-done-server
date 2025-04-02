@@ -1,8 +1,8 @@
-package in.oxidane.work.done.order.dao.impl;
+package in.oxidane.work.done.lineitem.dao.impl;
 
-import in.oxidane.work.done.order.dao.LineItemDao;
-import in.oxidane.work.done.order.entity.LineItem;
-import in.oxidane.work.done.order.repository.LineItemRepository;
+import in.oxidane.work.done.lineitem.dao.LineItemDao;
+import in.oxidane.work.done.lineitem.entity.LineItem;
+import in.oxidane.work.done.lineitem.repository.LineItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

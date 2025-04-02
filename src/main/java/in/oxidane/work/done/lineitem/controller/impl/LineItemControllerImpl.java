@@ -1,9 +1,9 @@
-package in.oxidane.work.done.order.controller.impl;
+package in.oxidane.work.done.lineitem.controller.impl;
 
-import in.oxidane.work.done.order.controller.LineItemController;
-import in.oxidane.work.done.order.dto.LineItemRequest;
-import in.oxidane.work.done.order.dto.LineItemResponse;
-import in.oxidane.work.done.order.service.LineItemService;
+import in.oxidane.work.done.lineitem.controller.LineItemController;
+import in.oxidane.work.done.lineitem.dto.LineItemRequest;
+import in.oxidane.work.done.lineitem.dto.LineItemResponse;
+import in.oxidane.work.done.lineitem.service.LineItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

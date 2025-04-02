@@ -1,7 +1,7 @@
-package in.oxidane.work.done.order.controller;
+package in.oxidane.work.done.lineitem.controller;
 
-import in.oxidane.work.done.order.dto.LineItemRequest;
-import in.oxidane.work.done.order.dto.LineItemResponse;
+import in.oxidane.work.done.lineitem.dto.LineItemRequest;
+import in.oxidane.work.done.lineitem.dto.LineItemResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = DbConstants.MATERIAL, schema = DbConstants.CORE_SCHEMA)
+@Table(name = DbConstants.MATERIAL, schema = DbConstants.MDM_SCHEMA)
 public class Material extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

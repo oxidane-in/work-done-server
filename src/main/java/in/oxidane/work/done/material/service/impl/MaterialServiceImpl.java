@@ -10,7 +10,6 @@ import in.oxidane.work.done.material.dto.MaterialResponse;
 import in.oxidane.work.done.material.entity.Material;
 import in.oxidane.work.done.material.mapper.MaterialMapper;
 import in.oxidane.work.done.material.service.MaterialService;
-import in.oxidane.work.done.material.validator.MaterialRequestValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,14 +31,10 @@ public class MaterialServiceImpl implements MaterialService {
     private final MaterialVendorDao materialVendorDao;
     private final MaterialTypeDao materialTypeDao;
     private final MaterialMapper materialMapper;
-    private final MaterialRequestValidator validator;
 
     @Override
     public MaterialResponse createMaterial(MaterialRequest request) {
         log.info("Creating new material: {}", request.getMaterialName());
-
-        // Validate request
-        validator.validateForCreate(request);
 
         // Prepare the material entity
         Material material = materialMapper.toEntity(request);
@@ -83,9 +78,6 @@ public class MaterialServiceImpl implements MaterialService {
 
         //TODO: Check this flow
         log.info("Updating material with ID: {}", materialId);
-
-        // Validate request
-        validator.validateForUpdate(request, materialId);
 
         // Check if material exists
         if (!materialDao.existsById(materialId)) {

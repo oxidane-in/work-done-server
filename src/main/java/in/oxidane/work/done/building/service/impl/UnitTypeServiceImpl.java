@@ -6,7 +6,6 @@ import in.oxidane.work.done.building.dto.UnitTypeResponse;
 import in.oxidane.work.done.building.entity.UnitType;
 import in.oxidane.work.done.building.mapper.UnitTypeMapper;
 import in.oxidane.work.done.building.service.UnitTypeService;
-import in.oxidane.work.done.building.validator.UnitTypeValidator;
 import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
 
     private final UnitTypeDao unitTypeDao;
     private final UnitTypeMapper unitTypeMapper;
-    private final UnitTypeValidator unitTypeValidator;
 
     /**
      * {@inheritDoc}
@@ -36,7 +34,6 @@ public class UnitTypeServiceImpl implements UnitTypeService {
         log.info("Creating new unit type");
         log.debug("Unit type request: {}", request);
 
-        unitTypeValidator.validateForCreate(request);
 
         UnitType unitType = unitTypeMapper.toEntity(request);
         UnitType savedUnitType = unitTypeDao.create(unitType);

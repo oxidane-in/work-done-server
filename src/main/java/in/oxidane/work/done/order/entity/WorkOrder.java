@@ -2,6 +2,7 @@ package in.oxidane.work.done.order.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
+import in.oxidane.work.done.lineitem.entity.LineItem;
 import in.oxidane.work.done.project.entity.Project;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
