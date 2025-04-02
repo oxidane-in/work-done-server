@@ -10,7 +10,6 @@ import in.oxidane.work.done.material.service.MaterialVendorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +27,6 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
     private final MaterialVendorMapper materialVendorMapper;
 
     @Override
-    @Transactional
     public MaterialVendorResponse createMaterialVendor(MaterialVendorRequest request) {
         log.info("Creating new material vendor: {}", request.getMaterialVendorName());
         log.debug("Material vendor request details: {}", request);
@@ -36,10 +34,10 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
         MaterialVendor materialVendor = materialVendorMapper.toEntity(request);
 
         MaterialVendor savedVendor = materialVendorDao.create(materialVendor)
-                .orElseThrow(() -> {
-                    log.error("Failed to create material vendor");
-                    return new RuntimeException("Failed to create material vendor");
-                });
+            .orElseThrow(() -> {
+                log.error("Failed to create material vendor");
+                return new RuntimeException("Failed to create material vendor");
+            });
 
         log.info("Material vendor created successfully with ID: {}", savedVendor.getMaterialVendorId());
         log.debug("Created material vendor details: {}", savedVendor);
@@ -48,15 +46,14 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public MaterialVendorResponse getMaterialVendorById(Long id) {
         log.info("Fetching material vendor with ID: {}", id);
 
         MaterialVendor materialVendor = materialVendorDao.getById(id)
-                .orElseThrow(() -> {
-                    log.info("Material vendor not found with ID: {}", id);
-                    return new ResourceNotFoundException("Material vendor not found with ID: " + id);
-                });
+            .orElseThrow(() -> {
+                log.info("Material vendor not found with ID: {}", id);
+                return new ResourceNotFoundException("Material vendor not found with ID: " + id);
+            });
 
         log.info("Found material vendor: {}", materialVendor.getMaterialVendorName());
         log.debug("Material vendor details: {}", materialVendor);
@@ -65,7 +62,6 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<MaterialVendorResponse> getAllMaterialVendors() {
         log.info("Fetching all material vendors");
 
@@ -74,21 +70,20 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
         log.debug("Material vendors details: {}", vendors);
 
         return vendors.stream()
-                .map(materialVendorMapper::toResponse)
-                .collect(Collectors.toList());
+            .map(materialVendorMapper::toResponse)
+            .collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public MaterialVendorResponse updateMaterialVendor(Long id, MaterialVendorRequest request) {
         log.info("Updating material vendor with ID: {}", id);
 
         // Check if the resource exists first
         MaterialVendor existingMaterialVendor = materialVendorDao.getById(id)
-                .orElseThrow(() -> {
-                    log.info("Material vendor not found with ID: {}", id);
-                    return new ResourceNotFoundException("Material vendor not found with ID: " + id);
-                });
+            .orElseThrow(() -> {
+                log.info("Material vendor not found with ID: {}", id);
+                return new ResourceNotFoundException("Material vendor not found with ID: " + id);
+            });
 
         MaterialVendor materialVendor = materialVendorMapper.toUpdateEntityFromRequest(request, existingMaterialVendor);
 
@@ -96,17 +91,16 @@ public class MaterialVendorServiceImpl implements MaterialVendorService {
 
         // Update the entity
         MaterialVendor updatedVendor = materialVendorDao.update(materialVendor)
-                .orElseThrow(() -> {
-                    log.error("Failed to update material vendor with ID: {}", id);
-                    return new RuntimeException("Failed to update material vendor with ID: " + id);
-                });
+            .orElseThrow(() -> {
+                log.error("Failed to update material vendor with ID: {}", id);
+                return new RuntimeException("Failed to update material vendor with ID: " + id);
+            });
 
         log.info("Material vendor updated successfully with ID: {}", id);
         return materialVendorMapper.toResponse(updatedVendor);
     }
 
     @Override
-    @Transactional
     public void deleteMaterialVendor(Long id) {
         log.info("Deleting material vendor with ID: {}", id);
 

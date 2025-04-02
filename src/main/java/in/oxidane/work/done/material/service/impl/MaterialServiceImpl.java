@@ -14,7 +14,6 @@ import in.oxidane.work.done.material.validator.MaterialRequestValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +35,6 @@ public class MaterialServiceImpl implements MaterialService {
     private final MaterialRequestValidator validator;
 
     @Override
-    @Transactional
     public MaterialResponse createMaterial(MaterialRequest request) {
         log.info("Creating new material: {}", request.getMaterialName());
 
@@ -57,7 +55,6 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public MaterialResponse getMaterialById(Long materialId) throws ResourceNotFoundException {
         log.info("Retrieving material with ID: {}", materialId);
 
@@ -70,7 +67,6 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<MaterialResponse> getAllMaterials() {
         log.info("Retrieving all materials");
 
@@ -83,7 +79,6 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    @Transactional
     public MaterialResponse updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException {
 
         //TODO: Check this flow
@@ -112,7 +107,6 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    @Transactional
     public void deleteMaterial(Long materialId) throws ResourceNotFoundException {
 
         log.info("Deleting material with ID: {}", materialId);

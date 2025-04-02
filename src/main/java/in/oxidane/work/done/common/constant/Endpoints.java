@@ -30,7 +30,9 @@ public class Endpoints {
     public static final String PROJECT_V1 = API_V1 + "/projects";
     public static final String PROJECT_SCOPE_V1 = API_V1 + "/project-scopes";
     public static final String PROJECT_STATUS_V1 = API_V1 + "/project-statuses";
+    public static final String CLIENT_V1 = API_V1 + "/client";
 
     // Worker
     public static final String WORKER_TYPE_V1 = API_V1 + "/worker-types";
+    public static final String WORKER_V1 = API_V1 + "/worker";
 }

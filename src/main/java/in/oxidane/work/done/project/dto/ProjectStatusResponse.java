@@ -17,7 +17,7 @@ public class ProjectStatusResponse {
     private Long projectStatusId;
 
     @Schema(description = "Name of the project status", example = "In Progress")
-    private String projectStatusName;
+    private String statusName;
 
     @Schema(description = "Handle or unique identifier for the project status", example = "in_progress")
     private String projectStatusHandle;
