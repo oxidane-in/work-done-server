@@ -1,10 +1,12 @@
-package in.oxidane.work.done.order.entity;
+package in.oxidane.work.done.lineitem.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
+import in.oxidane.work.done.order.entity.UnitOfMeasurement;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,19 +18,20 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
+@Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = DbConstants.LINE_ITEM,
-    schema = DbConstants.MDM_SCHEMA,
+@EqualsAndHashCode(callSuper = true)
+@Table(name = DbConstants.LINE_ITEM, schema = DbConstants.CORE_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.LINE_ITEM_NAME),
-        @UniqueConstraint(columnNames = DbConstants.LINE_ITEM_HANDLE)
+        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_NAME}),
+        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_HANDLE})
     })
 public class LineItem extends Auditable {
 
@@ -47,7 +50,23 @@ public class LineItem extends Auditable {
     private String lineItemHandle;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.UOM_ID, nullable = false)
+    @JoinColumn(name = DbConstants.LINE_ITEM_HEADER_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_HEADER))
+    private LineItemHeader lineItemHeader;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.LINE_ITEM_CATEGORY_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_CATEGORY))
+    private LineItemCategory lineItemCategory;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.LINE_ITEM_SUB_CATEGORY_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_SUB_CATEGORY))
+    private LineItemSubCategory lineItemSubCategory;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.UOM_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_UOM))
     private UnitOfMeasurement unitOfMeasurement;
 
     @PrePersist

@@ -1,6 +1,6 @@
-package in.oxidane.work.done.order.repository;
+package in.oxidane.work.done.lineitem.repository;
 
-import in.oxidane.work.done.order.entity.LineItem;
+import in.oxidane.work.done.lineitem.entity.LineItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

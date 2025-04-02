@@ -11,20 +11,26 @@ public class DbConstants {
     public static final String PROJECT_SCOPE = "project_scope";
     public static final String WORKER_TYPE = "worker_type";
     public static final String WORKER = "worker";
+    public static final String CLIENT = "client";
     public static final String UNIT_OF_MEASUREMENT = "unit_of_measurement";
     public static final String UNIT_TYPE = "unit_type";
     public static final String MATERIAL_TYPE = "material_type";
     public static final String MATERIAL_VENDOR = "material_vendor";
     public static final String MATERIAL_MANUFACTURER = "material_manufacturer";
+    public static final String MATERIAL = "material";
+    public static final String LINE_ITEM_CATEGORY = "line_item_category";
+    public static final String LINE_ITEM_SUB_CATEGORY = "line_item_sub_category";
+    public static final String LINE_ITEM_HEADER = "line_item_header";
 
     // Database table names - core_schema
-    public static final String CLIENT = "client";
     public static final String PROJECT = "project";
-    public static final String MATERIAL = "material";
     public static final String LINE_ITEM = "line_item";
-    public static final String WORK_ORDER = "work_order";
     public static final String LINE_ITEM_MATERIAL = "line_item_material";
     public static final String LINE_ITEM_WORKER = "line_item_worker";
+    public static final String WORK_ORDER = "work_order";
+    public static final String WORK_ORDER_LINE_ITEM = "work_order_line_item";
+    public static final String WORK_ORDER_MATERIAL_DETAILS = "work_order_material_details";
+    public static final String WORK_ORDER_WORKER_DETAILS = "work_order_worker_details";
 
     //Column names for auditable
     public static final String CREATED_BY = "created_by";
@@ -32,19 +38,29 @@ public class DbConstants {
     public static final String UPDATED_BY = "updated_by";
     public static final String UPDATED_ON = "updated_on";
 
-    //Foreign key constraints
+    //Foreign Key constraints for Project
     public static final String FK_PROJECT_CLIENT = "fk_project_client";
     public static final String FK_PROJECT_PROJECT_STATUS = "fk_project_projectstatus";
+
+    //Foreign Key constraints for Material
+    public static final String FK_MATERIAL_MATERIAL_TYPE = "fk_material_materialtype";
+    public static final String FK_MATERIAL_MATERIAL_VENDOR = "fk_material_materialvendor";
+    public static final String FK_MATERIAL_MATERIAL_MANUFACTURER = "fk_material_materialmanufacturer";
+
+    //Foreign Key constraints for WorkOrder
+    public static final String FK_WORK_ORDER_PROJECT = "fk_workorder_project";
+    public static final String FK_WORK_ORDER_LINE_ITEM = "fk_workorder_lineitem";
+    public static final String FK_WORK_ORDER_UOM = "fk_workorder_uom";
+
+    //Foreign Key constraints for LineItem
+    public static final String FK_LINE_ITEM_HEADER = "fk_lineitem_header";
+    public static final String FK_LINE_ITEM_CATEGORY = "fk_lineitem_category";
+    public static final String FK_LINE_ITEM_SUB_CATEGORY = "fk_lineitem_subcategory";
+    public static final String FK_LINE_ITEM_UOM = "fk_lineitem_uom";
     public static final String FK_LINE_ITEM_MATERIAL_LINE_ITEM = "fk_lineitemmaterial_lineitem";
     public static final String FK_LINE_ITEM_MATERIAL_MATERIAL = "fk_lineitemmaterial_material";
     public static final String FK_LINE_ITEM_WORKER_LINE_ITEM = "fk_lineitemworker_lineitem";
     public static final String FK_LINE_ITEM_WORKER_WORKER_TYPE = "fk_lineitemworker_workertype";
-    public static final String FK_MATERIAL_MATERIAL_TYPE = "fk_material_materialtype";
-    public static final String FK_MATERIAL_MATERIAL_VENDOR = "fk_material_materialvendor";
-    public static final String FK_MATERIAL_MATERIAL_MANUFACTURER = "fk_material_materialmanufacturer";
-    public static final String FK_WORK_ORDER_PROJECT = "fk_workorder_project";
-    public static final String FK_WORK_ORDER_LINE_ITEM = "fk_workorder_lineitem";
-    public static final String FK_WORK_ORDER_UOM = "fk_workorder_uom";
 
     // Column names for worker_type table
     public static final String WORKER_TYPE_ID = "worker_type_id";
@@ -157,12 +173,26 @@ public class DbConstants {
     public static final String MATERIAL_RATE = "MaterialRate";
     public static final String CONSUMPTION_PER_UOM = "consumption_per_uom";
 
-    // Column names for LineItem_Labor table
+    // Column names for LineItem_Worker table
     public static final String LINE_ITEM_WORKER_ID = "line_item_worker_id";
     public static final String WORKER_REQUIRED = "worker_required";
     public static final String TOTAL_WORKER_COST = "total_worker_cost";
+
+    // Column names for LineItem_Category table
+    public static final String LINE_ITEM_CATEGORY_ID = "line_item_category_id";
+    public static final String LINE_ITEM_CATEGORY_NAME = "line_item_category_name";
+    public static final String LINE_ITEM_CATEGORY_HANDLE = "line_item_category_handle";
+    public static final String LINE_ITEM_CATEGORY_DESC = "line_item_category_desc";
+
+    // Column names for LineItem_Category table
+    public static final String LINE_ITEM_SUB_CATEGORY_ID = "line_item_sub_category_id";
+    public static final String LINE_ITEM_SUB_CATEGORY_NAME = "line_item_sub_category_name";
+    public static final String LINE_ITEM_SUB_CATEGORY_HANDLE = "line_item_sub_category_handle";
+    public static final String LINE_ITEM_SUB_CATEGORY_DESC = "line_item_sub_category_desc";
+
+    // Column names for LineItem_Header table
+    public static final String LINE_ITEM_HEADER_ID = "line_item_header_id";
+    public static final String LINE_ITEM_HEADER_NAME = "line_item_header_name";
+    public static final String LINE_ITEM_HEADER_HANDLE = "line_item_header_handle";
+    public static final String LINE_ITEM_HEADER_DESC = "line_item_header_desc";
 }
-
-
-
-

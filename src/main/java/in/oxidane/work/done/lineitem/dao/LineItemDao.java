@@ -1,6 +1,6 @@
-package in.oxidane.work.done.order.dao;
+package in.oxidane.work.done.lineitem.dao;
 
-import in.oxidane.work.done.order.entity.LineItem;
+import in.oxidane.work.done.lineitem.entity.LineItem;
 
 import java.util.List;
 import java.util.Optional;
