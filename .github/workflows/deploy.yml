@@ -1,0 +1,139 @@
+name: PR Build, Version Bump, and Conditional Deploy
+
+on:
+  pull_request:
+    branches:
+      - staging
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+  workflow_dispatch: # Allows manual trigger
+    inputs:
+      deploy:
+        description: "Deploy to Render?"
+        required: true
+        type: boolean
+
+jobs:
+  pr-build:
+    runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.versioning.outputs.NEW_VERSION }}
+      image_tag: ${{ steps.versioning.outputs.IMAGE_TAG }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up JDK 23
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '23'
+
+      - name: Build PR with Maven
+        run: mvn clean package -DskipTests -Dspring.profiles.active=staging
+
+  version-bump:
+    needs: pr-build
+    runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.versioning.outputs.NEW_VERSION }}
+      image_tag: ${{ steps.versioning.outputs.IMAGE_TAG }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: staging  # Ensure we're working on the latest staging branch
+
+      - name: Extract and Increment Version
+        id: versioning
+        run: |
+          TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+
+          # Extract current version and remove -SNAPSHOT
+          CURRENT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+
+          # Get latest version from Git tags
+          LATEST_TAG=$(git tag --sort=-v:refname | head -n 1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+$' || echo "$CURRENT_VERSION")
+
+          # Increment patch version
+          NEW_VERSION=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
+          IMAGE_TAG="work-done-server-$TIMESTAMP-$NEW_VERSION"
+
+          echo "New version: $NEW_VERSION"
+          echo "Image tag: $IMAGE_TAG"
+
+          # Set outputs
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Update pom.xml Version
+        run: |
+          mvn versions:set -DnewVersion=${{ env.NEW_VERSION }} -DgenerateBackupPoms=false
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git commit -am "Bump version to ${{ env.NEW_VERSION }}"
+          git push origin staging
+
+      - name: Create Git Tag
+        run: |
+          git tag -a work-done-server-${{ env.NEW_VERSION }} -m "Release ${{ env.NEW_VERSION }}"
+          git push origin work-done-server-${{ env.NEW_VERSION }}
+
+  docker-build:
+    needs: version-bump
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build and Tag Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/work-done-server:${{ needs.version-bump.outputs.image_tag }} .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/work-done-server:${{ needs.version-bump.outputs.image_tag }} ${{ secrets.DOCKER_USERNAME }}/work-done-server:latest
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/work-done-server:${{ needs.version-bump.outputs.image_tag }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/work-done-server:latest
+
+  deploy-prompt:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prompt for Deployment
+        run: |
+          echo "Docker image built and pushed successfully."
+          echo "Would you like to deploy to Render?"
+          echo "Manually trigger the 'workflow_dispatch' event with 'deploy: true' to deploy."
+
+  deploy:
+    needs: deploy-prompt
+    if: github.event.inputs.deploy == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Render
+        run: |
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          --data '{
+            "image": "docker.io/${{ secrets.DOCKER_USERNAME }}/work-done-server:${{ needs.version-bump.outputs.image_tag }}",
+            "envVars": {
+              "DATABASE_URL": "${{ secrets.DATABASE_URL }}",
+              "DATABASE_USERNAME": "${{ secrets.DATABASE_USERNAME }}",
+              "DATABASE_PASSWORD": "${{ secrets.DATABASE_PASSWORD }}"
+            }
+          }'
