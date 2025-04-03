@@ -52,7 +52,7 @@ public class DbConstants {
     public static final String FK_WORK_ORDER_LINE_ITEM = "fk_workorder_lineitem";
     public static final String FK_WORK_ORDER_UOM = "fk_workorder_uom";
 
-    //Foreign Key constraints for LineItem
+    //Foreign and Unique constraints for LineItem
     public static final String FK_LINE_ITEM_HEADER = "fk_lineitem_header";
     public static final String FK_LINE_ITEM_CATEGORY = "fk_lineitem_category";
     public static final String FK_LINE_ITEM_SUB_CATEGORY = "fk_lineitem_subcategory";
@@ -61,6 +61,12 @@ public class DbConstants {
     public static final String FK_LINE_ITEM_MATERIAL_MATERIAL = "fk_lineitemmaterial_material";
     public static final String FK_LINE_ITEM_WORKER_LINE_ITEM = "fk_lineitemworker_lineitem";
     public static final String FK_LINE_ITEM_WORKER_WORKER_TYPE = "fk_lineitemworker_workertype";
+    public static final String UK_LINE_ITEM_NAME = "uk_line_item_name";
+    public static final String UK_LINE_ITEM_HANDLE = "uk_line_item_handle";
+
+    //Foreign and Unique Key constraints for Client
+    public static final String UK_CLIENT_NAME = "uk_client_name";
+    public static final String UK_CLIENT_HANDLE = "uk_client_handle";
 
     // Column names for worker_type table
     public static final String WORKER_TYPE_ID = "worker_type_id";
@@ -170,13 +176,11 @@ public class DbConstants {
 
     // Column names for LineItem_Material table
     public static final String LINE_ITEM_MATERIAL_ID = "LineItemMaterialId";
-    public static final String MATERIAL_RATE = "MaterialRate";
     public static final String CONSUMPTION_PER_UOM = "consumption_per_uom";
 
     // Column names for LineItem_Worker table
     public static final String LINE_ITEM_WORKER_ID = "line_item_worker_id";
-    public static final String WORKER_REQUIRED = "worker_required";
-    public static final String TOTAL_WORKER_COST = "total_worker_cost";
+    public static final String WORKER_TYPE_HAJRI = "worker_type_hajri";
 
     // Column names for LineItem_Category table
     public static final String LINE_ITEM_CATEGORY_ID = "line_item_category_id";

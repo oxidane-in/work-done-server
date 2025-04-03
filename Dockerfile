@@ -1,21 +1,13 @@
-# Use Amazon Corretto JDK 23
-FROM amazoncorretto:23
-
-# Set working directory
+FROM amazoncorretto:23 AS builder
+RUN yum install -y maven
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the JAR file to the container
-COPY target/your-app.jar app.jar
-
-# Create logs directory if it doesn't exist
+FROM amazoncorretto:23
+WORKDIR /app
+COPY --from=builder /app/target/work-done-server-0.0.1-SNAPSHOT.jar app.jar
 RUN mkdir -p /var/data/logs
-
-# Set correct permissions (optional)
-RUN chmod -R 777 /var/data/logs
-
-# Set environment variables (if needed)
-ENV SPRING_PROFILES_ACTIVE=staging
-ENV LOG_DIR=/var/data/logs
-
-# Start the application
+EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
