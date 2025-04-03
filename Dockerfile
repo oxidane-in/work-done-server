@@ -1,20 +1,21 @@
-FROM amazoncorretto:23 AS builder
-WORKDIR /app
-RUN yum install -y maven
-COPY pom.xml .
-RUN mvn dependency:go-offline
-COPY src ./src
-RUN mvn clean package -DskipTests
-
+# Use Amazon Corretto JDK 23
 FROM amazoncorretto:23
+
+# Set working directory
 WORKDIR /app
-RUN yum install -y shadow-utils && \
-    groupadd --system --gid 1001 appuser && \
-    useradd --system --uid 1001 --gid 1001 appuser && \
-    yum remove -y shadow-utils && \
-    yum clean all
-COPY --from=builder /app/target/*.jar app.jar
-RUN chown appuser:appuser /app/app.jar
-USER appuser
-EXPOSE 8080
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+
+# Copy the JAR file to the container
+COPY target/your-app.jar app.jar
+
+# Create logs directory if it doesn't exist
+RUN mkdir -p /var/data/logs
+
+# Set correct permissions (optional)
+RUN chmod -R 777 /var/data/logs
+
+# Set environment variables (if needed)
+ENV SPRING_PROFILES_ACTIVE=staging
+ENV LOG_DIR=/var/data/logs
+
+# Start the application
+CMD ["java", "-jar", "app.jar"]
