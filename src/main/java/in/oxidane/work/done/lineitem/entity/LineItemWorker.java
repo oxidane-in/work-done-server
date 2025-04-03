@@ -43,12 +43,6 @@ public class LineItemWorker extends Auditable {
         foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_WORKER_WORKER_TYPE))
     private WorkerType workerType;
 
-    @Column(name = DbConstants.WORKER_REQUIRED, nullable = false, precision = 10, scale = 2)
-    private BigDecimal laborRequired;
-
-    @Column(name = DbConstants.WORKER_RATE, nullable = false, precision = 18, scale = 2)
-    private BigDecimal laborRate;
-
-    @Column(name = DbConstants.TOTAL_WORKER_COST, nullable = false, precision = 18, scale = 2, insertable = false, updatable = false)
-    private BigDecimal totalWorkerCost;
+    @Column(name = DbConstants.WORKER_TYPE_HAJRI, precision = 10, scale = 2)
+    private BigDecimal workerTypeHajri;
 }

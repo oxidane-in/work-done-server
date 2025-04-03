@@ -41,12 +41,6 @@ public class LineItemMaterial extends Auditable {
     @JoinColumn(name = DbConstants.MATERIAL_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_MATERIAL_MATERIAL))
     private Material material;
 
-    @Column(name = DbConstants.MATERIAL_UNIT, nullable = false)
-    private String materialUnit;
-
-    @Column(name = DbConstants.MATERIAL_RATE, nullable = false, precision = 18, scale = 2)
-    private BigDecimal materialRate;
-
     @Column(name = DbConstants.CONSUMPTION_PER_UOM, precision = 10, scale = 2)
     private BigDecimal consumptionPerUom;
 }

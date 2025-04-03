@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 @Table(name = DbConstants.CLIENT,
     schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.CLIENT_NAME),
-        @UniqueConstraint(columnNames = DbConstants.CLIENT_HANDLE)
+        @UniqueConstraint(name = DbConstants.UK_CLIENT_NAME, columnNames = DbConstants.CLIENT_NAME),
+        @UniqueConstraint(name = DbConstants.UK_CLIENT_HANDLE, columnNames = DbConstants.CLIENT_HANDLE)
     })
 public class Client extends Auditable {
 

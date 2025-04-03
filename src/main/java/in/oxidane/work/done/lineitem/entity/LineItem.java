@@ -30,8 +30,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = DbConstants.LINE_ITEM, schema = DbConstants.CORE_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_NAME}),
-        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_HANDLE})
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_NAME, columnNames = DbConstants.LINE_ITEM_NAME),
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_HANDLE, columnNames = DbConstants.LINE_ITEM_HANDLE)
     })
 public class LineItem extends Auditable {
 
