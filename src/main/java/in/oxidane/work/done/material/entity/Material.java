@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,14 +27,17 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = DbConstants.MATERIAL, schema = DbConstants.MDM_SCHEMA)
+@Table(name = DbConstants.MATERIAL, schema = DbConstants.MDM_SCHEMA,
+    uniqueConstraints = {
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_NAME, columnNames = DbConstants.MATERIAL_NAME)
+    })
 public class Material extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = DbConstants.MATERIAL_ID)
     private Long materialId;
 
-    @Column(name = DbConstants.MATERIAL_NAME, nullable = false)
+    @Column(name = DbConstants.MATERIAL_NAME, nullable = false, unique = true)
     private String materialName;
 
     @ManyToOne

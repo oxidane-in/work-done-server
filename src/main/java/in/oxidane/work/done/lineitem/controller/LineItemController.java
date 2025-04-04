@@ -1,5 +1,6 @@
 package in.oxidane.work.done.lineitem.controller;
 
+import in.oxidane.work.done.common.constant.Endpoints;
 import in.oxidane.work.done.lineitem.dto.LineItemRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ import java.util.List;
  * REST API endpoints for LineItem operations.
  */
 @Tag(name = "Line Items", description = "APIs for line item management")
-@RequestMapping("/api/v1/line-items")
+@RequestMapping(Endpoints.LINE_ITEM_V1)
 public interface LineItemController {
 
     /**

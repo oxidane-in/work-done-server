@@ -1,13 +1,17 @@
-FROM amazoncorretto:23 AS builder
-RUN yum install -y maven
+FROM maven:3.9-eclipse-temurin-23 AS builder
+
 WORKDIR /app
 COPY pom.xml .
+# This layer caches the dependencies
+RUN mvn dependency:go-offline
+
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM amazoncorretto:23
+FROM eclipse-temurin:23-jdk
 WORKDIR /app
-COPY --from=builder /app/target/work-done-server-0.0.1-SNAPSHOT.jar app.jar
-RUN mkdir -p /var/data/logs
-EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
+# Make sure this matches your actual JAR file name (check target directory)
+COPY --from=builder /app/target/*.jar app.jar
+
+EXPOSE 19062
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = DbConstants.LINE_ITEM_HEADER, schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_HEADER_HANDLE, DbConstants.LINE_ITEM_HEADER_NAME}),
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_HEADER_NAME, columnNames = DbConstants.LINE_ITEM_HEADER_NAME),
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_HEADER_HANDLE, columnNames = DbConstants.LINE_ITEM_HEADER_HANDLE)
     })
 public class LineItemHeader extends Auditable {
 

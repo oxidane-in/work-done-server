@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,13 +22,24 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Entity class representing a project.
+ * <p>
+ * This class is used to map the project table in the database.
+ * It contains various attributes related to a project such as project code, name, location, status, etc.
+ * </p>
+ */
 @Data
 @Entity
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = DbConstants.PROJECT, schema = DbConstants.CORE_SCHEMA)
+@Table(name = DbConstants.PROJECT, schema = DbConstants.CORE_SCHEMA,
+uniqueConstraints = {
+    @UniqueConstraint(name = DbConstants.UK_PROJECT_CODE, columnNames = DbConstants.PROJECT_CODE),
+    @UniqueConstraint(name = DbConstants.UK_PROJECT_NAME, columnNames = DbConstants.PROJECT_NAME),
+})
 public class Project extends Auditable {
 
     @Id
@@ -35,7 +47,10 @@ public class Project extends Auditable {
     @Column(name = DbConstants.PROJECT_ID)
     private Long projectId;
 
-    @Column(name = DbConstants.PROJECT_NAME, nullable = false)
+    @Column(name = DbConstants.PROJECT_CODE, nullable = false, unique = true)
+    private String projectCode;
+
+    @Column(name = DbConstants.PROJECT_NAME, nullable = false, unique = true)
     private String projectName;
 
     @Column(name = DbConstants.PROJECT_LOCATION, nullable = false)

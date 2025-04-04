@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 @Table(name = DbConstants.MATERIAL_MANUFACTURER,
     schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.MATERIAL_MANUFACTURER_NAME),
-        @UniqueConstraint(columnNames = DbConstants.MATERIAL_MANUFACTURER_HANDLE)
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_MANUFACTURER_NAME, columnNames = DbConstants.MATERIAL_MANUFACTURER_NAME),
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_MANUFACTURER_HANDLE, columnNames = DbConstants.MATERIAL_MANUFACTURER_HANDLE)
     })
 public class MaterialManufacturer extends Auditable {
     @Id

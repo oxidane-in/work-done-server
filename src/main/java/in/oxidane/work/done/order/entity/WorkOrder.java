@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +27,10 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = DbConstants.WORK_ORDER, schema = DbConstants.CORE_SCHEMA)
+@Table(name = DbConstants.WORK_ORDER, schema = DbConstants.CORE_SCHEMA,
+uniqueConstraints = {
+    @UniqueConstraint(name = DbConstants.UK_WORK_ORDER_CODE, columnNames = DbConstants.WORK_ORDER_CODE),
+})
 public class WorkOrder extends Auditable {
 
     @Id
@@ -34,16 +38,22 @@ public class WorkOrder extends Auditable {
     @Column(name = DbConstants.WORK_ORDER_ID)
     private Long workOrderId;
 
+    @Column(name = DbConstants.WORK_ORDER_CODE, nullable = false, length = 50, unique = true)
+    private String workOrderCode;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.PROJECT_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_PROJECT))
+    @JoinColumn(name = DbConstants.PROJECT_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_PROJECT))
     private Project project;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.LINE_ITEM_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_LINE_ITEM))
+    @JoinColumn(name = DbConstants.LINE_ITEM_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_LINE_ITEM))
     private LineItem lineItem;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.UOM_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_UOM))
+    @JoinColumn(name = DbConstants.UOM_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_UOM))
     private UnitOfMeasurement unitOfMeasurement;
 
     @Column(name = DbConstants.QUANTITY, nullable = false, precision = 18, scale = 2)

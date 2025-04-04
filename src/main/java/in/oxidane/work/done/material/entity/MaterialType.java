@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 @Table(name = DbConstants.MATERIAL_TYPE,
     schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.MATERIAL_TYPE_NAME),
-        @UniqueConstraint(columnNames = DbConstants.MATERIAL_TYPE_HANDLE)
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_TYPE_NAME, columnNames = DbConstants.MATERIAL_TYPE_NAME),
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_TYPE_HANDLE, columnNames = DbConstants.MATERIAL_TYPE_HANDLE)
     })
 public class MaterialType extends Auditable {
     @Id

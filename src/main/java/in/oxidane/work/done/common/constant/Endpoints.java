@@ -4,7 +4,7 @@ public class Endpoints {
 
     public static final String BASE_URL = "https://api.oxidane.in";
 
-    public static final String API_V1 = "/api/v1";
+    public static final String API_V1 = "/v1";
 
     // health check
     public static final String HEALTH_CHECK = "/health/check";

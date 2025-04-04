@@ -26,9 +26,9 @@ import lombok.NoArgsConstructor;
 @Table(name = DbConstants.UNIT_OF_MEASUREMENT,
     schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.UOM_NAME),
-        @UniqueConstraint(columnNames = DbConstants.UOM_SYMBOL),
-        @UniqueConstraint(columnNames = DbConstants.UOM_HANDLE)
+        @UniqueConstraint(name = DbConstants.UK_UOM_NAME, columnNames = DbConstants.UOM_NAME),
+        @UniqueConstraint(name = DbConstants.UK_UOM_SYMBOL, columnNames = DbConstants.UOM_SYMBOL),
+        @UniqueConstraint(name = DbConstants.UK_UOM_HANDLE, columnNames = DbConstants.UOM_HANDLE)
     })
 public class UnitOfMeasurement extends Auditable {
 
