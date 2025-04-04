@@ -28,7 +28,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = DbConstants.LINE_ITEM_SUB_CATEGORY, schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {DbConstants.LINE_ITEM_SUB_CATEGORY_HANDLE, DbConstants.LINE_ITEM_SUB_CATEGORY_NAME}),
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_SUB_CATEGORY_NAME, columnNames = DbConstants.LINE_ITEM_SUB_CATEGORY_NAME),
+        @UniqueConstraint(name = DbConstants.UK_LINE_ITEM_SUB_CATEGORY_HANDLE, columnNames = DbConstants.LINE_ITEM_SUB_CATEGORY_HANDLE)
     })
 public class LineItemSubCategory extends Auditable {
 

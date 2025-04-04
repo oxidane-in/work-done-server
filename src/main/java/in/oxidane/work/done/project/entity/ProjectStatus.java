@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 @Table(name = DbConstants.PROJECT_STATUS,
     schema = DbConstants.MDM_SCHEMA,
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = DbConstants.PROJECT_STATUS_NAME),
-        @UniqueConstraint(columnNames = DbConstants.PROJECT_STATUS_HANDLE)
+        @UniqueConstraint(name = DbConstants.UK_PROJECT_STATUS_NAME, columnNames = DbConstants.PROJECT_STATUS_NAME),
+        @UniqueConstraint(name = DbConstants.UK_PROJECT_STATUS_HANDLE, columnNames = DbConstants.PROJECT_STATUS_HANDLE)
     })
 public class ProjectStatus extends Auditable {
 

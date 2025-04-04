@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,13 +19,17 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
 @Data
+@Entity
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = DbConstants.WORKER_TYPE, schema = DbConstants.MDM_SCHEMA)
+@Table(name = DbConstants.WORKER_TYPE, schema = DbConstants.MDM_SCHEMA,
+uniqueConstraints = {
+    @UniqueConstraint(name = DbConstants.UK_WORKER_TYPE_NAME, columnNames = DbConstants.WORKER_TYPE_NAME),
+    @UniqueConstraint(name = DbConstants.UK_WORKER_TYPE_HANDLE, columnNames = DbConstants.WORKER_TYPE_HANDLE)
+})
 public class WorkerType extends Auditable {
 
     @Id

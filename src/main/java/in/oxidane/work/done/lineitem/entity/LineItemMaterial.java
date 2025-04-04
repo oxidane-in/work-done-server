@@ -34,11 +34,13 @@ public class LineItemMaterial extends Auditable {
     private Long lineItemMaterialId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.LINE_ITEM_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_MATERIAL_LINE_ITEM))
+    @JoinColumn(name = DbConstants.LINE_ITEM_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_MATERIAL_LINE_ITEM))
     private LineItem lineItem;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.MATERIAL_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_MATERIAL_MATERIAL))
+    @JoinColumn(name = DbConstants.MATERIAL_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_MATERIAL_MATERIAL))
     private Material material;
 
     @Column(name = DbConstants.CONSUMPTION_PER_UOM, precision = 10, scale = 2)

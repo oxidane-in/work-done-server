@@ -38,19 +38,34 @@ public class DbConstants {
     public static final String UPDATED_BY = "updated_by";
     public static final String UPDATED_ON = "updated_on";
 
-    //Foreign Key constraints for Project
+    //Foreign and Unique Key constraints for Project
     public static final String FK_PROJECT_CLIENT = "fk_project_client";
     public static final String FK_PROJECT_PROJECT_STATUS = "fk_project_projectstatus";
+    public static final String FK_PROJECT_PROJECT_SCOPE = "fk_project_projectscope";
+    public static final String UK_PROJECT_NAME = "uk_project_name";
+    public static final String UK_PROJECT_CODE = "uk_project_code";
+    public static final String UK_PROJECT_STATUS_NAME = "uk_project_status_name";
+    public static final String UK_PROJECT_STATUS_HANDLE = "uk_project_status_handle";
+    public static final String UK_PROJECT_SCOPE_NAME = "uk_project_scope_name";
+    public static final String UK_PROJECT_SCOPE_HANDLE = "uk_project_scope_handle";
 
-    //Foreign Key constraints for Material
+    //Foreign and Unique Key constraints for Material
     public static final String FK_MATERIAL_MATERIAL_TYPE = "fk_material_materialtype";
     public static final String FK_MATERIAL_MATERIAL_VENDOR = "fk_material_materialvendor";
     public static final String FK_MATERIAL_MATERIAL_MANUFACTURER = "fk_material_materialmanufacturer";
+    public static final String UK_MATERIAL_NAME = "uk_material_name";
+    public static final String UK_MATERIAL_VENDOR_NAME = "uk_material_vendor_name";
+    public static final String UK_MATERIAL_VENDOR_HANDLE = "uk_material_vendor_handle";
+    public static final String UK_MATERIAL_MANUFACTURER_NAME = "uk_material_manufacturer_name";
+    public static final String UK_MATERIAL_MANUFACTURER_HANDLE = "uk_material_manufacturer_handle";
+    public static final String UK_MATERIAL_TYPE_NAME = "uk_material_type_name";
+    public static final String UK_MATERIAL_TYPE_HANDLE = "uk_material_type_handle";
 
-    //Foreign Key constraints for WorkOrder
+    //Foreign and Unique Key constraints for WorkOrder
     public static final String FK_WORK_ORDER_PROJECT = "fk_workorder_project";
     public static final String FK_WORK_ORDER_LINE_ITEM = "fk_workorder_lineitem";
     public static final String FK_WORK_ORDER_UOM = "fk_workorder_uom";
+    public static final String UK_WORK_ORDER_CODE = "uk_workorder_code";
 
     //Foreign and Unique constraints for LineItem
     public static final String FK_LINE_ITEM_HEADER = "fk_lineitem_header";
@@ -63,10 +78,28 @@ public class DbConstants {
     public static final String FK_LINE_ITEM_WORKER_WORKER_TYPE = "fk_lineitemworker_workertype";
     public static final String UK_LINE_ITEM_NAME = "uk_line_item_name";
     public static final String UK_LINE_ITEM_HANDLE = "uk_line_item_handle";
+    public static final String UK_LINE_ITEM_CATEGORY_NAME = "uk_line_item_category_name";
+    public static final String UK_LINE_ITEM_SUB_CATEGORY_NAME = "uk_line_item_sub_category_name";
+    public static final String UK_LINE_ITEM_HEADER_NAME = "uk_line_item_header_name";
+    public static final String UK_LINE_ITEM_CATEGORY_HANDLE = "uk_line_item_category_handle";
+    public static final String UK_LINE_ITEM_SUB_CATEGORY_HANDLE = "uk_line_item_sub_category_handle";
+    public static final String UK_LINE_ITEM_HEADER_HANDLE = "uk_line_item_header_handle";
 
     //Foreign and Unique Key constraints for Client
     public static final String UK_CLIENT_NAME = "uk_client_name";
     public static final String UK_CLIENT_HANDLE = "uk_client_handle";
+
+    //Foreign and Unique Key constraints for Worker
+    public static final String FK_WORKER_TYPE = "fk_worker_workertype";
+    public static final String UK_WORKER_NAME = "uk_worker_name";
+    public static final String UK_WORKER_MOBILE_NUMBER = "uk_worker_mobile_number";
+    public static final String UK_WORKER_TYPE_NAME = "uk_worker_type_name";
+    public static final String UK_WORKER_TYPE_HANDLE = "uk_worker_type_handle";
+
+    //Unique Key constraints for UOM
+    public static final String UK_UOM_NAME = "uk_uom_name";
+    public static final String UK_UOM_SYMBOL = "uk_uom_symbol";
+    public static final String UK_UOM_HANDLE = "uk_uom_handle";
 
     // Column names for worker_type table
     public static final String WORKER_TYPE_ID = "worker_type_id";
@@ -98,6 +131,7 @@ public class DbConstants {
 
     // Column names for project table
     public static final String PROJECT_ID = "project_id";
+    public static final String PROJECT_CODE = "project_code";
     public static final String PROJECT_NAME = "project_name";
     public static final String PROJECT_LOCATION = "project_location";
     public static final String PROJECT_CITY = "project_city";
@@ -162,14 +196,15 @@ public class DbConstants {
     public static final String MATERIAL_VENDOR_DESC = "material_vendor_desc";
     public static final String MATERIAL_VENDOR_HANDLE = "material_vendor_handle";
 
-    // Column names for LineItem table
+    // Column names for line_item table
     public static final String LINE_ITEM_ID = "line_item_id";
     public static final String LINE_ITEM_NAME = "line_item_name";
     public static final String LINE_ITEM_DESC = "line_item_desc";
     public static final String LINE_ITEM_HANDLE = "line_item_handle";
 
-    // Column names for WorkOrder table
+    // Column names for work_order table
     public static final String WORK_ORDER_ID = "work_order_id";
+    public static final String WORK_ORDER_CODE = "work_order_code";
     public static final String QUANTITY = "quantity";
     public static final String RATE = "rate";
     public static final String TOTAL_AMOUNT = "total_amount";

@@ -12,12 +12,16 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.CacheControl;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @RequiredArgsConstructor
@@ -27,7 +31,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loggingInterceptor);
+        registry.addInterceptor(loggingInterceptor)
+            .excludePathPatterns("/swagger-ui/**", "/v3/api-docs/**", "/favicon.ico");
     }
 
     @Bean
@@ -58,4 +63,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return registration;
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+            .addResourceLocations("classpath:/static/")
+            .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
+
+        registry.addResourceHandler("/swagger-ui/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/swagger-ui/")
+            .resourceChain(false);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", "/swagger-ui/index.html");
+        registry.addRedirectViewController("/swagger", "/swagger-ui/index.html");
+        registry.addRedirectViewController("/docs", "/swagger-ui/index.html");
+    }
 }
