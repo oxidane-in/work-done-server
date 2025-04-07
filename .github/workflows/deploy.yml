@@ -18,9 +18,9 @@ jobs:
     env:
       SPRING_PROFILES_ACTIVE: staging
       LOG_LEVEL: INFO
-      DB_URL: ${{ secrets.STAGING_DB_URL }}
-      DB_USERNAME: ${{ secrets.STAGING_DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.STAGING_DB_PASSWORD }}
+      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      DATABASE_USERNAME: ${{ secrets.STAGING_DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.STAGING_DATABASE_PASSWORD }}
       API_KEY: ${{ secrets.STAGING_API_KEY }}
 
     steps:
