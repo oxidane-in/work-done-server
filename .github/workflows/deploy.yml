@@ -40,13 +40,13 @@ jobs:
       - name: Run Integration Tests
         run: mvn verify -DskipTests=false
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            target/surefire-reports/*.xml
-            target/failsafe-reports/*.xml
+#      - name: Publish Test Results
+#        uses: EnricoMi/publish-unit-test-result-action@v2
+#        if: always()
+#        with:
+#          files: |
+#            target/surefire-reports/*.xml
+#            target/failsafe-reports/*.xml
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
