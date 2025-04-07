@@ -28,10 +28,11 @@ public class LoggingInterceptor implements HandlerInterceptor {
     private static final String USER = "user";
     private static final String ENDPOINT = "endpoint";
     private static final String START_TIME = "startTime";
+    private static final String API_REGEX = ".*/v[1-2]/.*";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (!loggingProperties.isEnabled() || !request.getRequestURI().contains("/api/")) {
+        if (!loggingProperties.isEnabled() || !request.getRequestURI().matches(API_REGEX)) {
             return true;
         }
 
@@ -67,7 +68,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (!loggingProperties.isEnabled() || !request.getRequestURI().contains("/api/")) {
+        if (!loggingProperties.isEnabled() || !request.getRequestURI().matches(API_REGEX)) {
             return;
         }
 

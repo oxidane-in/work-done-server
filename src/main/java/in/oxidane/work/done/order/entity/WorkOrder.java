@@ -2,7 +2,6 @@ package in.oxidane.work.done.order.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
-import in.oxidane.work.done.lineitem.entity.LineItem;
 import in.oxidane.work.done.project.entity.Project;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +19,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -28,9 +27,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = DbConstants.WORK_ORDER, schema = DbConstants.CORE_SCHEMA,
-uniqueConstraints = {
-    @UniqueConstraint(name = DbConstants.UK_WORK_ORDER_CODE, columnNames = DbConstants.WORK_ORDER_CODE),
-})
+    uniqueConstraints = {
+        @UniqueConstraint(name = DbConstants.UK_WORK_ORDER_CODE, columnNames = DbConstants.WORK_ORDER_CODE),
+    })
 public class WorkOrder extends Auditable {
 
     @Id
@@ -43,25 +42,12 @@ public class WorkOrder extends Auditable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.PROJECT_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_PROJECT))
+        foreignKey = @ForeignKey(name = DbConstants.FK_WO_PROJECT_ID))
     private Project project;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.LINE_ITEM_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_LINE_ITEM))
-    private LineItem lineItem;
+    @Column(name = DbConstants.WORK_ORDER_DATE, nullable = false, length = 100)
+    private LocalDate workOrderDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.UOM_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_UOM))
-    private UnitOfMeasurement unitOfMeasurement;
-
-    @Column(name = DbConstants.QUANTITY, nullable = false, precision = 18, scale = 2)
-    private BigDecimal quantity;
-
-    @Column(name = DbConstants.RATE, nullable = false, precision = 18, scale = 2)
-    private BigDecimal rate;
-
-    @Column(name = DbConstants.TOTAL_AMOUNT, nullable = false, precision = 18, scale = 2, insertable = false, updatable = false)
-    private BigDecimal totalAmount;
+    @Column(name = DbConstants.WORK_ORDER_DESC, length = 500)
+    private String workOrderDesc;
 }

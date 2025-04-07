@@ -11,10 +11,10 @@ import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
 import in.oxidane.work.done.worker.service.WorkerTypeService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class WorkerTypeControllerImpl implements WorkerTypeController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_WORKER_TYPE_REQUEST_SCHEMA).getInputStream()) {
-            createWorkerTypeRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createWorkerTypeRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_WORKER_TYPE_REQUEST_SCHEMA).getInputStream()) {
-            updateWorkerTypeRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateWorkerTypeRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
