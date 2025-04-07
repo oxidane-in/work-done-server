@@ -1,6 +1,8 @@
 package in.oxidane.work.done.project.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.project.dto.ClientRequest;
 import in.oxidane.work.done.project.dto.ClientResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,7 +41,7 @@ public interface ClientController {
     @PostMapping
     ResponseEntity<ClientResponse> createClient(
             @Parameter(description = "Client details", required = true)
-            @Valid @RequestBody ClientRequest request);
+            @RequestBody ClientRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Get all clients")
     @ApiResponses(value = {
@@ -84,7 +85,7 @@ public interface ClientController {
             @Parameter(description = "Client ID", required = true)
             @PathVariable Long id,
             @Parameter(description = "Updated client details", required = true)
-            @Valid @RequestBody ClientRequest request);
+            @RequestBody ClientRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Delete a client")
     @ApiResponses(value = {

@@ -103,4 +103,22 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(SchemaValidationException.class)
+    public ResponseEntity<ApiErrorResponse> handleSchemaValidationException(SchemaValidationException ex, WebRequest request) {
+        setupMDC();
+        log.error("Schema Validation error: {}", ex.getMessage());
+        List<String> errorList = ex.getErrors().stream().map(e->e.getName()+" "+e.getPointer()).toList();
+
+        ApiErrorResponse response = ApiErrorResponse.builder()
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error("Bad Request")
+            .message("Schema Validation failed")
+            .errorMessages(errorList)
+            .path(getRequestPath(request))
+            .build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
