@@ -25,12 +25,12 @@ public class DbConstants {
     // Database table names - core_schema
     public static final String PROJECT = "project";
     public static final String LINE_ITEM = "line_item";
-    public static final String LINE_ITEM_MATERIAL = "line_item_material";
-    public static final String LINE_ITEM_WORKER = "line_item_worker";
+    public static final String LI_MATERIAL = "li_material";
+    public static final String LI_WORKER = "li_worker";
     public static final String WORK_ORDER = "work_order";
-    public static final String WORK_ORDER_LINE_ITEM = "work_order_line_item";
-    public static final String WORK_ORDER_MATERIAL_DETAILS = "work_order_material_details";
-    public static final String WORK_ORDER_WORKER_DETAILS = "work_order_worker_details";
+    public static final String WO_LINE_ITEMS = "wo_line_items";
+    public static final String WO_MATERIAL_DETAILS = "wo_material_details";
+    public static final String WO_WORKER_DETAILS = "wo_worker_details";
 
     //Column names for auditable
     public static final String CREATED_BY = "created_by";
@@ -41,7 +41,6 @@ public class DbConstants {
     //Foreign and Unique Key constraints for Project
     public static final String FK_PROJECT_CLIENT = "fk_project_client";
     public static final String FK_PROJECT_PROJECT_STATUS = "fk_project_projectstatus";
-    public static final String FK_PROJECT_PROJECT_SCOPE = "fk_project_projectscope";
     public static final String UK_PROJECT_NAME = "uk_project_name";
     public static final String UK_PROJECT_CODE = "uk_project_code";
     public static final String UK_PROJECT_STATUS_NAME = "uk_project_status_name";
@@ -62,9 +61,10 @@ public class DbConstants {
     public static final String UK_MATERIAL_TYPE_HANDLE = "uk_material_type_handle";
 
     //Foreign and Unique Key constraints for WorkOrder
-    public static final String FK_WORK_ORDER_PROJECT = "fk_workorder_project";
-    public static final String FK_WORK_ORDER_LINE_ITEM = "fk_workorder_lineitem";
-    public static final String FK_WORK_ORDER_UOM = "fk_workorder_uom";
+    public static final String FK_WO_PROJECT_ID = "fk_wo_project_id";
+    public static final String FK_WORK_ORDER_ID = "fk_workorder_id";
+    public static final String FK_WO_LINE_ITEM_ID = "fk_wo_lineitem_id";
+    public static final String FK_WOLI_LINE_ITEM_ID = "fk_woli_lineitem_id";
     public static final String UK_WORK_ORDER_CODE = "uk_workorder_code";
 
     //Foreign and Unique constraints for LineItem
@@ -205,9 +205,8 @@ public class DbConstants {
     // Column names for work_order table
     public static final String WORK_ORDER_ID = "work_order_id";
     public static final String WORK_ORDER_CODE = "work_order_code";
-    public static final String QUANTITY = "quantity";
-    public static final String RATE = "rate";
-    public static final String TOTAL_AMOUNT = "total_amount";
+    public static final String WORK_ORDER_DATE = "work_order_date";
+    public static final String WORK_ORDER_DESC = "work_order_desc";
 
     // Column names for LineItem_Material table
     public static final String LINE_ITEM_MATERIAL_ID = "LineItemMaterialId";
@@ -234,4 +233,23 @@ public class DbConstants {
     public static final String LINE_ITEM_HEADER_NAME = "line_item_header_name";
     public static final String LINE_ITEM_HEADER_HANDLE = "line_item_header_handle";
     public static final String LINE_ITEM_HEADER_DESC = "line_item_header_desc";
+
+    // Column names for WorkOrder_LineItems table
+    public static final String WORK_ORDER_LINE_ITEM_ID = "work_order_line_item_id";
+    public static final String WO_ALLOCATED_LINE_ITEM_ID = "wo_allocated_line_item_id";
+    public static final String WO_LINE_ITEM_QTY = "wo_line_item_qty";
+    public static final String WO_LINE_ITEM_RATE = "wo_line_item_rate";
+    public static final String WO_LINE_ITEM_LABOR_CONSTANT = "wo_line_item_labor_constant";
+
+    // Column names for WorkOrder_MaterialDetails table
+    public static final String WO_MATERIAL_DETAIL_ID = "wo_material_detail_id";
+    public static final String WO_MATERIAL_ID = "wo_material_id";
+    public static final String WO_MATERIAL_CONSUMPTION_PER_UOM = "wo_material_consumption_per_uom";
+    public static final String WO_LINE_ITEM_ID = "wo_lineitem_id";
+
+    // Column names for WorkOrder_WorkerDetails table
+    public static final String WO_WORKER_DETAIL_ID = "wo_worker_detail_id";
+    public static final String WO_WORKER_TYPE_ID = "wo_worker_type_id";
+    public static final String WO_WORKER_TYPE_REQUIRED_PER_UOM = "wo_worker_type_required_per_uom";
+    public static final String WO_WORKER_TYPE_RATE_PER_HAJRI = "wo_worker_type_rate_per_hajri";
 }

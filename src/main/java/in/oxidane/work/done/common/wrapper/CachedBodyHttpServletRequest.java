@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class CachedBodyHttpServletRequest extends HttpServletRequestWrapper {
-    private byte[] cachedBody;
+    private final byte[] cachedBody;
 
     public CachedBodyHttpServletRequest(HttpServletRequest request) throws IOException {
         super(request);

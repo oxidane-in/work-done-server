@@ -3,6 +3,7 @@ package in.oxidane.work.done.common.exception;
 import in.oxidane.work.done.common.dto.ApiErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -38,12 +39,12 @@ public class GlobalExceptionHandler {
         setupMDC();
         log.error("Unhandled exception occurred", ex);
         ApiErrorResponse errorResponse = ApiErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .error("Internal Server Error")
-                .message("An unexpected error occurred: " + ex.getMessage())
-                .path(getRequestPath(request))
-                .build();
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+            .error("Internal Server Error")
+            .message("An unexpected error occurred: " + ex.getMessage())
+            .path(getRequestPath(request))
+            .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -67,13 +68,13 @@ public class GlobalExceptionHandler {
         log.error("Validation error: {}", ex.getMessage());
 
         ApiErrorResponse response = ApiErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error("Bad Request")
-                .message("Validation failed")
-                .errorMessages(ex.getErrors())
-                .path(getRequestPath(request))
-                .build();
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error("Bad Request")
+            .message("Validation failed")
+            .errorMessages(ex.getErrors())
+            .path(getRequestPath(request))
+            .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -93,14 +94,32 @@ public class GlobalExceptionHandler {
         List<String> errorList = new ArrayList<>(errorMap.values());
 
         ApiErrorResponse response = ApiErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error("Bad Request")
-                .message("Validation failed")
-                .errorMessages(errorList)
-                .path(getRequestPath(request))
-                .build();
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error("Bad Request")
+            .message("Validation failed")
+            .errorMessages(errorList)
+            .path(getRequestPath(request))
+            .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex, WebRequest request) {
+        String message = "Data already exists or violates unique constraint";
+
+        setupMDC();
+        log.error("Data integrity violation: {}", message, ex);
+
+        ApiErrorResponse response = ApiErrorResponse.builder()
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.CONFLICT.value())
+            .error(ex.getMostSpecificCause().getLocalizedMessage())
+            .message(message)
+            .path(getRequestPath(request))
+            .build();
+
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 }

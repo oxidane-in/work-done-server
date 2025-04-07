@@ -26,7 +26,6 @@ public class Endpoints {
     public static final String UNIT_OF_MEASUREMENT_V1 = API_V1 + "/unit-of-measurements";
 
     // Project
-    public static final String CUSTOMER_V1 = API_V1 + "/customers";
     public static final String PROJECT_V1 = API_V1 + "/projects";
     public static final String PROJECT_SCOPE_V1 = API_V1 + "/project-scopes";
     public static final String PROJECT_STATUS_V1 = API_V1 + "/project-statuses";
