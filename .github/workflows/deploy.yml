@@ -1,13 +1,24 @@
-name: PR Build
+name: Spring Boot PR Build
 
 on:
   pull_request:
     types: [ opened, synchronize, reopened ]
+    # No branch filtering - will run on PRs targeting any branch
 
 jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-latest
+    environment: staging
+
+    env:
+      # Common environment variables
+      SPRING_PROFILES_ACTIVE: staging
+      LOG_LEVEL: INFO
+      # Add your specific staging environment variables here
+      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      DATABASE_USERNAME: ${{ secrets.STAGING_DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.STAGING_DATABASE_PASSWORD }}
 
     steps:
       - name: Checkout code
