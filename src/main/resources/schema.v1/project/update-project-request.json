@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjectRequest",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Project name is required"
+    },
+    "projectLocation": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Project location is required"
+    },
+    "projectCity": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Project city is required"
+    },
+    "projectState": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Project state is required"
+    },
+    "clientId": {
+      "type": ["integer","null"],
+      "description": "Client ID is required"
+    },
+    "projectStatusId": {
+      "type": ["integer","null"],
+      "description": "Project status ID is required"
+    },
+    "projectStartDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Project start date is required"
+    },
+    "projectEndDatePlanned": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Planned end date (must be present or future)"
+    },
+    "projectEndDateActual": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Actual end date (optional)"
+    },
+    "woNumber": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "WO number is required"
+    },
+    "woDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "WO date is required"
+    },
+    "woCompletionDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "WO completion date (optional)"
+    },
+    "tenureOfProjectMonths": {
+      "type": ["integer","null"],
+      "minimum": 1,
+      "description": "Tenure of project in months (min 1)"
+    },
+    "woAmount": {
+      "type": ["number","null"],
+      "exclusiveMinimum": 0,
+      "description": "WO amount (must be > 0, up to 16 digits and 2 decimals)",
+      "multipleOf": 0.01
+    }
+  },
+  "additionalProperties": false
+}

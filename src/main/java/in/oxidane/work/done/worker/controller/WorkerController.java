@@ -1,6 +1,8 @@
 package in.oxidane.work.done.worker.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.worker.dto.WorkerRequest;
 import in.oxidane.work.done.worker.dto.WorkerResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,7 +36,7 @@ public interface WorkerController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    ResponseEntity<WorkerResponse> createWorker(@Valid @RequestBody WorkerRequest request);
+    ResponseEntity<WorkerResponse> createWorker(@RequestBody WorkerRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Get worker by ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public interface WorkerController {
     @PutMapping("/{id}")
     ResponseEntity<WorkerResponse> updateWorker(
         @Parameter(description = "Worker ID") @PathVariable Long id,
-        @Valid @RequestBody WorkerRequest request);
+        @Valid @RequestBody WorkerRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Delete a worker")
     @ApiResponses(value = {

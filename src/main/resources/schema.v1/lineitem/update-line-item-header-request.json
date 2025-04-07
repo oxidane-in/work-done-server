@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LineItemHeaderRequest",
+  "type": "object",
+  "properties": {
+    "lineItemHeaderName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Line item header name is required"
+    },
+    "lineItemHeaderDesc": {
+      "type": ["string", "null"],
+      "maxLength": 255,
+      "description": "Optional description of the line item header"
+    }
+  },
+  "additionalProperties": false
+}
