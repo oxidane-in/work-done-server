@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop
-      - 'feature/**'  # Match all feature branches
   pull_request:
     branches:
       - develop
