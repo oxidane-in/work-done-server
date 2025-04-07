@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "LineItemRequest",
+  "description": "Schema for creating a line item",
+  "properties": {
+    "lineItemName": {
+      "type": "string",
+      "description": "Name of the line item",
+      "example": "Steel Rebar",
+      "maxLength": 100
+    },
+    "lineItemDesc": {
+      "type": "string",
+      "description": "Description of the line item",
+      "example": "High tensile strength steel rebar for reinforcement",
+      "maxLength": 255
+    },
+    "lineItemHandle": {
+      "type": "string",
+      "description": "Handle of the line item (will be auto-generated if not provided)",
+      "example": "steel-rebar",
+      "maxLength": 50
+    },
+    "unitOfMeasurementId": {
+      "type": "integer",
+      "description": "ID of the unit of measurement",
+      "example": 1
+    }
+  },
+  "required": ["lineItemName", "unitOfMeasurementId"]
+}

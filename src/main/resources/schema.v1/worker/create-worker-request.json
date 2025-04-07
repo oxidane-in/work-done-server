@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Worker Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workerName",
+    "workerTypeId",
+    "workerRate",
+    "workerBankAccount",
+    "workerIFSC",
+    "workerBirthDate",
+    "workerMobileNumber",
+    "workerState",
+    "workerDOJ"
+  ],
+  "properties": {
+    "workerName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "workerTypeId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "workerRate": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "workerBankAccount": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "workerIFSC": {
+      "type": "string",
+      "pattern": "^[A-Z]{4}0[A-Z0-9]{6}$"
+    },
+    "workerBirthDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "workerMobileNumber": {
+      "type": "string",
+      "pattern": "^[0-9]{10,15}$"
+    },
+    "workerState": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "workerDOJ": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

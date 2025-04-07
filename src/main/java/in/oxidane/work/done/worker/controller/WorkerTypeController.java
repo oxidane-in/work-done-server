@@ -1,6 +1,8 @@
 package in.oxidane.work.done.worker.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +39,7 @@ public interface WorkerTypeController {
     @PostMapping
     ResponseEntity<WorkerTypeResponse> createWorkerType(
         @Parameter(description = "Worker type to create", required = true)
-        @Valid @RequestBody WorkerTypeRequest request);
+        @RequestBody WorkerTypeRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Get a worker type by ID")
     @ApiResponses(value = {
@@ -71,7 +72,7 @@ public interface WorkerTypeController {
         @Parameter(description = "ID of worker type to update", required = true)
         @PathVariable Long id,
         @Parameter(description = "Updated worker type details", required = true)
-        @Valid @RequestBody WorkerTypeRequest request);
+        @RequestBody WorkerTypeRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Delete a worker type")
     @ApiResponses(value = {
