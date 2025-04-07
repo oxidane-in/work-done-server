@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MaterialVendorRequest",
+  "description": "Material Vendor Request DTO",
+  "type": "object",
+  "properties": {
+    "materialVendorName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the material vendor",
+      "example": "ABC Suppliers"
+    },
+    "materialVendorDesc": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Description of the material vendor",
+      "example": "Supplier of building materials"
+    }
+  },
+  "required": ["materialVendorName"],
+  "additionalProperties": false
+}

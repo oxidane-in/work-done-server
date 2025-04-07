@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "UnitOfMeasurementRequest",
+  "description": "Unit of Measurement Request DTO",
+  "properties": {
+    "uomName": {
+      "type": ["string", "null"],
+      "description": "Name of the unit of measurement",
+      "example": "Meter"
+    },
+    "uomSymbol": {
+      "type": ["string", "null"],
+      "description": "Symbol of the unit of measurement",
+      "example": "m"
+    },
+    "uomDesc": {
+      "type": ["string", "null"],
+      "description": "Description of the unit of measurement",
+      "example": "Standard unit of length"
+    }
+  },
+  "required": ["uomName", "uomSymbol"]
+}

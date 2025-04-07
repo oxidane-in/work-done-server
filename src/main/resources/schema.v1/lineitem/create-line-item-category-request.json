@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LineItemCategoryRequest",
+  "type": "object",
+  "properties": {
+    "lineItemCategoryName": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "description": "Category name is required"
+    },
+    "lineItemCategoryDesc": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Optional description of the category"
+    }
+  },
+  "required": ["lineItemCategoryName"],
+  "additionalProperties": false
+}

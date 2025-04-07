@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "MaterialRequest",
+  "description": "Material Request DTO",
+  "properties": {
+    "materialName": {
+      "type": "string",
+      "description": "Name of the material",
+      "example": "Cement",
+      "maxLength": 100
+    },
+    "materialManufacturerId": {
+      "type": "integer",
+      "description": "ID of the material manufacturer",
+      "example": 1
+    },
+    "materialVendorId": {
+      "type": "integer",
+      "description": "ID of the material vendor",
+      "example": 1
+    },
+    "materialTypeId": {
+      "type": "integer",
+      "description": "ID of the material type",
+      "example": 1
+    },
+    "materialUnit": {
+      "type": "string",
+      "description": "Unit of measurement for the material",
+      "example": "kg",
+      "maxLength": 20
+    },
+    "materialPackSize": {
+      "type": "number",
+      "description": "Size of the material package",
+      "example": 50.0,
+      "minimum": 0
+    },
+    "materialRatePerPack": {
+      "type": "number",
+      "description": "Rate per pack of the material",
+      "example": 350.0
+    },
+    "materialRatePerUnit": {
+      "type": "number",
+      "description": "Rate per unit of the material",
+      "example": 7.0
+    }
+  },
+  "required": ["materialName", "materialPackSize"]
+}

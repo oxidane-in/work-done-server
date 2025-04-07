@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Project Status Request Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "projectStatusName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the project status",
+      "example": "In Progress"
+    },
+    "projectStatusDesc": {
+      "type": ["string", "null"],
+      "description": "Description of the project status",
+      "example": "Project is currently in progress"
+    }
+  }
+}

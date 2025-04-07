@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LineItemSubCategoryRequest",
+  "type": "object",
+  "properties": {
+    "lineItemCategoryId": {
+      "type": "integer",
+      "description": "Category ID cannot be null"
+    },
+    "lineItemSubCategoryName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Sub category name cannot be blank"
+    },
+    "lineItemSubCategoryDesc": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Optional description of the sub category"
+    }
+  },
+  "required": ["lineItemCategoryId", "lineItemSubCategoryName"],
+  "additionalProperties": false
+}

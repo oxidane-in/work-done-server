@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LineItemWorkerRequest",
+  "type": "object",
+  "properties": {
+    "lineItemId": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Line item ID must be positive and is required"
+    },
+    "workerTypeId": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Worker type ID must be positive and is required"
+    },
+    "workerTypeHajri": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Optional; must be non-negative and have at most 8 integer digits and 2 decimal places",
+      "multipleOf": 0.01
+    }
+  },
+  "required": ["lineItemId", "workerTypeId"],
+  "additionalProperties": false
+}

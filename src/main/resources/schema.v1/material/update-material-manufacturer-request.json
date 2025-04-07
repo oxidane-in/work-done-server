@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "MaterialManufacturerRequest",
+  "description": "Material manufacturer request data",
+  "properties": {
+    "materialManufacturerName": {
+      "type": ["string", "null"],
+      "description": "Material manufacturer name",
+      "example": "ABC Industries"
+    },
+    "materialManufacturerDesc": {
+      "type": ["string", "null"],
+      "description": "Material manufacturer description",
+      "example": "Leading provider of industrial materials"
+    }
+  },
+  "required": ["materialManufacturerName"]
+}
