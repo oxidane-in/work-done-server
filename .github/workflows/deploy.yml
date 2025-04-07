@@ -1,24 +1,28 @@
-name: Spring Boot PR Build
+name: Develop Branch Build
 
 on:
+  push:
+    branches:
+      - develop
+      - 'feature/**'  # Match all feature branches
   pull_request:
-    types: [ opened, synchronize, reopened ]
-    # No branch filtering - will run on PRs targeting any branch
+    branches:
+      - develop
+      - 'feature/**'
 
 jobs:
   build:
-    name: Build and Test
+    name: Build and Test Develop
     runs-on: ubuntu-latest
     environment: staging
 
     env:
-      # Common environment variables
       SPRING_PROFILES_ACTIVE: staging
       LOG_LEVEL: INFO
-      # Add your specific staging environment variables here
-      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
-      DATABASE_USERNAME: ${{ secrets.STAGING_DATABASE_USERNAME }}
-      DATABASE_PASSWORD: ${{ secrets.STAGING_DATABASE_PASSWORD }}
+      DB_URL: ${{ secrets.STAGING_DB_URL }}
+      DB_USERNAME: ${{ secrets.STAGING_DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.STAGING_DB_PASSWORD }}
+      API_KEY: ${{ secrets.STAGING_API_KEY }}
 
     steps:
       - name: Checkout code
@@ -31,8 +35,23 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - name: Run Unit Tests
+        run: mvn test
 
-      - name: Run tests
-        run: mvn -B test
+      - name: Run Integration Tests
+        run: mvn verify -DskipTests=false
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            target/surefire-reports/*.xml
+            target/failsafe-reports/*.xml
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
