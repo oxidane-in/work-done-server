@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = DbConstants.LINE_ITEM_WORKER, schema = DbConstants.CORE_SCHEMA)
+@Table(name = DbConstants.LI_WORKER, schema = DbConstants.CORE_SCHEMA)
 public class LineItemWorker extends Auditable {
 
     @Id

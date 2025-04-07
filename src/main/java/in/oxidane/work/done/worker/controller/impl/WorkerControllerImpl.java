@@ -11,10 +11,10 @@ import in.oxidane.work.done.worker.dto.WorkerResponse;
 import in.oxidane.work.done.worker.service.WorkerService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -38,17 +38,17 @@ public class WorkerControllerImpl implements WorkerController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_WORKER_REQUEST_SCHEMA).getInputStream()) {
-            createWorkerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createWorkerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_WORKER_REQUEST_SCHEMA).getInputStream()) {
-            updateWorkerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateWorkerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
     @Override
     public ResponseEntity<WorkerResponse> createWorker(WorkerRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(createWorkerRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(createWorkerRequestSchema, objectMapper.writeValueAsString(request));
         WorkerResponse createdWorker = workerService.createWorker(request);
         return new ResponseEntity<>(createdWorker, HttpStatus.CREATED);
     }
@@ -67,7 +67,7 @@ public class WorkerControllerImpl implements WorkerController {
 
     @Override
     public ResponseEntity<WorkerResponse> updateWorker(Long id, WorkerRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(updateWorkerRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(updateWorkerRequestSchema, objectMapper.writeValueAsString(request));
         WorkerResponse updatedWorker = workerService.updateWorker(id, request);
         return ResponseEntity.ok(updatedWorker);
     }

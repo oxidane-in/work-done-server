@@ -1,29 +1,4 @@
-version: '3.8'
-
 services:
-  app:
-    build: .
-    container_name: work_done_be
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/work_done_dev
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_PROFILES_ACTIVE=dev
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
-      - SPRING_LIQUIBASE_ENABLED=true
-      - SPRING_LIQUIBASE_CHANGE_LOG=classpath:db/changelog/db.changelog-master.xml
-    depends_on:
-      db_dev:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
   db_dev:
     container_name: work_done_dev
     image: postgres:16-alpine
