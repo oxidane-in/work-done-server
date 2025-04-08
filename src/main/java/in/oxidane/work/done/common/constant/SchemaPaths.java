@@ -45,4 +45,8 @@ public interface SchemaPaths {
     public static final String UPDATE_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-worker-request.json";
     public static final String CREATE_WORKER_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-worker-type-request.json";
     public static final String UPDATE_WORKER_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-worker-type-request.json";
+
+    //Work Order Schema
+    public static final String CREATE_WORK_ORDER_REQUEST_SCHEMA = "classpath:schemas/create-work-order-request-schema.json";
+    public static final String UPDATE_WORK_ORDER_REQUEST_SCHEMA = "classpath:schemas/update-work-order-request-schema.json";
 }

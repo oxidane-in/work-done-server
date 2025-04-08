@@ -30,8 +30,9 @@ public interface WorkerMapper {
         if (workerTypeId == null) {
             return null;
         }
-        WorkerType workerType = new WorkerType();
-        workerType.setWorkerTypeId(workerTypeId);
-        return workerType;
+
+        return WorkerType.builder()
+            .workerTypeId(workerTypeId)
+            .build();
     }
 }

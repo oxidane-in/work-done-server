@@ -3,11 +3,8 @@ package in.oxidane.work.done.material.dto;
 import in.oxidane.work.done.common.dto.AuditableResponse;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -17,9 +14,6 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "Material Response DTO")
 public class MaterialResponse extends AuditableResponse {
 

@@ -1,19 +1,13 @@
 package in.oxidane.work.done.project.dto;
 
 import in.oxidane.work.done.common.dto.AuditableResponse;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProjectResponse extends AuditableResponse {
     private Long projectId;
     private String projectName;
