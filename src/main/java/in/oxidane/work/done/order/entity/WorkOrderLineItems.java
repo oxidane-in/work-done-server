@@ -50,6 +50,6 @@ public class WorkOrderLineItems extends Auditable {
     @Column(name = DbConstants.WO_LINE_ITEM_RATE, nullable = false, precision = 10, scale = 2)
     private BigDecimal woLineItemRate;
 
-    @Column(name = DbConstants.WO_LINE_ITEM_LABOR_CONSTANT, nullable = false, precision = 10, scale = 2)
-    private BigDecimal woLineItemLaborConstant;
+    @Column(name = DbConstants.WO_LINE_ITEM_WORKER_CONSTANT, nullable = false, precision = 10, scale = 2)
+    private BigDecimal woLineItemWorkerConstant;
 }

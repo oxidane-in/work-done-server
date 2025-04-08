@@ -19,14 +19,14 @@ public interface ProjectMapper {
     ProjectResponse toResponse(Project entity);
 
     @Mapping(target = "projectId", ignore = true)
-    @Mapping(target = "customer", expression = "java(createClient(request.getClientId()))")
+    @Mapping(target = "client", expression = "java(createClient(request.getClientId()))")
     @Mapping(target = "projectStatus", expression = "java(createProjectStatus(request.getProjectStatusId()))")
     Project toEntity(ProjectRequest request);
 
     List<ProjectResponse> toResponse(List<Project> projects);
 
     @Mapping(target = "projectId", ignore = true)
-    @Mapping(target = "customer", expression = "java(createClient(request.getClientId()))")
+    @Mapping(target = "client", expression = "java(createClient(request.getClientId()))")
     @Mapping(target = "projectStatus", expression = "java(createProjectStatus(request.getProjectStatusId()))")
     Project toUpdateEntityFromRequest(ProjectRequest request, @MappingTarget Project entity);
 

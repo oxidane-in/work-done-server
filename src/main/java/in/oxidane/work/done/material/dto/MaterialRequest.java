@@ -39,7 +39,7 @@ public class MaterialRequest {
 
     @Size(max = 20, message = "Material unit must be less than 20 characters")
     @Schema(description = "Unit of measurement for the material", example = "kg")
-    private String materialUnit;
+    private Long materialUOMId;
 
     @NotNull(message = "Material pack size is required")
     @Positive(message = "Material pack size must be positive")
