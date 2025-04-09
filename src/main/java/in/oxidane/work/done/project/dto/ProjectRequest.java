@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -14,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ProjectRequest {
 
+    private String projectCode;
     private String projectName;
     private String projectLocation;
     private String projectCity;
@@ -23,9 +23,5 @@ public class ProjectRequest {
     private LocalDate projectStartDate;
     private LocalDate projectEndDatePlanned;
     private LocalDate projectEndDateActual;
-    private String woNumber;
-    private LocalDate woDate;
-    private LocalDate woCompletionDate;
     private Integer tenureOfProjectMonths;
-    private BigDecimal woAmount;
 }

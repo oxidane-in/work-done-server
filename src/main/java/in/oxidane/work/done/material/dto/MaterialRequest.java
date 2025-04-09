@@ -32,7 +32,7 @@ public class MaterialRequest {
     private Long materialTypeId;
 
     @Schema(description = "Unit of measurement for the material", example = "kg")
-    private String materialUnit;
+    private Long materialUOMId;
 
     @Schema(description = "Size of the material package", example = "50.0")
     private BigDecimal materialPackSize;

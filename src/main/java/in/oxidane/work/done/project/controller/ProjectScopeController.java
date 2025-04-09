@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,6 @@ import java.util.List;
  * REST API endpoints for ProjectScope operations.
  */
 @Tag(name = "Project Scope", description = "APIs for project scope management")
-@Validated
 @RequestMapping(Endpoints.PROJECT_SCOPE_V1)
 public interface ProjectScopeController {
 
@@ -51,7 +48,7 @@ public interface ProjectScopeController {
     @PostMapping
     ResponseEntity<ProjectScopeResponse> createProjectScope(
         @Parameter(description = "Project scope details", required = true)
-        @Valid @RequestBody ProjectScopeRequest request
+        @RequestBody ProjectScopeRequest request
     ) throws JsonProcessingException, SchemaValidationException;
 
     /**
@@ -112,7 +109,7 @@ public interface ProjectScopeController {
         @Parameter(description = "Project scope ID", required = true)
         @PathVariable("id") Long id,
         @Parameter(description = "Updated project scope details", required = true)
-        @Valid @RequestBody ProjectScopeRequest request
+        @RequestBody ProjectScopeRequest request
     ) throws JsonProcessingException, SchemaValidationException;
 
     /**

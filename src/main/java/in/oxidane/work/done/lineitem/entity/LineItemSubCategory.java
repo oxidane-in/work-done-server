@@ -5,6 +5,7 @@ import in.oxidane.work.done.common.entity.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,7 +40,7 @@ public class LineItemSubCategory extends Auditable {
     private Long lineItemSubCategoryId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.LINE_ITEM_CATEGORY_ID, nullable = false)
+    @JoinColumn(name = DbConstants.LINE_ITEM_CATEGORY_ID, nullable = false, foreignKey = @ForeignKey(name = DbConstants.FK_LINE_ITEM_CATEGORY_ID))
     private LineItemCategory lineItemCategoryId;
 
     @Column(name = DbConstants.LINE_ITEM_SUB_CATEGORY_NAME, nullable = false, length = 100, unique = true)

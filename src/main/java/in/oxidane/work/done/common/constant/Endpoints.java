@@ -20,10 +20,11 @@ public class Endpoints {
 
     // Order
     public static final String WORK_ORDER_V1 = API_V1 + "/work-orders";
+    public static final String WORK_ORDER_LINE_ITEMS_V1 = API_V1 + "/work-order-line-items";
     public static final String LINE_ITEM_V1 = API_V1 + "/line-items";
-    public static final String LINE_ITEM_MATERIAL_V1 = API_V1 + "/line-item-materials";
-    public static final String LINE_ITEM_WORKER_V1 = API_V1 + "/line-item-workers";
     public static final String UNIT_OF_MEASUREMENT_V1 = API_V1 + "/unit-of-measurements";
+    public static final String WORK_ORDER_MATERIAL_DETAILS_V1 = API_V1 + "/work-order-material-details";
+    public static final String WORK_ORDER_WORKER_DETAILS_V1 = API_V1 + "/work-order-worker-details";
 
     // Project
     public static final String PROJECT_V1 = API_V1 + "/projects";

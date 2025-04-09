@@ -1,6 +1,8 @@
 package in.oxidane.work.done.order.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementRequest;
 import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,6 @@ import java.util.List;
  * REST API endpoints for UnitOfMeasurement operations.
  */
 @Tag(name = "Unit of Measurement", description = "APIs for unit of measurement management")
-@Validated
 @RequestMapping(Endpoints.UNIT_OF_MEASUREMENT_V1)
 public interface UnitOfMeasurementController {
 
@@ -49,7 +49,7 @@ public interface UnitOfMeasurementController {
     ResponseEntity<UnitOfMeasurementResponse> createUnitOfMeasurement(
         @Parameter(description = "Unit of measurement details", required = true)
         @RequestBody UnitOfMeasurementRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a unit of measurement by its ID.
@@ -110,7 +110,7 @@ public interface UnitOfMeasurementController {
         @PathVariable("id") Long id,
         @Parameter(description = "Updated unit of measurement details", required = true)
         @RequestBody UnitOfMeasurementRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a unit of measurement by its ID.

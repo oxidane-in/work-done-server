@@ -1,24 +1,21 @@
 package in.oxidane.work.done.material.dto;
 
+import in.oxidane.work.done.common.dto.AuditableResponse;
+import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * Response DTO for Material operations.
  * Used for returning Material data to clients.
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "Material Response DTO")
-public class MaterialResponse {
+public class MaterialResponse extends AuditableResponse {
 
     @Schema(description = "ID of the material", example = "1")
     private Long materialId;
@@ -26,26 +23,17 @@ public class MaterialResponse {
     @Schema(description = "Name of the material", example = "Cement")
     private String materialName;
 
-    @Schema(description = "ID of the material manufacturer", example = "1")
-    private Long materialManufacturerId;
+    @Schema(description = "material manufacturer", example = "ABC Manufacturing")
+    private MaterialManufacturerResponse materialManufacturer;
 
-    @Schema(description = "Name of the material manufacturer", example = "ABC Manufacturing")
-    private String materialManufacturerName;
+    @Schema(description = "material vendor", example = "XYZ Suppliers")
+    private MaterialVendorResponse materialVendor;
 
-    @Schema(description = "ID of the material vendor", example = "1")
-    private Long materialVendorId;
-
-    @Schema(description = "Name of the material vendor", example = "XYZ Suppliers")
-    private String materialVendorName;
-
-    @Schema(description = "ID of the material type", example = "1")
-    private Long materialTypeId;
-
-    @Schema(description = "Name of the material type", example = "Construction")
-    private String materialTypeName;
+    @Schema(description = "material type", example = "Construction")
+    private MaterialTypeResponse materialType;
 
     @Schema(description = "Unit of measurement for the material", example = "kg")
-    private String materialUnit;
+    private UnitOfMeasurementResponse materialUOM;
 
     @Schema(description = "Size of the material package", example = "50.0")
     private BigDecimal materialPackSize;
@@ -55,10 +43,4 @@ public class MaterialResponse {
 
     @Schema(description = "Rate per unit of the material", example = "7.0")
     private BigDecimal materialRatePerUnit;
-
-    @Schema(description = "Creation timestamp", example = "2023-09-15T10:30:00")
-    private LocalDateTime createdOn;
-
-    @Schema(description = "Last update timestamp", example = "2023-09-15T10:30:00")
-    private LocalDateTime updatedOn;
 }
