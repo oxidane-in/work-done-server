@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +29,6 @@ import java.util.List;
  */
 @Tag(name = "Material", description = "Material Management API")
 @RequestMapping(Endpoints.MATERIAL_V1)
-@Validated
 public interface MaterialController {
 
     /**
@@ -57,7 +55,7 @@ public interface MaterialController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<MaterialResponse> createMaterial(
-        @Valid @RequestBody MaterialRequest request
+        @RequestBody MaterialRequest request
     );
 
     /**
@@ -136,7 +134,7 @@ public interface MaterialController {
     ResponseEntity<Void> updateMaterial(
         @Parameter(description = "ID of the material to update", required = true)
         @PathVariable Long materialId,
-        @Valid @RequestBody MaterialRequest request
+        @RequestBody MaterialRequest request
     );
 
     /**

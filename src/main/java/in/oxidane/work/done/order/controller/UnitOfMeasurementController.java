@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +48,7 @@ public interface UnitOfMeasurementController {
     @PostMapping
     ResponseEntity<UnitOfMeasurementResponse> createUnitOfMeasurement(
         @Parameter(description = "Unit of measurement details", required = true)
-        @Valid @RequestBody UnitOfMeasurementRequest request
+        @RequestBody UnitOfMeasurementRequest request
     );
 
     /**
@@ -110,7 +109,7 @@ public interface UnitOfMeasurementController {
         @Parameter(description = "Unit of measurement ID", required = true)
         @PathVariable("id") Long id,
         @Parameter(description = "Updated unit of measurement details", required = true)
-        @Valid @RequestBody UnitOfMeasurementRequest request
+        @RequestBody UnitOfMeasurementRequest request
     );
 
     /**
