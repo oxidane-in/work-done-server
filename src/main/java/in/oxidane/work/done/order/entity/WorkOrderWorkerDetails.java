@@ -2,6 +2,7 @@ package in.oxidane.work.done.order.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
+import in.oxidane.work.done.worker.entity.WorkerType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -44,8 +45,10 @@ public class WorkOrderWorkerDetails extends Auditable {
         foreignKey = @ForeignKey(name = DbConstants.FK_WO_LINE_ITEM_ID))
     private WorkOrderLineItems woLineItem;
 
-    @Column(name = DbConstants.WO_WORKER_TYPE_ID, nullable = false)
-    private Integer woWorkerTypeId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.WO_WORKER_TYPE_ID, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_WO_WORKER_TYPE_ID))
+    private WorkerType woWorkerType;
 
     @Column(name = DbConstants.WO_WORKER_TYPE_REQUIRED_PER_UOM, nullable = false, precision = 10, scale = 2)
     private BigDecimal woWorkerTypeRequiredPerUOM;

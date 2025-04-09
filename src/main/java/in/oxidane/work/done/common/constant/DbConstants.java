@@ -65,7 +65,9 @@ public class DbConstants {
     public static final String FK_WO_PROJECT_ID = "fk_wo_project_id";
     public static final String FK_WORK_ORDER_ID = "fk_workorder_id";
     public static final String FK_WO_LINE_ITEM_ID = "fk_wo_lineitem_id";
+    public static final String FK_WO_WORKER_TYPE_ID = "fk_wo_workertype_id";
     public static final String FK_WOLI_LINE_ITEM_ID = "fk_woli_lineitem_id";
+    public static final String FK_WO_MATERIAL_ID = "fk_wo_material_id";
     public static final String UK_WORK_ORDER_CODE = "uk_workorder_code";
 
     //Foreign and Unique constraints for LineItem

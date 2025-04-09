@@ -55,4 +55,16 @@ public final class SchemaPaths {
     public static final String UPDATE_WORK_ORDER_REQUEST_SCHEMA = "classpath:schema.v1/order/update-work-order-request-schema.json";
     public static final String CREATE_WORK_ORDER_LINE_ITEMS_REQUEST_SCHEMA = "classpath:schema.v1/order/create-work-order-line-items-request-schema.json";
     public static final String UPDATE_WORK_ORDER_LINE_ITEMS_REQUEST_SCHEMA = "classpath:schema.v1/order/update-work-order-line-items-request-schema.json";
+
+    // Work Order Material Details Schema
+    public static final String CREATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA = 
+        "classpath:schemas/create-work-order-material-details-request-schema.json";
+    public static final String UPDATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA = 
+        "classpath:schemas/update-work-order-material-details-request-schema.json";
+
+    // Work Order Worker Details Schema
+    public static final String CREATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA = 
+        "classpath:schemas/create-work-order-worker-details-request-schema.json";
+    public static final String UPDATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA = 
+        "classpath:schemas/update-work-order-worker-details-request-schema.json";
 }
