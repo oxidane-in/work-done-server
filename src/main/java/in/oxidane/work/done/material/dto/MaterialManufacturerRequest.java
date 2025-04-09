@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Material manufacturer request data")
 public class MaterialManufacturerRequest {
 
-    @NotBlank
     @Schema(description = "Material manufacturer name", example = "ABC Industries")
     private String materialManufacturerName;
 
