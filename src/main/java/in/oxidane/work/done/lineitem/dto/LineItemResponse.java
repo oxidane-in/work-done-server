@@ -2,15 +2,9 @@ package in.oxidane.work.done.lineitem.dto;
 
 import in.oxidane.work.done.order.dto.UnitOfMeasurementResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "Line Item Response DTO")
 public class LineItemResponse {
 

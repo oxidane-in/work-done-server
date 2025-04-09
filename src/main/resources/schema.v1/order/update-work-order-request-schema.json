@@ -3,23 +3,23 @@
   "type": "object",
   "properties": {
     "workOrderCode": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 1,
       "maxLength": 50
     },
     "projectId": {
-      "type": "integer",
+      "type": ["integer", "null"],
       "minimum": 1
     },
     "workOrderDate": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date"
     },
     "workOrderDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "maxLength": 500
     }
   },
   "required": ["workOrderCode", "projectId", "workOrderDate"],
   "additionalProperties": false
-} 
+}

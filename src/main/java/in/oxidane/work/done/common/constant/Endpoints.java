@@ -20,6 +20,7 @@ public class Endpoints {
 
     // Order
     public static final String WORK_ORDER_V1 = API_V1 + "/work-orders";
+    public static final String WORK_ORDER_LINE_ITEMS_V1 = API_V1 + "/work-order-line-items";
     public static final String LINE_ITEM_V1 = API_V1 + "/line-items";
     public static final String LINE_ITEM_MATERIAL_V1 = API_V1 + "/line-item-materials";
     public static final String LINE_ITEM_WORKER_V1 = API_V1 + "/line-item-workers";
