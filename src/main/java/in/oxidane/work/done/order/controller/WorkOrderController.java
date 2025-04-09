@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,7 @@ public interface WorkOrderController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    ResponseEntity<WorkOrderResponse> create(@Valid @RequestBody WorkOrderRequest request)
+    ResponseEntity<WorkOrderResponse> create(@RequestBody WorkOrderRequest request)
         throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Update an existing work order")
@@ -50,7 +49,7 @@ public interface WorkOrderController {
     @PutMapping("/{id}")
     ResponseEntity<WorkOrderResponse> update(
         @Parameter(description = "Work Order ID") @PathVariable Long id,
-        @Valid @RequestBody WorkOrderRequest request)
+        @RequestBody WorkOrderRequest request)
         throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Get work order by ID")
