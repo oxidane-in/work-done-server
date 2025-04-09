@@ -11,10 +11,10 @@ import in.oxidane.work.done.project.dto.ProjectScopeResponse;
 import in.oxidane.work.done.project.service.ProjectScopeService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class ProjectScopeControllerImpl implements ProjectScopeController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_PROJECT_SCOPE_REQUEST_SCHEMA).getInputStream()) {
-            createProjectScopeRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createProjectScopeRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_PROJECT_SCOPE_REQUEST_SCHEMA).getInputStream()) {
-            updateProjectScopeRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateProjectScopeRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
@@ -54,7 +54,7 @@ public class ProjectScopeControllerImpl implements ProjectScopeController {
      */
     @Override
     public ResponseEntity<ProjectScopeResponse> createProjectScope(ProjectScopeRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(createProjectScopeRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(createProjectScopeRequestSchema, objectMapper.writeValueAsString(request));
         ProjectScopeResponse response = projectScopeService.createProjectScope(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -82,7 +82,7 @@ public class ProjectScopeControllerImpl implements ProjectScopeController {
      */
     @Override
     public ResponseEntity<Void> updateProjectScope(Long id, ProjectScopeRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(updateProjectScopeRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(updateProjectScopeRequestSchema, objectMapper.writeValueAsString(request));
         projectScopeService.updateProjectScope(id, request);
         return ResponseEntity.ok().build();
     }
