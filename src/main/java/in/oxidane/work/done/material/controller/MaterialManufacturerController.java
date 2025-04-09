@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +27,6 @@ import java.util.List;
  * Defines REST operations for managing material manufacturers.
  */
 @Tag(name = "Material Manufacturer", description = "Material Manufacturer management APIs")
-@Validated
 @RequestMapping(Endpoints.MATERIAL_MANUFACTURER_V1)
 public interface MaterialManufacturerController {
 
@@ -45,7 +43,7 @@ public interface MaterialManufacturerController {
             content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@Valid @RequestBody MaterialManufacturerRequest request);
+    ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@RequestBody MaterialManufacturerRequest request);
 
     /**
      * Get a material manufacturer by ID

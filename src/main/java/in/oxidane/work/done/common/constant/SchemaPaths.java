@@ -34,15 +34,15 @@ public final class SchemaPaths {
     public static final String CREATE_UNIT_OF_MEASUREMENT_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-unit-of-measurement-request.json";
     public static final String UPDATE_UNIT_OF_MEASUREMENT_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-unit-of-measurement-request.json";
 
-    // Project Schema
-    public static final String CREATE_CLIENT_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-client-request.json";
-    public static final String UPDATE_CLIENT_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-client-request.json";
-    public static final String CREATE_PROJECT_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-project-request.json";
-    public static final String UPDATE_PROJECT_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-project-request.json";
-    public static final String CREATE_PROJECT_SCOPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-project-scope-request.json";
-    public static final String UPDATE_PROJECT_SCOPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-project-scope-request.json";
-    public static final String CREATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-project-status-request.json";
-    public static final String UPDATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-project-status-request.json";
+    //Project Schema
+    public static final String CREATE_CLIENT_REQUEST_SCHEMA = "classpath:schema.v1/project/create-client-request.json";
+    public static final String UPDATE_CLIENT_REQUEST_SCHEMA = "classpath:schema.v1/project/update-client-request.json";
+    public static final String CREATE_PROJECT_REQUEST_SCHEMA = "classpath:schema.v1/project/create-project-request.json";
+    public static final String UPDATE_PROJECT_REQUEST_SCHEMA = "classpath:schema.v1/project/update-project-request.json";
+    public static final String CREATE_PROJECT_SCOPE_REQUEST_SCHEMA = "classpath:schema.v1/project/create-project-scope-request.json";
+    public static final String UPDATE_PROJECT_SCOPE_REQUEST_SCHEMA = "classpath:schema.v1/project/update-project-scope-request.json";
+    public static final String CREATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/project/create-project-status-request.json";
+    public static final String UPDATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/project/update-project-status-request.json";
 
     // Worker Schema
     public static final String CREATE_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-worker-request.json";
@@ -57,14 +57,14 @@ public final class SchemaPaths {
     public static final String UPDATE_WORK_ORDER_LINE_ITEMS_REQUEST_SCHEMA = "classpath:schema.v1/order/update-work-order-line-items-request-schema.json";
 
     // Work Order Material Details Schema
-    public static final String CREATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA = 
+    public static final String CREATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA =
         "classpath:schemas/create-work-order-material-details-request-schema.json";
-    public static final String UPDATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA = 
+    public static final String UPDATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA =
         "classpath:schemas/update-work-order-material-details-request-schema.json";
 
     // Work Order Worker Details Schema
-    public static final String CREATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA = 
+    public static final String CREATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA =
         "classpath:schemas/create-work-order-worker-details-request-schema.json";
-    public static final String UPDATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA = 
+    public static final String UPDATE_WORK_ORDER_WORKER_DETAILS_REQUEST_SCHEMA =
         "classpath:schemas/update-work-order-worker-details-request-schema.json";
 }

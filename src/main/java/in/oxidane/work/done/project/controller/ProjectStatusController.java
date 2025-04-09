@@ -1,6 +1,8 @@
 package in.oxidane.work.done.project.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.project.dto.ProjectStatusRequest;
 import in.oxidane.work.done.project.dto.ProjectStatusResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +52,7 @@ public interface ProjectStatusController {
     ResponseEntity<ProjectStatusResponse> createProjectStatus(
         @Parameter(description = "Project status details", required = true)
         @Valid @RequestBody ProjectStatusRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a project status by its ID.
@@ -111,7 +113,7 @@ public interface ProjectStatusController {
         @PathVariable("id") Long id,
         @Parameter(description = "Updated project status details", required = true)
         @Valid @RequestBody ProjectStatusRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a project status by its ID.
