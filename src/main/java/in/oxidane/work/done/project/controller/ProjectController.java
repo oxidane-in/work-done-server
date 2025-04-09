@@ -1,6 +1,8 @@
 package in.oxidane.work.done.project.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.project.dto.ProjectRequest;
 import in.oxidane.work.done.project.dto.ProjectResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +42,7 @@ public interface ProjectController {
     @PostMapping
     ResponseEntity<ProjectResponse> createProject(
         @Parameter(description = "Project details", required = true)
-        @Valid @RequestBody ProjectRequest request);
+        @Valid @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(
         summary = "Get project by ID",
@@ -82,7 +84,7 @@ public interface ProjectController {
     ResponseEntity<ProjectResponse> updateProject(
         @Parameter(description = "Project ID", required = true) @PathVariable Long id,
         @Parameter(description = "Updated project details", required = true)
-        @Valid @RequestBody ProjectRequest request);
+        @Valid @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(
         summary = "Delete project",

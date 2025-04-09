@@ -1,6 +1,8 @@
 package in.oxidane.work.done.project.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.project.dto.ProjectScopeRequest;
 import in.oxidane.work.done.project.dto.ProjectScopeResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +52,7 @@ public interface ProjectScopeController {
     ResponseEntity<ProjectScopeResponse> createProjectScope(
         @Parameter(description = "Project scope details", required = true)
         @Valid @RequestBody ProjectScopeRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a project scope by its ID.
@@ -111,7 +113,7 @@ public interface ProjectScopeController {
         @PathVariable("id") Long id,
         @Parameter(description = "Updated project scope details", required = true)
         @Valid @RequestBody ProjectScopeRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a project scope by its ID.

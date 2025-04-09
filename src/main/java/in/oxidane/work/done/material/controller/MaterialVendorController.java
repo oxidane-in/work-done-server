@@ -10,9 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,6 @@ import java.util.List;
  * Defines REST operations for managing material vendors.
  */
 @Tag(name = "Material Vendor", description = "Material Vendor management APIs")
-@Validated
 @RequestMapping(Endpoints.MATERIAL_VENDOR_V1)
 public interface MaterialVendorController {
 
@@ -45,7 +42,7 @@ public interface MaterialVendorController {
             content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialVendorResponse> createMaterialVendor(@Valid @RequestBody MaterialVendorRequest request);
+    ResponseEntity<MaterialVendorResponse> createMaterialVendor(@RequestBody MaterialVendorRequest request);
 
     /**
      * Get a material vendor by ID
@@ -90,7 +87,7 @@ public interface MaterialVendorController {
     })
     ResponseEntity<Void> updateMaterialVendor(
         @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id,
-        @Valid @RequestBody MaterialVendorRequest request);
+        @RequestBody MaterialVendorRequest request);
 
     /**
      * Delete a material vendor by ID
