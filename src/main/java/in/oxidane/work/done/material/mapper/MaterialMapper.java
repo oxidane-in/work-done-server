@@ -1,15 +1,18 @@
 package in.oxidane.work.done.material.mapper;
 
 import in.oxidane.work.done.common.config.MapstructMapperConfig;
+import in.oxidane.work.done.common.mapper.IdToEntityMapper;
 import in.oxidane.work.done.material.dto.MaterialRequest;
 import in.oxidane.work.done.material.dto.MaterialResponse;
 import in.oxidane.work.done.material.entity.Material;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 /**
  * Mapper class for converting between Material entity and DTOs.
  */
-@Mapper(config = MapstructMapperConfig.class)
+@Mapper(config = MapstructMapperConfig.class, uses = {IdToEntityMapper.class})
 public interface MaterialMapper {
 
     /**
@@ -18,6 +21,10 @@ public interface MaterialMapper {
      * @param request The source MaterialRequest DTO
      * @return The mapped Material entity
      */
+    @Mapping(target = "materialManufacturer", source = "materialManufacturerId", qualifiedByName = "toMaterialManufacturer")
+    @Mapping(target = "materialVendor", source = "materialVendorId", qualifiedByName = "toMaterialVendor")
+    @Mapping(target = "materialType", source = "materialTypeId", qualifiedByName = "toMaterialType")
+    @Mapping(target = "materialUOM", source = "materialUOMId", qualifiedByName = "toUnitOfMeasurement")
     Material toEntity(MaterialRequest request);
 
     /**
@@ -27,7 +34,11 @@ public interface MaterialMapper {
      * @param request  The source MaterialRequest DTO
      * @return The updated Material entity
      */
-//    Material updateEntityFromRequest(Material material, MaterialRequest request);
+    @Mapping(target = "materialManufacturer", source = "materialManufacturerId", qualifiedByName = "toMaterialManufacturer")
+    @Mapping(target = "materialVendor", source = "materialVendorId", qualifiedByName = "toMaterialVendor")
+    @Mapping(target = "materialType", source = "materialTypeId", qualifiedByName = "toMaterialType")
+    @Mapping(target = "materialUOM", source = "materialUOMId", qualifiedByName = "toUnitOfMeasurement")
+    Material updateEntityFromRequest(MaterialRequest request, @MappingTarget Material material);
 
     /**
      * Converts a Material entity to a MaterialResponse DTO.

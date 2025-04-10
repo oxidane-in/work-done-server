@@ -7,8 +7,6 @@ import in.oxidane.work.done.material.service.MaterialManufacturerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,13 +18,13 @@ public class MaterialManufacturerControllerImpl implements MaterialManufacturerC
     private final MaterialManufacturerService materialManufacturerService;
 
     @Override
-    public ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@RequestBody MaterialManufacturerRequest request) {
+    public ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(MaterialManufacturerRequest request) {
         MaterialManufacturerResponse response = materialManufacturerService.createMaterialManufacturer(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Override
-    public ResponseEntity<MaterialManufacturerResponse> getMaterialManufacturerById(@PathVariable Long id) {
+    public ResponseEntity<MaterialManufacturerResponse> getMaterialManufacturerById(Long id) {
         MaterialManufacturerResponse response = materialManufacturerService.getMaterialManufacturerById(id);
         return ResponseEntity.ok(response);
 
@@ -39,13 +37,13 @@ public class MaterialManufacturerControllerImpl implements MaterialManufacturerC
     }
 
     @Override
-    public ResponseEntity<Void> updateMaterialManufacturer(@PathVariable Long id, @RequestBody MaterialManufacturerRequest request) {
+    public ResponseEntity<Void> updateMaterialManufacturer(Long id, MaterialManufacturerRequest request) {
         materialManufacturerService.updateMaterialManufacturer(id, request);
         return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Void> deleteMaterialManufacturer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMaterialManufacturer(Long id) {
         materialManufacturerService.deleteMaterialManufacturer(id);
         return ResponseEntity.noContent().build();
     }

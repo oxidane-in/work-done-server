@@ -19,7 +19,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -36,10 +35,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = DbConstants.PROJECT, schema = DbConstants.CORE_SCHEMA,
-uniqueConstraints = {
-    @UniqueConstraint(name = DbConstants.UK_PROJECT_CODE, columnNames = DbConstants.PROJECT_CODE),
-    @UniqueConstraint(name = DbConstants.UK_PROJECT_NAME, columnNames = DbConstants.PROJECT_NAME),
-})
+    uniqueConstraints = {
+        @UniqueConstraint(name = DbConstants.UK_PROJECT_CODE, columnNames = DbConstants.PROJECT_CODE),
+        @UniqueConstraint(name = DbConstants.UK_PROJECT_NAME, columnNames = DbConstants.PROJECT_NAME),
+    })
 public class Project extends Auditable {
 
     @Id
@@ -64,12 +63,12 @@ public class Project extends Auditable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.CLIENT_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_CLIENT))
-    private Client customer;
+        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_CLIENT_ID))
+    private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.PROJECT_STATUS_ID, nullable = false,
-        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_PROJECT_STATUS))
+        foreignKey = @ForeignKey(name = DbConstants.FK_PROJECT_PROJECT_STATUS_ID))
     private ProjectStatus projectStatus;
 
     @Column(name = DbConstants.PROJECT_START_DATE, nullable = false)
@@ -81,18 +80,6 @@ public class Project extends Auditable {
     @Column(name = DbConstants.PROJECT_END_DATE_ACTUAL)
     private LocalDate projectEndDateActual;
 
-    @Column(name = DbConstants.WO_NUMBER, nullable = false, unique = true, length = 50)
-    private String woNumber;
-
-    @Column(name = DbConstants.WO_DATE, nullable = false)
-    private LocalDate woDate;
-
-    @Column(name = DbConstants.WO_COMPLETION_DATE)
-    private LocalDate woCompletionDate;
-
     @Column(name = DbConstants.TENURE_OF_PROJECT_MONTHS, nullable = false)
     private Integer tenureOfProjectMonths;
-
-    @Column(name = DbConstants.WO_AMOUNT, nullable = false, precision = 18, scale = 2)
-    private BigDecimal woAmount;
 }

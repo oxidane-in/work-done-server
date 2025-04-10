@@ -11,11 +11,11 @@ import in.oxidane.work.done.project.dto.ClientResponse;
 import in.oxidane.work.done.project.service.ClientService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,17 +37,17 @@ public class ClientControllerImpl implements ClientController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_CLIENT_REQUEST_SCHEMA).getInputStream()) {
-            createClientRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createClientRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_CLIENT_REQUEST_SCHEMA).getInputStream()) {
-            updateClientRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateClientRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
     @Override
     public ResponseEntity<ClientResponse> createClient(ClientRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(createClientRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(createClientRequestSchema, objectMapper.writeValueAsString(request));
         ClientResponse createdClient = clientService.createClient(request);
         return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
     }
@@ -72,7 +72,7 @@ public class ClientControllerImpl implements ClientController {
 
     @Override
     public ResponseEntity<ClientResponse> updateClient(Long id, ClientRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(updateClientRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(updateClientRequestSchema, objectMapper.writeValueAsString(request));
         ClientResponse updatedClient = clientService.updateClient(id, request);
         return ResponseEntity.ok(updatedClient);
     }

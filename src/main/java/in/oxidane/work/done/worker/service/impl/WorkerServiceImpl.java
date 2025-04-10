@@ -7,7 +7,6 @@ import in.oxidane.work.done.worker.dto.WorkerResponse;
 import in.oxidane.work.done.worker.entity.Worker;
 import in.oxidane.work.done.worker.mapper.WorkerMapper;
 import in.oxidane.work.done.worker.service.WorkerService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +42,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public WorkerResponse updateWorker(Long id, WorkerRequest request) {
         Worker existingWorker = workerDao.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Worker not found with ID: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Worker not found with ID: " + id));
 
         Worker updatedWorker = workerMapper.toUpdateEntityFromRequest(request, existingWorker);
         Worker savedWorker = workerDao.save(updatedWorker);
@@ -54,7 +53,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public void deleteWorker(Long id) {
         if (!workerDao.existsById(id)) {
-            throw new EntityNotFoundException("Worker not found with ID: " + id);
+            throw new ResourceNotFoundException("Worker not found with ID: " + id);
         }
         workerDao.delete(id);
     }

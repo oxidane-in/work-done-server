@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,6 @@ import java.util.List;
  * REST API endpoints for ProjectStatus operations.
  */
 @Tag(name = "Project Status", description = "APIs for project status management")
-@Validated
 @RequestMapping(Endpoints.PROJECT_STATUS_V1)
 public interface ProjectStatusController {
 
@@ -51,7 +48,7 @@ public interface ProjectStatusController {
     @PostMapping
     ResponseEntity<ProjectStatusResponse> createProjectStatus(
         @Parameter(description = "Project status details", required = true)
-        @Valid @RequestBody ProjectStatusRequest request
+        @RequestBody ProjectStatusRequest request
     ) throws JsonProcessingException, SchemaValidationException;
 
     /**
@@ -112,7 +109,7 @@ public interface ProjectStatusController {
         @Parameter(description = "Project status ID", required = true)
         @PathVariable("id") Long id,
         @Parameter(description = "Updated project status details", required = true)
-        @Valid @RequestBody ProjectStatusRequest request
+        @RequestBody ProjectStatusRequest request
     ) throws JsonProcessingException, SchemaValidationException;
 
     /**

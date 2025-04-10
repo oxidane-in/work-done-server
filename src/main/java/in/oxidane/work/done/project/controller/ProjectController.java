@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Tag(name = "Project", description = "Project management APIs")
-@Validated
 @RequestMapping(Endpoints.PROJECT_V1)
 public interface ProjectController {
 
@@ -42,7 +39,7 @@ public interface ProjectController {
     @PostMapping
     ResponseEntity<ProjectResponse> createProject(
         @Parameter(description = "Project details", required = true)
-        @Valid @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
+        @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(
         summary = "Get project by ID",
@@ -84,7 +81,7 @@ public interface ProjectController {
     ResponseEntity<ProjectResponse> updateProject(
         @Parameter(description = "Project ID", required = true) @PathVariable Long id,
         @Parameter(description = "Updated project details", required = true)
-        @Valid @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
+        @RequestBody ProjectRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(
         summary = "Delete project",

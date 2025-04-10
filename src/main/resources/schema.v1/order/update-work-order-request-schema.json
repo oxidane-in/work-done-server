@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "workOrderCode": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "projectId": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "workOrderDate": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "workOrderDesc": {
+      "type": ["string", "null"],
+      "maxLength": 500
+    }
+  },
+  "required": ["workOrderCode", "projectId", "workOrderDate"],
+  "additionalProperties": false
+}

@@ -11,10 +11,10 @@ import in.oxidane.work.done.project.dto.ProjectResponse;
 import in.oxidane.work.done.project.service.ProjectService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,17 +37,17 @@ public class ProjectControllerImpl implements ProjectController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_PROJECT_REQUEST_SCHEMA).getInputStream()) {
-            createProjectRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createProjectRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_PROJECT_REQUEST_SCHEMA).getInputStream()) {
-            updateProjectRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateProjectRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
     @Override
     public ResponseEntity<ProjectResponse> createProject(ProjectRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(createProjectRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(createProjectRequestSchema, objectMapper.writeValueAsString(request));
         ProjectResponse createdProject = projectService.createProject(request);
         return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
@@ -67,7 +67,7 @@ public class ProjectControllerImpl implements ProjectController {
     @Override
     public ResponseEntity<ProjectResponse> updateProject(Long id,
                                                          ProjectRequest request) throws JsonProcessingException, SchemaValidationException {
-        schemaValidator.validate(updateProjectRequestSchema,objectMapper.writeValueAsString(request));
+        schemaValidator.validate(updateProjectRequestSchema, objectMapper.writeValueAsString(request));
         ProjectResponse updatedProject = projectService.updateProject(id, request);
         return ResponseEntity.ok(updatedProject);
     }

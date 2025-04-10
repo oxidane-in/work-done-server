@@ -2,6 +2,7 @@ package in.oxidane.work.done.order.entity;
 
 import in.oxidane.work.done.common.constant.DbConstants;
 import in.oxidane.work.done.common.entity.Auditable;
+import in.oxidane.work.done.material.entity.Material;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,15 +38,17 @@ public class WorkOrderMaterialDetails extends Auditable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.WORK_ORDER_ID, nullable = false,
         foreignKey = @ForeignKey(name = DbConstants.FK_WORK_ORDER_ID))
-    private WorkOrder workOrderId;
+    private WorkOrder workOrder;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = DbConstants.WO_LINE_ITEM_ID, nullable = false,
         foreignKey = @ForeignKey(name = DbConstants.FK_WOLI_LINE_ITEM_ID))
-    private WorkOrderLineItems woLineItemId;
+    private WorkOrderLineItems woLineItem;
 
-    @Column(name = DbConstants.WO_MATERIAL_ID, nullable = false)
-    private Long woMaterialId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.WO_MATERIAL_ID, nullable = false,
+    foreignKey = @ForeignKey(name = DbConstants.FK_WO_MATERIAL_ID))
+    private Material woMaterial;
 
     @Column(name = DbConstants.WO_MATERIAL_CONSUMPTION_PER_UOM, nullable = false, precision = 18, scale = 2)
     private BigDecimal woMaterialConsumptionPerUOM;

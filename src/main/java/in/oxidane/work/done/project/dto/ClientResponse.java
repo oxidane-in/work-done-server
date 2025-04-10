@@ -1,16 +1,9 @@
 package in.oxidane.work.done.project.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ClientResponse {
 
     @Schema(description = "Unique identifier for the client", example = "1")
@@ -36,9 +29,4 @@ public class ClientResponse {
 
     @Schema(description = "Handle or unique identifier for the client", example = "john_doe")
     private String clientHandle;
-
-    private String createdBy;
-    private LocalDateTime createdDate;
-    private String lastModifiedBy;
-    private LocalDateTime lastModifiedDate;
 }
