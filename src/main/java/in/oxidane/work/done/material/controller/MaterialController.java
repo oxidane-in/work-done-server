@@ -1,6 +1,8 @@
 package in.oxidane.work.done.material.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.material.dto.MaterialRequest;
 import in.oxidane.work.done.material.dto.MaterialResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,7 +57,7 @@ public interface MaterialController {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<MaterialResponse> createMaterial(
         @RequestBody MaterialRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a material by its ID.
@@ -134,7 +136,7 @@ public interface MaterialController {
         @Parameter(description = "ID of the material to update", required = true)
         @PathVariable Long materialId,
         @RequestBody MaterialRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a material by its ID.

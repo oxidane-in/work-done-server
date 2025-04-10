@@ -1,6 +1,8 @@
 package in.oxidane.work.done.material.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.material.dto.MaterialManufacturerRequest;
 import in.oxidane.work.done.material.dto.MaterialManufacturerResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +44,7 @@ public interface MaterialManufacturerController {
             content = @Content(schema = @Schema(implementation = MaterialManufacturerResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@RequestBody MaterialManufacturerRequest request);
+    ResponseEntity<MaterialManufacturerResponse> createMaterialManufacturer(@RequestBody MaterialManufacturerRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Get a material manufacturer by ID
@@ -87,7 +89,7 @@ public interface MaterialManufacturerController {
     })
     ResponseEntity<Void> updateMaterialManufacturer(
         @Parameter(description = "Material manufacturer ID", required = true) @PathVariable Long id,
-        @RequestBody MaterialManufacturerRequest request);
+        @RequestBody MaterialManufacturerRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Delete a material manufacturer by ID

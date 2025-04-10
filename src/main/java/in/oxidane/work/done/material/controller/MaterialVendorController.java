@@ -1,6 +1,8 @@
 package in.oxidane.work.done.material.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +44,7 @@ public interface MaterialVendorController {
             content = @Content(schema = @Schema(implementation = MaterialVendorResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialVendorResponse> createMaterialVendor(@RequestBody MaterialVendorRequest request);
+    ResponseEntity<MaterialVendorResponse> createMaterialVendor(@RequestBody MaterialVendorRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Get a material vendor by ID
@@ -87,7 +89,7 @@ public interface MaterialVendorController {
     })
     ResponseEntity<Void> updateMaterialVendor(
         @Parameter(description = "Material vendor ID", required = true) @PathVariable Long id,
-        @RequestBody MaterialVendorRequest request);
+        @RequestBody MaterialVendorRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Delete a material vendor by ID

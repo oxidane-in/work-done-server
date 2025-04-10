@@ -7,28 +7,28 @@ public final class SchemaPaths {
     }
 
     // LineItem Schema
-    public static final String CREATE_LINE_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-request.json";
-    public static final String UPDATE_LINE_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-request.json";
-    public static final String CREATE_LINE_ITEM_HEADER_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-header-request.json";
-    public static final String UPDATE_LINE_ITEM_HEADER_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-header-request.json";
-    public static final String CREATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-material-request.json";
-    public static final String UPDATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-material-request.json";
-    public static final String CREATE_LINE_ITEM_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-worker-request.json";
-    public static final String UPDATE_LINE_ITEM_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-worker-request.json";
-    public static final String CREATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-category-request.json";
-    public static final String UPDATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-category-request.json";
-    public static final String CREATE_LINE_ITEM_SUB_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-line-item-sub-category-request.json";
-    public static final String UPDATE_LINE_ITEM_SUB_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-line-item-sub-category-request.json";
+    public static final String CREATE_LINE_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-request.json";
+    public static final String UPDATE_LINE_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-request.json";
+    public static final String CREATE_LINE_ITEM_HEADER_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-header-request.json";
+    public static final String UPDATE_LINE_ITEM_HEADER_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-header-request.json";
+    public static final String CREATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-material-request.json";
+    public static final String UPDATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-material-request.json";
+    public static final String CREATE_LINE_ITEM_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-worker-request.json";
+    public static final String UPDATE_LINE_ITEM_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-worker-request.json";
+    public static final String CREATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-category-request.json";
+    public static final String UPDATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-category-request.json";
+    public static final String CREATE_LINE_ITEM_SUB_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/create-line-item-sub-category-request.json";
+    public static final String UPDATE_LINE_ITEM_SUB_CATEGORY_REQUEST_SCHEMA = "classpath:schema.v1/lineitem/update-line-item-sub-category-request.json";
 
     // Material Schema
-    public static final String CREATE_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-material-request.json";
-    public static final String UPDATE_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-material-request.json";
-    public static final String CREATE_MATERIAL_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-material-type-request.json";
-    public static final String UPDATE_MATERIAL_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-material-type-request.json";
-    public static final String CREATE_MATERIAL_VENDOR_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-material-vendor-request.json";
-    public static final String UPDATE_MATERIAL_VENDOR_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-material-vendor-request.json";
-    public static final String CREATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-material-manufacturer-request.json";
-    public static final String UPDATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA = "classpath:schema.v1/worker/update-material-manufacturer-request.json";
+    public static final String CREATE_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/material/create-material-request.json";
+    public static final String UPDATE_MATERIAL_REQUEST_SCHEMA = "classpath:schema.v1/material/update-material-request.json";
+    public static final String CREATE_MATERIAL_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/material/create-material-type-request.json";
+    public static final String UPDATE_MATERIAL_TYPE_REQUEST_SCHEMA = "classpath:schema.v1/material/update-material-type-request.json";
+    public static final String CREATE_MATERIAL_VENDOR_REQUEST_SCHEMA = "classpath:schema.v1/material/create-material-vendor-request.json";
+    public static final String UPDATE_MATERIAL_VENDOR_REQUEST_SCHEMA = "classpath:schema.v1/material/update-material-vendor-request.json";
+    public static final String CREATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA = "classpath:schema.v1/material/create-material-manufacturer-request.json";
+    public static final String UPDATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA = "classpath:schema.v1/material/update-material-manufacturer-request.json";
 
     // Order Schema
     public static final String CREATE_UNIT_OF_MEASUREMENT_REQUEST_SCHEMA = "classpath:schema.v1/order/create-unit-of-measurement-request.json";

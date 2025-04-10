@@ -1,6 +1,8 @@
 package in.oxidane.work.done.lineitem.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.lineitem.dto.LineItemRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,8 +48,8 @@ public interface LineItemController {
     @PostMapping
     ResponseEntity<LineItemResponse> createLineItem(
         @Parameter(description = "Line item details", required = true)
-        @Valid @RequestBody LineItemRequest request
-    );
+        @RequestBody LineItemRequest request
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a line item by its ID.
@@ -108,8 +109,8 @@ public interface LineItemController {
         @Parameter(description = "Line item ID", required = true)
         @PathVariable("id") Long id,
         @Parameter(description = "Updated line item details", required = true)
-        @Valid @RequestBody LineItemRequest request
-    );
+        @RequestBody LineItemRequest request
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a line item by its ID.
