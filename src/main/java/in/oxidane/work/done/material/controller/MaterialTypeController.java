@@ -1,6 +1,8 @@
 package in.oxidane.work.done.material.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.material.dto.MaterialTypeRequest;
 import in.oxidane.work.done.material.dto.MaterialTypeResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +44,7 @@ public interface MaterialTypeController {
             content = @Content(schema = @Schema(implementation = MaterialTypeResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
-    ResponseEntity<MaterialTypeResponse> createMaterialType(@RequestBody MaterialTypeRequest request);
+    ResponseEntity<MaterialTypeResponse> createMaterialType(@RequestBody MaterialTypeRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Get a material type by ID
@@ -87,7 +89,7 @@ public interface MaterialTypeController {
     })
     ResponseEntity<Void> updateMaterialType(
         @Parameter(description = "Material type ID", required = true) @PathVariable Long id,
-        @RequestBody MaterialTypeRequest request);
+        @RequestBody MaterialTypeRequest request) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Delete a material type by ID
