@@ -9,12 +9,12 @@ import in.oxidane.work.done.lineitem.controller.LineItemMaterialController;
 import in.oxidane.work.done.lineitem.dto.LineItemMaterialRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemMaterialResponse;
 import in.oxidane.work.done.lineitem.service.LineItemMaterialService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ public class LineItemMaterialControllerImpl implements LineItemMaterialControlle
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA).getInputStream()) {
-            createLineItemMaterialRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createLineItemMaterialRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_LINE_ITEM_MATERIAL_REQUEST_SCHEMA).getInputStream()) {
-            updateLineItemMaterialRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateLineItemMaterialRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

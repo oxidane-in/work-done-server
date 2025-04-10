@@ -9,12 +9,12 @@ import in.oxidane.work.done.lineitem.controller.LineItemHeaderController;
 import in.oxidane.work.done.lineitem.dto.LineItemHeaderRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemHeaderResponse;
 import in.oxidane.work.done.lineitem.service.LineItemHeaderService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ public class LineItemHeaderControllerImpl implements LineItemHeaderController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_LINE_ITEM_HEADER_REQUEST_SCHEMA).getInputStream()) {
-            createLineItemHeaderRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createLineItemHeaderRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_LINE_ITEM_HEADER_REQUEST_SCHEMA).getInputStream()) {
-            updateLineItemHeaderRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateLineItemHeaderRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

@@ -9,12 +9,12 @@ import in.oxidane.work.done.material.controller.MaterialManufacturerController;
 import in.oxidane.work.done.material.dto.MaterialManufacturerRequest;
 import in.oxidane.work.done.material.dto.MaterialManufacturerResponse;
 import in.oxidane.work.done.material.service.MaterialManufacturerService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ public class MaterialManufacturerControllerImpl implements MaterialManufacturerC
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA).getInputStream()) {
-            createMaterialManufacturerControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createMaterialManufacturerControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_MATERIAL_MANUFACTURER_REQUEST_SCHEMA).getInputStream()) {
-            updateMaterialManufacturerControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateMaterialManufacturerControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

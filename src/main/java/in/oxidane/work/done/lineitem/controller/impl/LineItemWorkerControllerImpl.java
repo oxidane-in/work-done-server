@@ -9,12 +9,12 @@ import in.oxidane.work.done.lineitem.controller.LineItemWorkerController;
 import in.oxidane.work.done.lineitem.dto.LineItemWorkerRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemWorkerResponse;
 import in.oxidane.work.done.lineitem.service.LineItemWorkerService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ public class LineItemWorkerControllerImpl implements LineItemWorkerController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_LINE_ITEM_WORKER_REQUEST_SCHEMA).getInputStream()) {
-            createLineItemWorkerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createLineItemWorkerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_LINE_ITEM_WORKER_REQUEST_SCHEMA).getInputStream()) {
-            updateLineItemWorkerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateLineItemWorkerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

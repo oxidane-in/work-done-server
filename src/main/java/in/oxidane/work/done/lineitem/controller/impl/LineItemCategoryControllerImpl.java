@@ -9,12 +9,12 @@ import in.oxidane.work.done.lineitem.controller.LineItemCategoryController;
 import in.oxidane.work.done.lineitem.dto.LineItemCategoryRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemCategoryResponse;
 import in.oxidane.work.done.lineitem.service.LineItemCategoryService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ public class LineItemCategoryControllerImpl implements LineItemCategoryControlle
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA).getInputStream()) {
-            createLineItemCategoryRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createLineItemCategoryRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_LINE_ITEM_CATEGORY_REQUEST_SCHEMA).getInputStream()) {
-            updateLineItemCategoryRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateLineItemCategoryRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

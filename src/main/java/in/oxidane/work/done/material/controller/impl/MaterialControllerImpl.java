@@ -9,12 +9,12 @@ import in.oxidane.work.done.material.controller.MaterialController;
 import in.oxidane.work.done.material.dto.MaterialRequest;
 import in.oxidane.work.done.material.dto.MaterialResponse;
 import in.oxidane.work.done.material.service.MaterialService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class MaterialControllerImpl implements MaterialController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_MATERIAL_REQUEST_SCHEMA).getInputStream()) {
-            createMaterialControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createMaterialControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_MATERIAL_REQUEST_SCHEMA).getInputStream()) {
-            updateMaterialControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateMaterialControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 

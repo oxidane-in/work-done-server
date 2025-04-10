@@ -1,6 +1,8 @@
 package in.oxidane.work.done.lineitem.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.oxidane.work.done.common.constant.Endpoints;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
 import in.oxidane.work.done.lineitem.dto.LineItemRequest;
 import in.oxidane.work.done.lineitem.dto.LineItemResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +49,7 @@ public interface LineItemController {
     ResponseEntity<LineItemResponse> createLineItem(
         @Parameter(description = "Line item details", required = true)
         @RequestBody LineItemRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Retrieves a line item by its ID.
@@ -108,7 +110,7 @@ public interface LineItemController {
         @PathVariable("id") Long id,
         @Parameter(description = "Updated line item details", required = true)
         @RequestBody LineItemRequest request
-    );
+    ) throws JsonProcessingException, SchemaValidationException;
 
     /**
      * Deletes a line item by its ID.

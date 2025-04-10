@@ -9,12 +9,12 @@ import in.oxidane.work.done.material.controller.MaterialVendorController;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
 import in.oxidane.work.done.material.service.MaterialVendorService;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class MaterialVendorControllerImpl implements MaterialVendorController {
     public void init() throws IOException {
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.CREATE_MATERIAL_VENDOR_REQUEST_SCHEMA).getInputStream()) {
-            createMaterialVendorControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            createMaterialVendorControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
         try (InputStream inputStream = resourceLoader.getResource(
             SchemaPaths.UPDATE_MATERIAL_VENDOR_REQUEST_SCHEMA).getInputStream()) {
-            updateMaterialVendorControllerRequestSchema = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            updateMaterialVendorControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         }
     }
 
