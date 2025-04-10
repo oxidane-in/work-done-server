@@ -10,7 +10,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class WorkOrderMaterialDetailsServiceImpl implements WorkOrderMaterialDet
     private final WorkOrderMaterialDetailsMapper mapper;
 
     @Override
-    @Transactional
     public WorkOrderMaterialDetailsResponse create(WorkOrderMaterialDetailsRequest request) {
         log.info("Creating new work order material detail for work order ID: {} and line item ID: {}",
             request.getWorkOrderId(), request.getWoLineItemId());
@@ -36,7 +34,6 @@ public class WorkOrderMaterialDetailsServiceImpl implements WorkOrderMaterialDet
     }
 
     @Override
-    @Transactional
     public WorkOrderMaterialDetailsResponse update(Long id, WorkOrderMaterialDetailsRequest request) {
         log.info("Updating work order material detail with ID: {}", id);
 
@@ -51,7 +48,6 @@ public class WorkOrderMaterialDetailsServiceImpl implements WorkOrderMaterialDet
     }
 
     @Override
-    @Transactional(readOnly = true)
     public WorkOrderMaterialDetailsResponse getById(Long id) {
         log.info("Fetching work order material detail by ID: {}", id);
 
@@ -61,28 +57,24 @@ public class WorkOrderMaterialDetailsServiceImpl implements WorkOrderMaterialDet
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<WorkOrderMaterialDetailsResponse> getByWorkOrderId(Long workOrderId) {
         log.info("Fetching work order material details by work order ID: {}", workOrderId);
         return mapper.toResponse(dao.findByWorkOrderId(workOrderId));
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<WorkOrderMaterialDetailsResponse> getByLineItemId(Long lineItemId) {
         log.info("Fetching work order material details by line item ID: {}", lineItemId);
         return mapper.toResponse(dao.findByWoLineItemId(lineItemId));
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<WorkOrderMaterialDetailsResponse> getAll() {
         log.info("Fetching all work order material details");
         return mapper.toResponse(dao.findAll());
     }
 
     @Override
-    @Transactional
     public void deleteById(Long id) {
         log.info("Deleting work order material detail with ID: {}", id);
 

@@ -9,7 +9,6 @@ import in.oxidane.work.done.lineitem.service.LineItemSubCategoryService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class LineItemSubCategoryServiceImpl implements LineItemSubCategoryServic
     private final LineItemSubCategoryMapper mapper;
 
     @Override
-    @Transactional
     public LineItemSubCategoryResponse create(LineItemSubCategoryRequest request) {
         if (dao.existsByName(request.getLineItemSubCategoryName())) {
             throw new IllegalArgumentException("Sub category with this name already exists");
@@ -31,17 +29,15 @@ public class LineItemSubCategoryServiceImpl implements LineItemSubCategoryServic
     }
 
     @Override
-    @Transactional
     public LineItemSubCategoryResponse update(Long id, LineItemSubCategoryRequest request) {
         LineItemSubCategory existing = dao.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("Sub category not found"));
-        
+
         LineItemSubCategory updated = mapper.toUpdateEntityFromRequest(request, existing);
         return mapper.toResponse(dao.save(updated));
     }
 
     @Override
-    @Transactional(readOnly = true)
     public LineItemSubCategoryResponse getById(Long id) {
         return dao.findById(id)
             .map(mapper::toResponse)
@@ -49,7 +45,6 @@ public class LineItemSubCategoryServiceImpl implements LineItemSubCategoryServic
     }
 
     @Override
-    @Transactional(readOnly = true)
     public LineItemSubCategoryResponse getByHandle(String handle) {
         return dao.findByHandle(handle)
             .map(mapper::toResponse)
@@ -57,17 +52,15 @@ public class LineItemSubCategoryServiceImpl implements LineItemSubCategoryServic
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<LineItemSubCategoryResponse> getAll() {
         return mapper.toResponse(dao.findAll());
     }
 
     @Override
-    @Transactional
     public void deleteById(Long id) {
         if (!dao.findById(id).isPresent()) {
             throw new EntityNotFoundException("Sub category not found");
         }
         dao.deleteById(id);
     }
-} 
+}

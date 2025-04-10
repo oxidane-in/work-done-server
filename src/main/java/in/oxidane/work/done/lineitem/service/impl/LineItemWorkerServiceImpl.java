@@ -9,7 +9,6 @@ import in.oxidane.work.done.lineitem.service.LineItemWorkerService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class LineItemWorkerServiceImpl implements LineItemWorkerService {
     private final LineItemWorkerMapper mapper;
 
     @Override
-    @Transactional
     public LineItemWorkerResponse create(LineItemWorkerRequest request) {
         LineItemWorker entity = mapper.toEntity(request);
         LineItemWorker saved = lineItemWorkerDao.save(entity);
@@ -29,7 +27,6 @@ public class LineItemWorkerServiceImpl implements LineItemWorkerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public LineItemWorkerResponse getById(Long id) {
         return lineItemWorkerDao.findById(id)
                 .map(mapper::toResponse)
@@ -37,13 +34,11 @@ public class LineItemWorkerServiceImpl implements LineItemWorkerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<LineItemWorkerResponse> getAll() {
         return mapper.toResponse(lineItemWorkerDao.findAll());
     }
 
     @Override
-    @Transactional
     public LineItemWorkerResponse update(Long id, LineItemWorkerRequest request) {
         LineItemWorker existing = lineItemWorkerDao.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("LineItemWorker not found with id: " + id));
@@ -53,7 +48,6 @@ public class LineItemWorkerServiceImpl implements LineItemWorkerService {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         if (!lineItemWorkerDao.existsById(id)) {
             throw new EntityNotFoundException("LineItemWorker not found with id: " + id);
