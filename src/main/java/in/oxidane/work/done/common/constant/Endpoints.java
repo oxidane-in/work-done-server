@@ -12,6 +12,13 @@ public class Endpoints {
     // Building
     public static final String UNIT_TYPE_V1 = API_V1 + "/unit-types";
 
+    //LineItem
+    public static final String LINE_ITEM_CATEGORY_V1 = API_V1 + "/line-item-categories";
+    public static final String LINE_ITEM_HEADER_V1 = API_V1 + "/line-item-headers";
+    public static final String LINE_ITEM_MATERIAL_V1 = API_V1 + "/line-item-materials";
+    public static final String LINE_ITEM_SUB_CATEGORY_V1 = API_V1 + "/line-item-sub-categories";
+    public static final String LINE_ITEM_WORKER_V1 = API_V1 + "/line-item-workers";
+
     // Material
     public static final String MATERIAL_V1 = API_V1 + "/materials";
     public static final String MATERIAL_MANUFACTURER_V1 = API_V1 + "/material-manufacturers";
