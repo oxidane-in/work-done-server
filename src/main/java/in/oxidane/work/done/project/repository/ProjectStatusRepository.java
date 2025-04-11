@@ -11,7 +11,7 @@ import java.util.Optional;
  * Provides JPA operations for ProjectStatus.
  */
 @Repository
-public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Integer> {
+public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Long> {
 
     /**
      * Finds a project status by its handle.
@@ -28,13 +28,4 @@ public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, In
      * @return true if a project status with the handle exists, false otherwise
      */
     boolean existsByProjectStatusHandle(String handle);
-
-    /**
-     * Checks if a project status with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another project status with the handle exists, false otherwise
-     */
-    boolean existsByProjectStatusHandleAndProjectStatusIdNot(String handle, Integer id);
 }

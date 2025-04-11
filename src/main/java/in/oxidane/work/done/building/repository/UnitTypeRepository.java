@@ -11,8 +11,8 @@ import java.util.Optional;
  * Provides JPA operations for UnitType.
  */
 @Repository
-public interface UnitTypeRepository extends JpaRepository<UnitType, Integer> {
-    
+public interface UnitTypeRepository extends JpaRepository<UnitType, Long> {
+
     /**
      * Finds a unit type by its handle.
      *
@@ -20,7 +20,7 @@ public interface UnitTypeRepository extends JpaRepository<UnitType, Integer> {
      * @return An Optional containing the unit type if found, or empty if not found
      */
     Optional<UnitType> findByUnitTypeHandle(String handle);
-    
+
     /**
      * Checks if a unit type with the specified handle exists.
      *
@@ -28,13 +28,5 @@ public interface UnitTypeRepository extends JpaRepository<UnitType, Integer> {
      * @return true if a unit type with the handle exists, false otherwise
      */
     boolean existsByUnitTypeHandle(String handle);
-    
-    /**
-     * Checks if a unit type with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another unit type with the handle exists, false otherwise
-     */
-    boolean existsByUnitTypeHandleAndUnitTypeIdNot(String handle, Integer id);
-} 
+
+}

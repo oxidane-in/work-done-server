@@ -1,55 +1,84 @@
 package in.oxidane.work.done.material.entity;
 
+import in.oxidane.work.done.common.constant.DbConstants;
+import in.oxidane.work.done.common.entity.Auditable;
+import in.oxidane.work.done.order.entity.UnitOfMeasurement;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 
 @Entity
-@Table(name = "material", schema = "core")
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Material {
+@EqualsAndHashCode(callSuper = true)
+@Table(name = DbConstants.MATERIAL, schema = DbConstants.MDM_SCHEMA,
+    uniqueConstraints = {
+        @UniqueConstraint(name = DbConstants.UK_MATERIAL_NAME, columnNames = DbConstants.MATERIAL_NAME)
+    })
+public class Material extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "material_id")
-    private int materialId;
+    @Column(name = DbConstants.MATERIAL_ID)
+    private Long materialId;
 
-    @Column(name = "material_name", nullable = false)
+    @Column(name = DbConstants.MATERIAL_NAME, nullable = false, unique = true)
     private String materialName;
 
     @ManyToOne
-    @JoinColumn(name = "material_manufacturer_id", referencedColumnName = "material_manufacturer_id")
+    @JoinColumn(name = DbConstants.MATERIAL_MANUFACTURER_ID,
+        foreignKey = @ForeignKey(name = DbConstants.FK_MATERIAL_MATERIAL_MANUFACTURER_ID))
     private MaterialManufacturer materialManufacturer;
 
     @ManyToOne
-    @JoinColumn(name = "material_vendor_id", referencedColumnName = "material_vendor_id")
+    @JoinColumn(name = DbConstants.MATERIAL_VENDOR_ID,
+        foreignKey = @ForeignKey(name = DbConstants.FK_MATERIAL_MATERIAL_VENDOR_ID))
     private MaterialVendor materialVendor;
 
     @ManyToOne
-    @JoinColumn(name = "material_type_id", referencedColumnName = "material_type_id")
+    @JoinColumn(name = DbConstants.MATERIAL_TYPE_ID,
+        foreignKey = @ForeignKey(name = DbConstants.FK_MATERIAL_MATERIAL_TYPE_ID))
     private MaterialType materialType;
 
-    @Column(name = "material_unit")
-    private String materialUnit;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = DbConstants.MATERIAL_UNIT, nullable = false,
+        foreignKey = @ForeignKey(name = DbConstants.FK_MATERIAL_UOM_ID))
+    private UnitOfMeasurement materialUOM;
 
-    @Column(name = "material_pack_size", nullable = false)
+    @Column(name = DbConstants.MATERIAL_PACK_SIZE, nullable = false, precision = 10, scale = 2)
     private BigDecimal materialPackSize;
 
-    @Column(name = "material_rate_per_pack")
+    @Column(name = DbConstants.MATERIAL_RATE_PER_PACK, nullable = false, precision = 10, scale = 2)
     private BigDecimal materialRatePerPack;
 
-    @Column(name = "material_rate_per_unit")
+    @Column(name = DbConstants.MATERIAL_RATE_PER_UNIT, nullable = false, precision = 10, scale = 2)
     private BigDecimal materialRatePerUnit;
+
+    @PreUpdate
+    @PrePersist
+    private void prePersist() {
+        if (materialRatePerPack != null && materialPackSize != null) {
+            materialRatePerUnit = materialRatePerPack.divide(materialPackSize, 2, RoundingMode.HALF_UP);
+        }
+    }
 }

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MaterialTypeRequest",
+  "description": "Material Type Request DTO",
+  "type": "object",
+  "properties": {
+    "materialTypeName": {
+      "type": ["string","null"],
+      "minLength": 1,
+      "description": "Name of the material type",
+      "example": "Raw Material"
+    },
+    "materialTypeDesc": {
+      "type": ["string","null"],
+      "maxLength": 255,
+      "description": "Description of the material type",
+      "example": "Unprocessed materials"
+    }
+  },
+  "required": ["materialTypeName"],
+  "additionalProperties": false
+}

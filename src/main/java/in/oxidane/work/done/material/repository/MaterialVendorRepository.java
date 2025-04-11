@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MaterialVendorRepository extends JpaRepository<MaterialVendor, Integer> {
+public interface MaterialVendorRepository extends JpaRepository<MaterialVendor, Long> {
     // Add custom query methods if needed
 }

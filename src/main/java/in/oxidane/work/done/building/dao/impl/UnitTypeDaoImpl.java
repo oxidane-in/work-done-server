@@ -25,7 +25,7 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
      * {@inheritDoc}
      */
     @Override
-    public Optional<UnitType> getById(Integer id) {
+    public Optional<UnitType> getById(Long id) {
         log.debug("Fetching unit type with id: {}", id);
         return unitTypeRepository.findById(id);
     }
@@ -44,7 +44,7 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
      */
     @Override
     public UnitType create(UnitType unitType) {
-        log.debug("Creating unit type: {}", unitType);
+        log.debug("Creating unit type: {}", unitType.toString());
         return unitTypeRepository.save(unitType);
     }
 
@@ -53,7 +53,7 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
      */
     @Override
     public UnitType update(UnitType unitType) {
-        log.debug("Updating unit type with id: {}", unitType.getUnitTypeId());
+        log.debug("Updating unit type: {}", unitType);
         return unitTypeRepository.save(unitType);
     }
 
@@ -61,7 +61,7 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         log.debug("Deleting unit type with id: {}", id);
         unitTypeRepository.deleteById(id);
     }
@@ -70,7 +70,7 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         log.debug("Checking if unit type exists with id: {}", id);
         return unitTypeRepository.existsById(id);
     }
@@ -83,13 +83,4 @@ public class UnitTypeDaoImpl implements UnitTypeDao {
         log.debug("Checking if unit type exists with handle: {}", handle);
         return unitTypeRepository.existsByUnitTypeHandle(handle);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean existsByHandleAndIdNot(String handle, Integer id) {
-        log.debug("Checking if unit type exists with handle: {} excluding id: {}", handle, id);
-        return unitTypeRepository.existsByUnitTypeHandleAndUnitTypeIdNot(handle, id);
-    }
-} 
+}

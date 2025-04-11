@@ -11,7 +11,7 @@ import java.util.Optional;
  * Provides JPA operations for ProjectScope.
  */
 @Repository
-public interface ProjectScopeRepository extends JpaRepository<ProjectScope, Integer> {
+public interface ProjectScopeRepository extends JpaRepository<ProjectScope, Long> {
 
     /**
      * Finds a project scope by its handle.
@@ -36,5 +36,5 @@ public interface ProjectScopeRepository extends JpaRepository<ProjectScope, Inte
      * @param id The ID to exclude from the check
      * @return true if another project scope with the handle exists, false otherwise
      */
-    boolean existsByProjectScopeHandleAndProjectScopeIdNot(String handle, Integer id);
+    boolean existsByProjectScopeHandleAndProjectScopeIdNot(String handle, Long id);
 }

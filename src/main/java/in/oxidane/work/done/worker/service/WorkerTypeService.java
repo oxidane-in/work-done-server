@@ -25,7 +25,7 @@ public interface WorkerTypeService {
      * @param id The ID of the worker type to retrieve
      * @return The worker type response if found
      */
-    WorkerTypeResponse getWorkerTypeById(int id);
+    WorkerTypeResponse getWorkerTypeById(Long id);
 
     /**
      * Get all worker types
@@ -37,16 +37,16 @@ public interface WorkerTypeService {
     /**
      * Update an existing worker type
      *
-     * @param id The ID of the worker type to update
+     * @param id      The ID of the worker type to update
      * @param request The updated worker type data
      * @return The updated worker type response
      */
-    WorkerTypeResponse updateWorkerType(int id, WorkerTypeRequest request);
+    WorkerTypeResponse updateWorkerType(Long id, WorkerTypeRequest request);
 
     /**
      * Delete a worker type by ID
      *
      * @param id The ID of the worker type to delete
      */
-    void deleteWorkerType(int id);
-} 
+    void deleteWorkerType(Long id);
+}

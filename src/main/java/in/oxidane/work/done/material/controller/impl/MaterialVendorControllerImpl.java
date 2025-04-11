@@ -1,82 +1,83 @@
 package in.oxidane.work.done.material.controller.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import in.oxidane.work.done.common.constant.SchemaPaths;
+import in.oxidane.work.done.common.exception.SchemaValidationException;
+import in.oxidane.work.done.common.validation.SchemaValidator;
 import in.oxidane.work.done.material.controller.MaterialVendorController;
 import in.oxidane.work.done.material.dto.MaterialVendorRequest;
 import in.oxidane.work.done.material.dto.MaterialVendorResponse;
 import in.oxidane.work.done.material.service.MaterialVendorService;
-import jakarta.validation.Valid;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * Implementation of the MaterialVendorController interface.
+ * Implementation of the MaterialVendorController Longerface.
  * Provides REST API endpoints for managing material vendors.
  */
-@Slf4j
 @RestController
-@RequestMapping("/api/v1/material-vendors")
 @RequiredArgsConstructor
 public class MaterialVendorControllerImpl implements MaterialVendorController {
 
     private final MaterialVendorService materialVendorService;
+    private final ObjectMapper objectMapper;
+    private final ResourceLoader resourceLoader;
+    private final SchemaValidator schemaValidator;
+    private String createMaterialVendorControllerRequestSchema;
+    private String updateMaterialVendorControllerRequestSchema;
+
+    @PostConstruct
+    public void init() throws IOException {
+        try (InputStream inputStream = resourceLoader.getResource(
+            SchemaPaths.CREATE_MATERIAL_VENDOR_REQUEST_SCHEMA).getInputStream()) {
+            createMaterialVendorControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+        }
+        try (InputStream inputStream = resourceLoader.getResource(
+            SchemaPaths.UPDATE_MATERIAL_VENDOR_REQUEST_SCHEMA).getInputStream()) {
+            updateMaterialVendorControllerRequestSchema = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+        }
+    }
 
     @Override
-    public ResponseEntity<MaterialVendorResponse> createMaterialVendor(@Valid @RequestBody MaterialVendorRequest request) {
-        log.info("REST request to create a new material vendor");
-        log.debug("Request body: {}", request);
-
+    public ResponseEntity<MaterialVendorResponse> createMaterialVendor(MaterialVendorRequest request) throws JsonProcessingException, SchemaValidationException {
+        schemaValidator.validate(createMaterialVendorControllerRequestSchema,objectMapper.writeValueAsString(request));
         MaterialVendorResponse response = materialVendorService.createMaterialVendor(request);
-
-        log.info("Material vendor created with ID: {}", response.getMaterialVendorId());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<MaterialVendorResponse> getMaterialVendorById(@PathVariable int id) {
-        log.info("REST request to get material vendor with ID: {}", id);
-
+    public ResponseEntity<MaterialVendorResponse> getMaterialVendorById(Long id) {
         MaterialVendorResponse response = materialVendorService.getMaterialVendorById(id);
-
-        log.info("Retrieved material vendor: {}", response.getMaterialVendorName());
         return ResponseEntity.ok(response);
     }
 
     @Override
     public ResponseEntity<List<MaterialVendorResponse>> getAllMaterialVendors() {
-        log.info("REST request to get all material vendors");
-
         List<MaterialVendorResponse> responses = materialVendorService.getAllMaterialVendors();
-
-        log.info("Retrieved {} material vendors", responses.size());
         return ResponseEntity.ok(responses);
     }
 
     @Override
-    public ResponseEntity<MaterialVendorResponse> updateMaterialVendor(@PathVariable int id, @Valid @RequestBody MaterialVendorRequest request) {
-        log.info("REST request to update material vendor with ID: {}", id);
-        log.debug("Request body: {}", request);
-
-        MaterialVendorResponse response = materialVendorService.updateMaterialVendor(id, request);
-
-        log.info("Updated material vendor with ID: {}", response.getMaterialVendorId());
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Void> updateMaterialVendor(Long id, MaterialVendorRequest request) throws JsonProcessingException, SchemaValidationException {
+        schemaValidator.validate(updateMaterialVendorControllerRequestSchema,objectMapper.writeValueAsString(request));
+        materialVendorService.updateMaterialVendor(id, request);
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Void> deleteMaterialVendor(@PathVariable int id) {
-        log.info("REST request to delete material vendor with ID: {}", id);
-
+    public ResponseEntity<Void> deleteMaterialVendor(Long id) {
         materialVendorService.deleteMaterialVendor(id);
-
-        log.info("Deleted material vendor with ID: {}", id);
         return ResponseEntity.noContent().build();
     }
 }

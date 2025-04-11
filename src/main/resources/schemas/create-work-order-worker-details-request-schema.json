@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "workOrderId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "woLineItemId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "woWorkerTypeId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "woWorkerTypeRequiredPerUOM": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99999999.99
+    },
+    "woWorkerTypeRatePerHajri": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99999999.99
+    }
+  },
+  "required": [
+    "workOrderId",
+    "woLineItemId",
+    "woWorkerTypeId",
+    "woWorkerTypeRequiredPerUOM",
+    "woWorkerTypeRatePerHajri"
+  ],
+  "additionalProperties": false
+} 

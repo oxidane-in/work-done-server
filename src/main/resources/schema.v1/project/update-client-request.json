@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Client Request Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "clientName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Name of the client",
+      "example": "John Doe"
+    },
+    "clientContactPerson": {
+      "type": ["string", "null"],
+      "maxLength": 100,
+      "description": "Name of the contact person",
+      "example": "Jane Smith"
+    },
+    "clientContactNumber": {
+      "type": ["string", "null"],
+      "maxLength": 15,
+      "pattern": "^[0-9+\-\s]*$",
+      "description": "Contact number of the client",
+      "example": "+1234567890"
+    },
+    "clientEmail": {
+      "type": ["string", "null"],
+      "maxLength": 100,
+      "format": "email",
+      "description": "Email of the client",
+      "example": "email@client.com"
+    },
+    "clientAddress": {
+      "type": ["string", "null"],
+      "description": "Address of the client",
+      "example": "123 Main St, City, Country"
+    },
+    "clientDesc": {
+      "type": ["string", "null"],
+      "maxLength": 255,
+      "description": "Description of the client",
+      "example": "A brief description about the client"
+    }
+  }
+}

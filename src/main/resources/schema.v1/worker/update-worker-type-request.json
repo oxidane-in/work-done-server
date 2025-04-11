@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Worker Type Update Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "workerTypeName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Name of the worker type",
+      "example": "Carpenter"
+    },
+    "workerTypeRate": {
+      "type": ["number", "null"],
+      "minimum": 0.01,
+      "description": "Hourly rate for the worker type",
+      "example": 25.50
+    },
+    "workerTypeDesc": {
+      "type": ["string", "null"],
+      "maxLength": 255,
+      "description": "Description of the worker type",
+      "example": "Senior carpenter with 5+ years experience"
+    }
+  }
+}

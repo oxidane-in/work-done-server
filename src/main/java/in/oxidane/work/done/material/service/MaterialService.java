@@ -2,7 +2,7 @@ package in.oxidane.work.done.material.service;
 
 import in.oxidane.work.done.material.dto.MaterialRequest;
 import in.oxidane.work.done.material.dto.MaterialResponse;
-import in.oxidane.work.done.exception.ResourceNotFoundException;
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface MaterialService {
      * @return The material response
      * @throws ResourceNotFoundException if the material is not found
      */
-    MaterialResponse getMaterialById(Integer materialId) throws ResourceNotFoundException;
+    MaterialResponse getMaterialById(Long materialId) throws ResourceNotFoundException;
 
     /**
      * Retrieves all materials.
@@ -44,7 +44,7 @@ public interface MaterialService {
      * @return The updated material response
      * @throws ResourceNotFoundException if the material is not found
      */
-    MaterialResponse updateMaterial(Integer materialId, MaterialRequest request) throws ResourceNotFoundException;
+    MaterialResponse updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException;
 
     /**
      * Deletes a material by its ID.
@@ -52,5 +52,5 @@ public interface MaterialService {
      * @param materialId The ID of the material to delete
      * @throws ResourceNotFoundException if the material is not found
      */
-    void deleteMaterial(Integer materialId) throws ResourceNotFoundException;
+    void deleteMaterial(Long materialId) throws ResourceNotFoundException;
 }

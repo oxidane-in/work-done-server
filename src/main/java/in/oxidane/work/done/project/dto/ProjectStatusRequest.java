@@ -12,16 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Schema(description = "Project Status Request DTO")
 public class ProjectStatusRequest {
-    
-    @Schema(description = "Name of the project status", example = "In Progress", required = true)
+
+    @Schema(description = "Name of the project status", example = "In Progress")
     private String projectStatusName;
-    
-    @Schema(description = "Handle or unique identifier for the project status", example = "in_progress")
-    private String projectStatusHandle;
-    
+
     @Schema(description = "Description of the project status", example = "Project is currently in progress")
     private String projectStatusDesc;
-    
-    @Schema(description = "Whether the project status is active", example = "true")
-    private Boolean projectStatusIsActive;
-} 
+}

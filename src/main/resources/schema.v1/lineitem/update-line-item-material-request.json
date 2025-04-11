@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LineItemMaterialRequest",
+  "type": "object",
+  "properties": {
+    "lineItemId": {
+      "type": ["integer","null"],
+      "description": "Line item ID is required"
+    },
+    "materialId": {
+      "type": ["integer","null"],
+      "description": "Material ID is required"
+    },
+    "materialUnit": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Material unit is required"
+    },
+    "materialRate": {
+      "type": ["number","null"],
+      "minimum": 0,
+      "description": "Material rate must be positive"
+    },
+    "consumptionPerUom": {
+      "type": ["number","null"],
+      "minimum": 0,
+      "description": "Optional; must be positive if provided"
+    }
+  },
+  "additionalProperties": false
+}

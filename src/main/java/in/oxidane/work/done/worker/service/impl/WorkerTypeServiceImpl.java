@@ -1,20 +1,17 @@
 package in.oxidane.work.done.worker.service.impl;
 
-import in.oxidane.work.done.exception.ResourceNotFoundException;
+import in.oxidane.work.done.common.exception.ResourceNotFoundException;
 import in.oxidane.work.done.worker.dao.WorkerTypeDao;
 import in.oxidane.work.done.worker.dto.WorkerTypeRequest;
 import in.oxidane.work.done.worker.dto.WorkerTypeResponse;
 import in.oxidane.work.done.worker.entity.WorkerType;
 import in.oxidane.work.done.worker.mapper.WorkerTypeMapper;
 import in.oxidane.work.done.worker.service.WorkerTypeService;
-import in.oxidane.work.done.worker.validator.WorkerTypeValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Implementation of the WorkerTypeService interface.
@@ -26,73 +23,63 @@ import java.util.stream.Collectors;
 public class WorkerTypeServiceImpl implements WorkerTypeService {
 
     private final WorkerTypeDao workerTypeDao;
-    private final WorkerTypeValidator validator;
-    private final WorkerTypeMapper mapper;
+    private final WorkerTypeMapper workerTypeMapper;
 
     @Override
-    @Transactional
     public WorkerTypeResponse createWorkerType(WorkerTypeRequest request) {
-        log.debug("Service - Creating worker type: {}", request.getWorkerTypeName());
-        
-        // Validate request
-        validator.validateForCreate(request);
-        
+        log.debug("Creating worker type: {}", request.getWorkerTypeName());
+
         // Map request to entity
-        WorkerType workerType = mapper.toEntity(request);
-        
+        WorkerType workerType = workerTypeMapper.toEntity(request);
+
         // Save entity
         return workerTypeDao.create(workerType)
-                .map(mapper::toResponse)
-                .orElseThrow(() -> new RuntimeException("Failed to create worker type"));
+            .map(workerTypeMapper::toResponse)
+            .orElseThrow(() -> new RuntimeException("Failed to create worker type"));
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public WorkerTypeResponse getWorkerTypeById(int id) {
-        log.debug("Service - Fetching worker type with ID: {}", id);
-        
+    public WorkerTypeResponse getWorkerTypeById(Long id) {
+        log.debug("Fetching worker type with ID: {}", id);
+
         return workerTypeDao.getById(id)
-                .map(mapper::toResponse)
-                .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
+            .map(workerTypeMapper::toResponse)
+            .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<WorkerTypeResponse> getAllWorkerTypes() {
-        log.debug("Service - Fetching all worker types");
-        
-        return workerTypeDao.getAll().stream()
-                .map(mapper::toResponse)
-                .collect(Collectors.toList());
+        log.debug("Fetching all worker types");
+
+        return workerTypeMapper.toResponse(workerTypeDao.getAll());
     }
 
     @Override
-    @Transactional
-    public WorkerTypeResponse updateWorkerType(int id, WorkerTypeRequest request) {
-        log.debug("Service - Updating worker type with ID: {}", id);
-        
-        // Validate request
-        validator.validateForUpdate(request, id);
-        
+    public WorkerTypeResponse updateWorkerType(Long id, WorkerTypeRequest request) {
+        log.debug("Updating worker type with ID: {}", id);
+
         // Map request to entity
-        WorkerType workerType = mapper.toEntity(request);
-        workerType.setWorkerTypeId(id);
-        
+        WorkerType existingWorkerType = workerTypeDao.getById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
+
+        WorkerType workerType = workerTypeMapper.toUpdateEntityFromRequest(request, existingWorkerType);
+
+        log.debug("Updating worker type: {}", workerType);
+
         // Update entity
         return workerTypeDao.update(workerType)
-                .map(mapper::toResponse)
-                .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
+            .map(workerTypeMapper::toResponse)
+            .orElseThrow(() -> new ResourceNotFoundException("Worker type not found with ID: " + id));
     }
 
     @Override
-    @Transactional
-    public void deleteWorkerType(int id) {
-        log.debug("Service - Deleting worker type with ID: {}", id);
-        
+    public void deleteWorkerType(Long id) {
+        log.debug("Deleting worker type with ID: {}", id);
+
         if (!workerTypeDao.existsById(id)) {
             throw new ResourceNotFoundException("Worker type not found with ID: " + id);
         }
-        
+
         workerTypeDao.delete(id);
     }
-} 
+}

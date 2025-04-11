@@ -1,27 +1,18 @@
 package in.oxidane.work.done.material.mapper;
 
+import in.oxidane.work.done.common.config.MapstructMapperConfig;
 import in.oxidane.work.done.material.dto.MaterialManufacturerRequest;
 import in.oxidane.work.done.material.dto.MaterialManufacturerResponse;
 import in.oxidane.work.done.material.entity.MaterialManufacturer;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-@Component
-public class MaterialManufacturerMapper {
+@Mapper(config = MapstructMapperConfig.class)
+public interface MaterialManufacturerMapper {
 
-    public MaterialManufacturer toEntity(MaterialManufacturerRequest request) {
-        return MaterialManufacturer.builder()
-                .materialManufacturerName(request.getName())
-                .materialManufacturerDesc(request.getDescription())
-                .materialManufacturerHandle(request.getHandle())
-                .build();
-    }
+    MaterialManufacturer toEntity(MaterialManufacturerRequest request);
 
-    public MaterialManufacturerResponse toResponse(MaterialManufacturer entity) {
-        return MaterialManufacturerResponse.builder()
-                .id(entity.getMaterialManufacturerId())
-                .name(entity.getMaterialManufacturerName())
-                .description(entity.getMaterialManufacturerDesc())
-                .handle(entity.getMaterialManufacturerHandle())
-                .build();
-    }
+    MaterialManufacturerResponse toResponse(MaterialManufacturer entity);
+
+    MaterialManufacturer toUpdateEntityFromRequest(MaterialManufacturerRequest request, @MappingTarget MaterialManufacturer entity);
 }

@@ -1,5 +1,5 @@
 -- Insert records into material_manufacturer if they don't exist
-INSERT INTO master.material_manufacturer (
+INSERT INTO master_schema.material_manufacturer (
     material_manufacturer_id,
     material_manufacturer_name,
     material_manufacturer_desc,
@@ -21,16 +21,15 @@ FROM (
      ) AS new_values
 WHERE NOT EXISTS (
     SELECT 1
-    FROM master.material_manufacturer
+    FROM master_schema.material_manufacturer
     WHERE material_manufacturer_id = new_values.column1
 );
 
 -- Insert records into material_vendor if they don't exist
-INSERT INTO master.material_vendor (
+INSERT INTO master_schema.material_vendor (
     material_vendor_id,
     material_vendor_name,
-    material_vendor_desc,
-    material_vendor_handle
+    material_vendor_desc
 )
 SELECT *
 FROM (
@@ -42,32 +41,31 @@ FROM (
              (5, 'Vendor E', 'Specialty materials', 'vendor_e'),
              (6, 'Vendor F', 'Chemicals and solvents supplier', 'vendor_f'),
              (7, 'Vendor G', 'Infrastructure materials', 'vendor_g'),
-             (8, 'Vendor H', 'Bulk construction materials', 'vendor_h'),
-             (9, 'Vendor I', 'Small-scale vendor', 'vendor_i'),
-             (10, 'Vendor J', 'Custom material solutions', 'vendor_j')
+             (8, 'Vendor H', 'Bulk construction materials'),
+             (9, 'Vendor I', 'Small-scale vendor'),
+             (10, 'Vendor J', 'Custom material solutions')
      ) AS new_values
 WHERE NOT EXISTS (
     SELECT 1
-    FROM master.material_vendor
+    FROM master_schema.material_vendor
     WHERE material_vendor_id = new_values.column1
 );
 
 -- Insert records into material_type if they don't exist
-INSERT INTO master.material_type (
+INSERT INTO master_schema.material_type (
     material_type_id,
     material_type_name,
-    material_type_desc,
-    material_type_handle
+    material_type_desc
 )
 SELECT *
 FROM (
          VALUES
-             (1, 'Building Material', 'Materials used in construction', 'build_mat'),
-             (2, 'Chemical Material', 'Chemical-based materials and solutions', 'chem_mat'),
-             (3, 'Others', 'Miscellaneous materials', 'other_mat')
+             (1, 'Building Material', 'Materials used in construction'),
+             (2, 'Chemical Material', 'Chemical-based materials and solutions'),
+             (3, 'Others', 'Miscellaneous materials')
      ) AS new_values
 WHERE NOT EXISTS (
     SELECT 1
-    FROM master.material_type
+    FROM master_schema.material_type
     WHERE material_type_id = new_values.column1
 );

@@ -3,11 +3,43 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.25.xsd">
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
 
-    <!-- Material Schema -->
+    <!-- Material Table -->
     <changeSet id="20250318123001" author="prashant">
         <sqlFile path="001_Core_CREATE_Material.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Customer Table -->
+    <changeSet id="20250320085601" author="prashant">
+        <sqlFile path="003_Core_CREATE_Customer.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Project Table -->
+    <changeSet id="20250320085602" author="prashant">
+        <sqlFile path="005_Core_CREATE_Project.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!-- Worker Table -->
+    <changeSet id="20250320085603" author="prashant">
+        <sqlFile path="007_Core_CREATE_Worker.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <!--    LineItem Table-->
+    <changeSet id="20250320085604" author="prashant">
+        <sqlFile path="009_Core_CREATE_LineItem.sql"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>

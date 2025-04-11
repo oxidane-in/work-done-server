@@ -11,8 +11,8 @@ import java.util.Optional;
  * Provides JPA operations for UnitOfMeasurement.
  */
 @Repository
-public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasurement, Integer> {
-    
+public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasurement, Long> {
+
     /**
      * Finds a unit of measurement by its handle.
      *
@@ -20,7 +20,7 @@ public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasure
      * @return An Optional containing the unit of measurement if found, or empty if not found
      */
     Optional<UnitOfMeasurement> findByUomHandle(String handle);
-    
+
     /**
      * Checks if a unit of measurement with the specified handle exists.
      *
@@ -28,13 +28,4 @@ public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasure
      * @return true if a unit of measurement with the handle exists, false otherwise
      */
     boolean existsByUomHandle(String handle);
-    
-    /**
-     * Checks if a unit of measurement with the specified handle exists, excluding the one with the specified ID.
-     *
-     * @param handle The handle to check
-     * @param id The ID to exclude from the check
-     * @return true if another unit of measurement with the handle exists, false otherwise
-     */
-    boolean existsByUomHandleAndUomIdNot(String handle, Integer id);
-} 
+}

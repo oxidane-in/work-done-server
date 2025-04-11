@@ -2,6 +2,7 @@ package in.oxidane.work.done.building.controller;
 
 import in.oxidane.work.done.building.dto.UnitTypeRequest;
 import in.oxidane.work.done.building.dto.UnitTypeResponse;
+import in.oxidane.work.done.common.constant.Endpoints;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,7 +10,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -17,7 +24,7 @@ import java.util.List;
  * REST API endpoints for UnitType operations.
  */
 @Tag(name = "Unit Type", description = "APIs for unit type management")
-@RequestMapping("/api/v1/unit-types")
+@RequestMapping(Endpoints.UNIT_TYPE_V1)
 public interface UnitTypeController {
 
     /**
@@ -60,7 +67,7 @@ public interface UnitTypeController {
     @GetMapping("/{id}")
     ResponseEntity<UnitTypeResponse> getUnitTypeById(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
 
     /**
@@ -81,7 +88,7 @@ public interface UnitTypeController {
     /**
      * Updates an existing unit type.
      *
-     * @param id The ID of the unit type to update
+     * @param id      The ID of the unit type to update
      * @param request The request containing updated unit type details
      * @return The updated unit type
      */
@@ -96,9 +103,9 @@ public interface UnitTypeController {
         }
     )
     @PutMapping("/{id}")
-    ResponseEntity<UnitTypeResponse> updateUnitType(
+    ResponseEntity<Void> updateUnitType(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id,
+        @PathVariable("id") Long id,
         @Parameter(description = "Updated unit type details", required = true)
         @RequestBody UnitTypeRequest request
     );
@@ -120,6 +127,6 @@ public interface UnitTypeController {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteUnitType(
         @Parameter(description = "Unit type ID", required = true)
-        @PathVariable("id") Integer id
+        @PathVariable("id") Long id
     );
-} 
+}

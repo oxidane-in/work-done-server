@@ -12,19 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Schema(description = "Unit Type Response DTO")
 public class UnitTypeResponse {
-    
+
     @Schema(description = "Unique identifier for the unit type", example = "1")
-    private Integer unitTypeId;
-    
+    private Long unitTypeId;
+
     @Schema(description = "Name of the unit type", example = "Apartment")
     private String unitTypeName;
-    
+
     @Schema(description = "Handle or unique identifier for the unit type", example = "apartment")
     private String unitTypeHandle;
-    
+
     @Schema(description = "Description of the unit type", example = "Residential apartment unit")
     private String unitTypeDesc;
-    
-    @Schema(description = "Whether the unit type is active", example = "true")
-    private Boolean isActive;
-} 
+}
