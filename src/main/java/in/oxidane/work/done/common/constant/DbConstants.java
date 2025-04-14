@@ -21,6 +21,7 @@ public class DbConstants {
     public static final String LINE_ITEM_CATEGORY = "line_item_category";
     public static final String LINE_ITEM_SUB_CATEGORY = "line_item_sub_category";
     public static final String LINE_ITEM_HEADER = "line_item_header";
+    public static final String OTHER_COST_ITEM = "other_cost_item";
 
     // Database table names - core_schema
     public static final String PROJECT = "project";
@@ -31,6 +32,10 @@ public class DbConstants {
     public static final String WO_LINE_ITEMS = "wo_line_items";
     public static final String WO_MATERIAL_DETAILS = "wo_material_details";
     public static final String WO_WORKER_DETAILS = "wo_worker_details";
+    public static final String WO_OTHER_COST_PLANNED = "wo_other_cost_planned";
+    public static final String WO_OTHER_COST_ACTUAL = "wo_other_cost_actual";
+    public static final String PROJECT_OTHER_COST_PLANNED = "project_other_cost_planned";
+    public static final String PROJECT_OTHER_COST_ACTUAL = "project_other_cost_actual";
 
     //Column names for auditable
     public static final String CREATED_BY = "created_by";
@@ -39,6 +44,7 @@ public class DbConstants {
     public static final String UPDATED_ON = "updated_on";
 
     //Foreign and Unique Key constraints for Project
+    public static final String FK_PROJECT_ID = "fk_project_id";
     public static final String FK_PROJECT_CLIENT_ID = "fk_project_client_id";
     public static final String FK_PROJECT_PROJECT_STATUS_ID = "fk_project_projectstatus_id";
     public static final String UK_PROJECT_NAME = "uk_project_name";
@@ -252,4 +258,33 @@ public class DbConstants {
     public static final String WO_WORKER_TYPE_ID = "wo_worker_type_id";
     public static final String WO_WORKER_TYPE_REQUIRED_PER_UOM = "wo_worker_type_required_per_uom";
     public static final String WO_WORKER_TYPE_RATE_PER_HAJRI = "wo_worker_type_rate_per_hajri";
+
+    // Column names for OtherCostItem table
+    public static final String OTHER_COST_ITEM_ID = "other_cost_item_id";
+    public static final String OTHER_COST_ITEM_NAME = "other_cost_item_name";
+    public static final String OTHER_COST_ITEM_DESC = "other_cost_item_desc";
+    public static final String OTHER_COST_ITEM_HANDLE = "other_cost_item_handle";
+    public static final String UK_OTHER_COST_ITEM_NAME = "uk_other_cost_item_name";
+    public static final String UK_OTHER_COST_ITEM_HANDLE = "uk_other_cost_item_handle";
+
+    // Column names for WorkOrder_OtherCostPlanned table
+    public static final String WO_OTHER_COST_PLANNED_ID = "wo_other_cost_planned_id";
+    public static final String WO_OTHER_COST_PLANNED_AMOUNT = "wo_other_cost_planned_amount";
+    public static final String WO_OTHER_COST_PLANNED_REMARK = "wo_other_cost_planned_remark";
+    public static final String FK_OTHER_COST_ITEM_ID = "fk_other_cost_item_id";
+
+    // Column names for WorkOrder_OtherCostActual table
+    public static final String WO_OTHER_COST_ACTUAL_ID = "wo_other_cost_actual_id";
+    public static final String WO_OTHER_COST_ACTUAL_AMOUNT = "wo_other_cost_actual_amount";
+    public static final String WO_OTHER_COST_ACTUAL_REMARK = "wo_other_cost_actual_remark";
+    public static final String FK_WO_OTHER_COST_PLANNED_ID = "fk_wo_other_cost_planned_id";
+
+    // Column names for Project_OtherCostActual table
+    public static final String PROJECT_OTHER_COST_ACTUAL_ID = "project_other_cost_actual_id";
+    public static final String PROJECT_OTHER_COST_ACTUAL_AMOUNT = "project_other_cost_actual_amount";
+    public static final String PROJECT_OTHER_COST_ACTUAL_REMARK = "project_other_cost_actual_remark";
+    public static final String PROJECT_OTHER_COST_PLANNED_ID = "project_other_cost_planned_id";
+    public static final String PROJECT_OTHER_COST_PLANNED_AMOUNT = "project_other_cost_planned_amount";
+    public static final String PROJECT_OTHER_COST_PLANNED_REMARK = "project_other_cost_planned_remark";
+    public static final String FK_PROJECT_OTHER_COST_PLANNED_ID = "fk_project_other_cost_planned_id";
 }
