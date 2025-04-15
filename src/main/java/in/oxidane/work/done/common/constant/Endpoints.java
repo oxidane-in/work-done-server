@@ -44,5 +44,5 @@ public class Endpoints {
     public static final String WORKER_V1 = API_V1 + "/worker";
 
     //OtherItemCost
-    public static final String OTHER_COST_ITEM_V1 = API_V1 + "/other-item-cost";
+    public static final String OTHER_COST_ITEM_V1 = API_V1 + "/other-cost-item";
 }
