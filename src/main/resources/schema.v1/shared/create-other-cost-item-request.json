@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "OtherCostItem Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "otherCostItemName",
+    "otherCostItemDesc"
+  ],
+  "properties": {
+    "otherCostItemName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "otherCostItemDesc": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  }
+}
