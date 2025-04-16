@@ -32,12 +32,16 @@ public class Endpoints {
     public static final String UNIT_OF_MEASUREMENT_V1 = API_V1 + "/unit-of-measurements";
     public static final String WORK_ORDER_MATERIAL_DETAILS_V1 = API_V1 + "/work-order-material-details";
     public static final String WORK_ORDER_WORKER_DETAILS_V1 = API_V1 + "/work-order-worker-details";
+    public static final String WORK_ORDER_OTHER_COST_ACTUAL_V1 = API_V1 + "/work-order-other-cost-actual";
+    public static final String WORK_ORDER_OTHER_COST_PLANNED_V1 =  API_V1 + "/work-order-other-cost-planned";
 
     // Project
     public static final String PROJECT_V1 = API_V1 + "/projects";
     public static final String PROJECT_SCOPE_V1 = API_V1 + "/project-scopes";
     public static final String PROJECT_STATUS_V1 = API_V1 + "/project-statuses";
     public static final String CLIENT_V1 = API_V1 + "/client";
+    public static final String PROJECT_OTHER_COST_ACTUAL_V1 = API_V1 + "/project-other-cost-actual";
+    public static final String PROJECT_OTHER_COST_PLANNED_V1 = API_V1 + "/project-other-cost-planned";
 
     // Worker
     public static final String WORKER_TYPE_V1 = API_V1 + "/worker-types";
@@ -45,4 +49,6 @@ public class Endpoints {
 
     //OtherItemCost
     public static final String OTHER_COST_ITEM_V1 = API_V1 + "/other-cost-item";
+
+
 }

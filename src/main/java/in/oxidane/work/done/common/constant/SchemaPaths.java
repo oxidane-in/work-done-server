@@ -43,6 +43,11 @@ public final class SchemaPaths {
     public static final String UPDATE_PROJECT_SCOPE_REQUEST_SCHEMA = "classpath:schema.v1/project/update-project-scope-request.json";
     public static final String CREATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/project/create-project-status-request.json";
     public static final String UPDATE_PROJECT_STATUS_REQUEST_SCHEMA = "classpath:schema.v1/project/update-project-status-request.json";
+    public static final String CREATE_PROJECT_OTHER_COST_ACTUAL_SCHEMA = "classpath:schema.v1/project/create-project-other-cost-actual.json";
+    public static final String UPDATE_PROJECT_OTHER_COST_ACTUAL_SCHEMA = "classpath:schema.v1/project/update-project-other-cost-actual.json";
+    public static final String CREATE_PROJECT_OTHER_COST_PLANNED_SCHEMA = "classpath:schema.v1/project/create-project-other-cost-planned.json";
+    public static final String UPDATE_PROJECT_OTHER_COST_PLANNED_SCHEMA = "classpath:schema.v1/project/update-project-other-cost-planned.json";
+
 
     // Worker Schema
     public static final String CREATE_WORKER_REQUEST_SCHEMA = "classpath:schema.v1/worker/create-worker-request.json";
@@ -55,6 +60,11 @@ public final class SchemaPaths {
     public static final String UPDATE_WORK_ORDER_REQUEST_SCHEMA = "classpath:schema.v1/order/update-work-order-request-schema.json";
     public static final String CREATE_WORK_ORDER_LINE_ITEMS_REQUEST_SCHEMA = "classpath:schema.v1/order/create-work-order-line-items-request-schema.json";
     public static final String UPDATE_WORK_ORDER_LINE_ITEMS_REQUEST_SCHEMA = "classpath:schema.v1/order/update-work-order-line-items-request-schema.json";
+    public static final String CREATE_WORK_ORDER_OTHER_COST_ACTUAL_SCHEMA = "classpath:schema.v1/order/create-work-order-other-cost-actual.json";
+    public static final String UPDATE_WORK_ORDER_OTHER_COST_ACTUAL_SCHEMA = "classpath:schema.v1/order/update-work-order-other-cost-actual.json";
+    public static final String UPDATE_WORK_ORDER_OTHER_COST_PLANNED_SCHEMA = "classpath:schema.v1/order/update-work-order-other-cost-planned.json";
+    public static final String CREATE_WORK_ORDER_OTHER_COST_PLANNED_SCHEMA = "classpath:schema.v1/order/create-work-order-other-cost-planned.json";
+
 
     // Work Order Material Details Schema
     public static final String CREATE_WORK_ORDER_MATERIAL_DETAILS_REQUEST_SCHEMA = "classpath:schemas/create-work-order-material-details-request-schema.json";
@@ -67,4 +77,5 @@ public final class SchemaPaths {
     // OtherCostItem Schema
     public static final String CREATE_OTHER_COST_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/shared/create-other-cost-item-request.json";
     public static final String UPDATE_OTHER_COST_ITEM_REQUEST_SCHEMA = "classpath:schema.v1/shared/update-other-cost-item-request.json";
+
 }

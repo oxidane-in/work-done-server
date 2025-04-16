@@ -31,7 +31,7 @@ public class WorkOrderOtherCostActual extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = DbConstants.WO_OTHER_COST_ACTUAL_ID, nullable = false)
-    private Long woOtherCostPlannedId;
+    private Long woOtherCostActualId;
 
     @ManyToOne
     @JoinColumn(name = DbConstants.WO_OTHER_COST_PLANNED_ID, nullable = false,
@@ -39,8 +39,8 @@ public class WorkOrderOtherCostActual extends Auditable {
     private WorkOrderOtherCostPlanned workOrderOtherCostPlanned;
 
     @Column(name = DbConstants.WO_OTHER_COST_ACTUAL_AMOUNT, nullable = false, precision = 18, scale = 2)
-    private BigDecimal woOtherCostPlannedAmount;
+    private BigDecimal woOtherCostActualAmount;
 
     @Column(name = DbConstants.WO_OTHER_COST_ACTUAL_REMARK, length = 500)
-    private String woOtherCostPlannedRemark;
+    private String woOtherCostActualRemark;
 }
