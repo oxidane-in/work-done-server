@@ -4,7 +4,7 @@ public class Endpoints {
 
     public static final String BASE_URL = "https://api.oxidane.in";
 
-    public static final String API_V1 = "/v1";
+    public static final String API_V1 = "/api/v1";
 
     // health check
     public static final String HEALTH_CHECK = "/health/check";
@@ -49,6 +49,5 @@ public class Endpoints {
 
     //OtherItemCost
     public static final String OTHER_COST_ITEM_V1 = API_V1 + "/other-cost-item";
-
 
 }
