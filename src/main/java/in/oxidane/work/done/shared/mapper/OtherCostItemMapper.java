@@ -16,10 +16,10 @@ public interface OtherCostItemMapper {
     OtherCostItem toEntity(OtherCostItemRequest request);
 
     //OtherCostItem - entity to response DTO
-    OtherCostItemResponse toResponse( OtherCostItem entity);
+    OtherCostItemResponse toResponse(OtherCostItem entity);
 
     //OtherCostItem - entity list to response list dto
-    List<OtherCostItemResponse> toResponse(List<OtherCostItem> otherCostItems );
+    List<OtherCostItemResponse> toResponse(List<OtherCostItem> otherCostItems);
 
     //OtherCostItem - update from request to existing entity
     OtherCostItem toUpdateEntityFromRequest(OtherCostItemRequest request, @MappingTarget OtherCostItem entity);

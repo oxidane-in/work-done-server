@@ -15,7 +15,7 @@ import java.util.List;
 public interface WorkOrderOtherCostActualMapper {
 
     // mapper - from request to entity
-    @Mapping(source = "workOrderOtherCostPlannedId", target = "workOrderOtherCostPlanned", qualifiedByName = "toWorkOrderOtherCostActualPlanned")
+    @Mapping(source = "workOrderOtherCostPlannedId", target = "workOrderOtherCostPlanned", qualifiedByName = "toWorkOrderOtherCostPlanned")
     WorkOrderOtherCostActual toEntity(WorkOrderOtherCostActualRequest request);
 
     // mapper - from entity to response
@@ -24,7 +24,7 @@ public interface WorkOrderOtherCostActualMapper {
     //mapper - from List entity to List response
     List<WorkOrderOtherCostActualResponse> toResponse(List<WorkOrderOtherCostActual> entities);
 
-    @Mapping(source = "workOrderOtherCostPlannedId", target = "workOrderOtherCostPlanned", qualifiedByName = "toWorkOrderOtherCostActualPlanned")
+    @Mapping(source = "workOrderOtherCostPlannedId", target = "workOrderOtherCostPlanned", qualifiedByName = "toWorkOrderOtherCostPlanned")
     WorkOrderOtherCostActual toUpdateEntityFromRequest(WorkOrderOtherCostActualRequest request, @MappingTarget WorkOrderOtherCostActual entity);
 
 }

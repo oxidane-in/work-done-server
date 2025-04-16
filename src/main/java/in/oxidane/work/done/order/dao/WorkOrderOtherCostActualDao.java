@@ -7,8 +7,12 @@ import java.util.Optional;
 
 public interface WorkOrderOtherCostActualDao {
     WorkOrderOtherCostActual save(WorkOrderOtherCostActual entity);
+
     Optional<WorkOrderOtherCostActual> findById(Long id);
+
     List<WorkOrderOtherCostActual> findAll();
+
     void delete(Long id);
+
     boolean existById(Long id);
 }

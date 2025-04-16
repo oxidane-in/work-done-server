@@ -62,14 +62,14 @@ public class ProjectOtherCostActualControllerImpl implements ProjectOtherCostAct
     @Override
     public ResponseEntity<List<ProjectOtherCostActualResponse>> getAllOtherCostActual() {
         List<ProjectOtherCostActualResponse> allOtherCostActual = projectOtherCostActualService.getAllOtherCostActual();
-        return  ResponseEntity.ok(allOtherCostActual);
+        return ResponseEntity.ok(allOtherCostActual);
     }
 
     @Override
     public ResponseEntity<ProjectOtherCostActualResponse> updateOtherCostActual(Long id, ProjectOtherCostActualRequest request) throws JsonProcessingException, SchemaValidationException {
         schemaValidator.validate(updateProjectOtherCostActual, objectMapper.writeValueAsString(request));
         ProjectOtherCostActualResponse updatedOtherCostActual = projectOtherCostActualService.updateOtherCostActual(id, request);
-        return  ResponseEntity.ok(updatedOtherCostActual);
+        return ResponseEntity.ok(updatedOtherCostActual);
     }
 
     @Override

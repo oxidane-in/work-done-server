@@ -29,7 +29,7 @@ public class WorkOrderOtherCostActualServiceImpl implements WorkOrderOtherCostAc
     @Override
     public WorkOrderOtherCostActualResponse getWorkOrderCostActualById(Long id) {
         WorkOrderOtherCostActual entity = workOrderOtherCostActualDoa.findById(id).
-            orElseThrow(()->new ResourceNotFoundException("Not found WorkOrderCostActual with id : " + id));
+            orElseThrow(() -> new ResourceNotFoundException("Not found WorkOrderCostActual with id : " + id));
         return workOrderOtherCostActualMapper.toResponse(entity);
     }
 
@@ -42,7 +42,7 @@ public class WorkOrderOtherCostActualServiceImpl implements WorkOrderOtherCostAc
     @Override
     public WorkOrderOtherCostActualResponse updateWorkOrderCostActualById(Long id, WorkOrderOtherCostActualRequest request) {
         WorkOrderOtherCostActual entity = workOrderOtherCostActualDoa.findById(id)
-            .orElseThrow(()->new ResourceNotFoundException("Not found WorkOrderCostActual with id : " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Not found WorkOrderCostActual with id : " + id));
 
         WorkOrderOtherCostActual updateEntities = workOrderOtherCostActualMapper.toUpdateEntityFromRequest(request, entity);
         WorkOrderOtherCostActual savedEntities = workOrderOtherCostActualDoa.save(updateEntities);

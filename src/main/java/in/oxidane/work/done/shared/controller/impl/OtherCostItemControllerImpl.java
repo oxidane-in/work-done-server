@@ -49,8 +49,8 @@ public class OtherCostItemControllerImpl implements OtherCostItemController {
     @Override
     public ResponseEntity<OtherCostItemResponse> createOtherCostItem(OtherCostItemRequest request) throws JsonProcessingException, SchemaValidationException {
         schemaValidator.validate(createOtherCostItemRequestSchema, objectMapper.writeValueAsString(request));
-       OtherCostItemResponse otherCostItem = otherCostItemService.createOtherCostItem(request);
-       return new ResponseEntity<>(otherCostItem, HttpStatus.CREATED);
+        OtherCostItemResponse otherCostItem = otherCostItemService.createOtherCostItem(request);
+        return new ResponseEntity<>(otherCostItem, HttpStatus.CREATED);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class OtherCostItemControllerImpl implements OtherCostItemController {
     @Override
     public ResponseEntity<OtherCostItemResponse> updateOtherCostItem(Long id, OtherCostItemRequest request) throws JsonProcessingException, SchemaValidationException {
         schemaValidator.validate(updateOtherCostItemRequestSchema, objectMapper.writeValueAsString(request));
-       OtherCostItemResponse otherCostItem = otherCostItemService.updateOtherItemCost(id, request);
-       return  ResponseEntity.ok(otherCostItem);
+        OtherCostItemResponse otherCostItem = otherCostItemService.updateOtherItemCost(id, request);
+        return ResponseEntity.ok(otherCostItem);
     }
 
     @Override

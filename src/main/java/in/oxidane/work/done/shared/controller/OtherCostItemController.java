@@ -13,7 +13,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -35,7 +41,7 @@ public interface OtherCostItemController {
     @Operation(summary = "Get OtherCostItem by id")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OtherCostItem Found",
-        content = @Content( schema = @Schema(implementation = OtherCostItemResponse.class))),
+            content = @Content(schema = @Schema(implementation = OtherCostItemResponse.class))),
         @ApiResponse(responseCode = "404", description = "OtherCostItem Not Found"),
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
@@ -45,7 +51,7 @@ public interface OtherCostItemController {
     @Operation(summary = "Get all OtherCostItem")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Fetched all OtherCostItem",
-            content = @Content( schema = @Schema(implementation = OtherCostItemResponse.class))),
+            content = @Content(schema = @Schema(implementation = OtherCostItemResponse.class))),
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
@@ -54,7 +60,7 @@ public interface OtherCostItemController {
     @Operation(summary = "Update existing OtherCostItem")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Updated OtherCostItem",
-        content = @Content(schema = @Schema(implementation = OtherCostItemResponse.class))),
+            content = @Content(schema = @Schema(implementation = OtherCostItemResponse.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input"),
         @ApiResponse(responseCode = "404", description = "OtherCostItem Not Found"),
         @ApiResponse(responseCode = "500", description = "Internal server error")
@@ -62,7 +68,7 @@ public interface OtherCostItemController {
     @PutMapping("/{id}")
     ResponseEntity<OtherCostItemResponse> updateOtherCostItem(
         @Parameter(description = "OTHER_COST_ITEM_ID") @PathVariable Long id,
-        @RequestBody  OtherCostItemRequest request) throws JsonProcessingException, SchemaValidationException;
+        @RequestBody OtherCostItemRequest request) throws JsonProcessingException, SchemaValidationException;
 
     @Operation(summary = "Delete a OtherCostItem")
     @ApiResponses(value = {

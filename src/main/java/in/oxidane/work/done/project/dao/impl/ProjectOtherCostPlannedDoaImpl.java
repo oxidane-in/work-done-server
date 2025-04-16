@@ -32,7 +32,7 @@ public class ProjectOtherCostPlannedDoaImpl implements ProjectOtherCostPlannedDa
 
     @Override
     public void deleteById(Long id) {
-       projectOtherCostPlannedRepository.deleteById(id);
+        projectOtherCostPlannedRepository.deleteById(id);
     }
 
     @Override

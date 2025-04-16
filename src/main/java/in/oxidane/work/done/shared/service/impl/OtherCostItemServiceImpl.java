@@ -42,7 +42,7 @@ public class OtherCostItemServiceImpl implements OtherCostItemService {
     @Override
     public OtherCostItemResponse updateOtherItemCost(Long id, OtherCostItemRequest request) {
         OtherCostItem existingOtherCostItem = otherCostItemDao.findById(id).
-            orElseThrow(()-> new ResourceNotFoundException("OtherCostItem not found with id" + id));
+            orElseThrow(() -> new ResourceNotFoundException("OtherCostItem not found with id" + id));
 
         OtherCostItem updatedOtherCostItem = otherCostItemMapper.toUpdateEntityFromRequest(request, existingOtherCostItem);
         return otherCostItemMapper.toResponse(updatedOtherCostItem);
@@ -50,7 +50,7 @@ public class OtherCostItemServiceImpl implements OtherCostItemService {
 
     @Override
     public void deleteOtherCostItem(Long id) {
-        if(!otherCostItemDao.existById(id)){
+        if (!otherCostItemDao.existById(id)) {
             throw new ResourceNotFoundException("OtherCostItem not found with ID: " + id);
         }
 

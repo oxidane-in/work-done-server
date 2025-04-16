@@ -11,7 +11,11 @@ import in.oxidane.work.done.order.entity.WorkOrderLineItems;
 import in.oxidane.work.done.order.entity.WorkOrderOtherCostPlanned;
 import in.oxidane.work.done.order.mapper.WorkOrderLineItemsMapper;
 import in.oxidane.work.done.order.mapper.WorkOrderMapper;
-import in.oxidane.work.done.project.entity.*;
+import in.oxidane.work.done.project.entity.Client;
+import in.oxidane.work.done.project.entity.Project;
+import in.oxidane.work.done.project.entity.ProjectOtherCostActual;
+import in.oxidane.work.done.project.entity.ProjectOtherCostPlanned;
+import in.oxidane.work.done.project.entity.ProjectStatus;
 import in.oxidane.work.done.project.mapper.ClientMapper;
 import in.oxidane.work.done.project.mapper.ProjectStatusMapper;
 import in.oxidane.work.done.shared.entity.OtherCostItem;
@@ -21,7 +25,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
 @Mapper(config = MapstructMapperConfig.class,
-        uses = {WorkOrderMapper.class, WorkOrderLineItemsMapper.class, WorkerTypeMapper.class, ClientMapper.class, ProjectStatusMapper.class, ProjectOtherCostActual.class})
+    uses = {WorkOrderMapper.class, WorkOrderLineItemsMapper.class, WorkerTypeMapper.class, ClientMapper.class, ProjectStatusMapper.class, ProjectOtherCostActual.class})
 public interface IdToEntityMapper {
 
     @Named("toWorkOrder")
@@ -91,20 +95,20 @@ public interface IdToEntityMapper {
     }
 
     @Named("toProjectOtherCostPlanned")
-    default ProjectOtherCostPlanned toProjectOtherCostPlanned(Long id){
+    default ProjectOtherCostPlanned toProjectOtherCostPlanned(Long id) {
         if (id == null) return null;
         return ProjectOtherCostPlanned.builder().projectOtherCostPlannedId(id).build();
     }
 
     @Named("toOtherCostItem")
-    default OtherCostItem toOtherCostItem(Long id){
+    default OtherCostItem toOtherCostItem(Long id) {
         if (id == null) return null;
         return OtherCostItem.builder().otherCostItemId(id).build();
     }
 
-    @Named("toWorkOrderOtherCostActualPlanned")
-    default WorkOrderOtherCostPlanned toWorkOrderOtherCostActualPlanned(Long id){
-        if(id == null) return null;
+    @Named("toWorkOrderOtherCostPlanned")
+    default WorkOrderOtherCostPlanned toWorkOrderOtherCostPlanned(Long id) {
+        if (id == null) return null;
         return WorkOrderOtherCostPlanned.builder().woOtherCostPlannedId(id).build();
     }
 
