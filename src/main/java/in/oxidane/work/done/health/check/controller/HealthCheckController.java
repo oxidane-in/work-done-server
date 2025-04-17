@@ -8,19 +8,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping(Endpoints.HEALTH_CHECK)
 @Tag(name = "Health", description = "Health check API for service status monitoring")
 public class HealthCheckController {
-
 
     @Operation(summary = "Get service health status", description = "Returns the current health status of the service along with timestamp")
     @ApiResponses(value = {
@@ -30,15 +26,12 @@ public class HealthCheckController {
     })
     @GetMapping
     public ResponseEntity<HealthResponse> healthCheck() {
-        try (MDC.MDCCloseable _ = MDC.putCloseable("requestId", UUID.randomUUID().toString())) {
+        HealthResponse response = HealthResponse.builder()
+            .status("UP")
+            .timestamp(System.currentTimeMillis())
+            .service("work-done-server")
+            .build();
 
-            HealthResponse response = HealthResponse.builder()
-                .status("UP")
-                .timestamp(System.currentTimeMillis())
-                .service("work-done-api-service")
-                .build();
-
-            return ResponseEntity.ok(response);
-        }
+        return ResponseEntity.ok(response);
     }
 }

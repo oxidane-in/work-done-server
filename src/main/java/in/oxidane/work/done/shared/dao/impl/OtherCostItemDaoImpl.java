@@ -32,7 +32,7 @@ public class OtherCostItemDaoImpl implements OtherCostItemDao {
 
     @Override
     public void delete(Long id) {
-       otherCostItemRepository.deleteById(id);
+        otherCostItemRepository.deleteById(id);
     }
 
     @Override
