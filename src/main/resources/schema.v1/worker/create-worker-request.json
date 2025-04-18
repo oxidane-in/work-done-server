@@ -29,12 +29,12 @@
       "exclusiveMinimum": 0
     },
     "workerBankAccount": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 1,
       "maxLength": 20
     },
     "workerIFSC": {
-      "type": "string",
+      "type": ["string", "null"],
       "pattern": "^[A-Z]{4}0[A-Z0-9]{6}$"
     },
     "workerBirthDate": {
@@ -43,7 +43,7 @@
     },
     "workerMobileNumber": {
       "type": "string",
-      "pattern": "^[0-9]{10,15}$"
+      "pattern": "^[0-9+\\-\\s]+$"
     },
     "workerState": {
       "type": "string",

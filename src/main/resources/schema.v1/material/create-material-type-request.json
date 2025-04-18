@@ -11,7 +11,7 @@
       "example": "Raw Material"
     },
     "materialTypeDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "maxLength": 255,
       "description": "Description of the material type",
       "example": "Unprocessed materials"

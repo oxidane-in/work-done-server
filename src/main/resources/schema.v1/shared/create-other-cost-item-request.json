@@ -14,7 +14,7 @@
       "maxLength": 255
     },
     "otherCostItemDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 1,
       "maxLength": 255
     }

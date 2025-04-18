@@ -21,8 +21,8 @@
       "description": "Planned amount for the other cost"
     },
     "projectOtherCostPlannedRemark": {
-      "type": "string",
-      "description": "Remarks for the planned other cost",
+      "type": ["string", "null"],
+      "description": "Remarks for the planned other cost"
     }
   },
   "required": [

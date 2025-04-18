@@ -15,7 +15,7 @@
       "maximum": 999999999999.99
     },
     "projectOtherCostActualRemark": {
-      "type": "string",
+      "type": ["string", "null"],
       "maxLength": 500,
       "description": "Remarks for the actual other cost"
     }

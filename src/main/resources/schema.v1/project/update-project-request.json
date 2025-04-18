@@ -3,6 +3,12 @@
   "title": "ProjectRequest",
   "type": "object",
   "properties": {
+    "projectCode": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Project code is required"
+    },
     "projectName": {
       "type": ["string", "null"],
       "minLength": 1,
@@ -50,32 +56,10 @@
       "format": "date",
       "description": "Actual end date (optional)"
     },
-    "woNumber": {
-      "type": ["string", "null"],
-      "minLength": 1,
-      "maxLength": 50,
-      "description": "WO number is required"
-    },
-    "woDate": {
-      "type": ["string", "null"],
-      "format": "date",
-      "description": "WO date is required"
-    },
-    "woCompletionDate": {
-      "type": ["string", "null"],
-      "format": "date",
-      "description": "WO completion date (optional)"
-    },
     "tenureOfProjectMonths": {
       "type": ["integer","null"],
       "minimum": 1,
       "description": "Tenure of project in months (min 1)"
-    },
-    "woAmount": {
-      "type": ["number","null"],
-      "exclusiveMinimum": 0,
-      "description": "WO amount (must be > 0, up to 16 digits and 2 decimals)",
-      "multipleOf": 0.01
     }
   },
   "additionalProperties": false
