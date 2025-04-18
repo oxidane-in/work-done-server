@@ -61,7 +61,7 @@ public class Material extends Auditable {
     private MaterialType materialType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = DbConstants.MATERIAL_UNIT, nullable = false,
+    @JoinColumn(name = DbConstants.MATERIAL_UOM_ID, nullable = false,
         foreignKey = @ForeignKey(name = DbConstants.FK_MATERIAL_UOM_ID))
     private UnitOfMeasurement materialUOM;
 

@@ -10,12 +10,12 @@ import in.oxidane.work.done.material.dto.MaterialResponse;
 import in.oxidane.work.done.material.entity.Material;
 import in.oxidane.work.done.material.mapper.MaterialMapper;
 import in.oxidane.work.done.material.service.MaterialService;
+import in.oxidane.work.done.order.dao.UnitOfMeasurementDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Implementation of the MaterialService interface.
@@ -30,17 +30,17 @@ public class MaterialServiceImpl implements MaterialService {
     private final MaterialManufacturerDao materialManufacturerDao;
     private final MaterialVendorDao materialVendorDao;
     private final MaterialTypeDao materialTypeDao;
+    private final UnitOfMeasurementDao unitOfMeasurementDao;
     private final MaterialMapper materialMapper;
 
     @Override
     public MaterialResponse createMaterial(MaterialRequest request) {
         log.info("Creating new material: {}", request.getMaterialName());
 
-        // Prepare the material entity
-        Material material = materialMapper.toEntity(request);
-        material = setRelatedEntities(material, request);
+        checkAssociatedEntitiesExists(request);
 
-        // Save the material
+        Material material = materialMapper.toEntity(request);
+
         return materialDao.create(material)
             .map(materialMapper::toResponse)
             .orElseThrow(() -> {
@@ -68,34 +68,27 @@ public class MaterialServiceImpl implements MaterialService {
         List<Material> materials = materialDao.getAll();
         log.info("Found {} materials", materials.size());
 
-        return materials.stream()
-            .map(materialMapper::toResponse)
-            .collect(Collectors.toList());
+        return materialMapper.toResponse(materials);
     }
 
     @Override
-    public MaterialResponse updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException {
+    public void updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException {
 
-        //TODO: Check this flow
         log.info("Updating material with ID: {}", materialId);
 
         // Check if material exists
-        if (!materialDao.existsById(materialId)) {
-            log.error("Material not found with ID: {}", materialId);
-            throw new ResourceNotFoundException("Material not found with ID: " + materialId);
-        }
-
-//        // Update the material using builder
-//        Material updatedMaterial = materialMapper.updateEntityFromRequest(existingMaterial, request);
-//        updatedMaterial = setRelatedEntities(updatedMaterial, request);
-
-        // Update the material
-        return materialDao.update(materialId, materialMapper.toEntity(request))
-            .map(materialMapper::toResponse)
+        Material existingMaterial = materialDao.getById(materialId)
             .orElseThrow(() -> {
-                log.error("Failed to update material with ID: {}", materialId);
-                return new RuntimeException("Failed to update material");
+                log.error("Material not found with ID: {}", materialId);
+                return new ResourceNotFoundException("Material not found with ID: " + materialId);
             });
+
+        checkAssociatedEntitiesExists(request);
+
+        // Update the material using builder
+        Material updatedMaterial = materialMapper.updateEntityFromRequest(request, existingMaterial);
+
+        materialDao.update(updatedMaterial.getMaterialId(), updatedMaterial);
     }
 
     @Override
@@ -109,12 +102,7 @@ public class MaterialServiceImpl implements MaterialService {
             throw new ResourceNotFoundException("Material not found with ID: " + materialId);
         }
 
-        // Delete the material
-        boolean deleted = materialDao.delete(materialId);
-        if (!deleted) {
-            log.error("Failed to delete material with ID: {}", materialId);
-            throw new RuntimeException("Failed to delete material with ID: " + materialId);
-        }
+        materialDao.delete(materialId);
 
         log.info("Successfully deleted material with ID: {}", materialId);
     }
@@ -122,29 +110,29 @@ public class MaterialServiceImpl implements MaterialService {
     /**
      * Sets related entities on the Material entity based on the request.
      *
-     * @param material The Material entity to update
-     * @param request  The request containing related entity IDs
-     * @return The updated Material entity with related entities set
+     * @param request The request containing related entity IDs
      */
-    private Material setRelatedEntities(Material material, MaterialRequest request) {
-        Material.MaterialBuilder builder = material.toBuilder();
+    private void checkAssociatedEntitiesExists(MaterialRequest request) {
 
-        // Set related entities if IDs are provided
-        if (request.getMaterialManufacturerId() != null) {
-            materialManufacturerDao.getById(request.getMaterialManufacturerId())
-                .ifPresent(builder::materialManufacturer);
+        Long typeId = request.getMaterialTypeId();
+        Long vendorId = request.getMaterialVendorId();
+        Long manufacturerId = request.getMaterialManufacturerId();
+        Long uomId = request.getMaterialUOMId();
+
+        if (typeId != null && !materialTypeDao.existsById(typeId)) {
+            throw new ResourceNotFoundException("MaterialType not found with id " + typeId);
         }
 
-        if (request.getMaterialVendorId() != null) {
-            materialVendorDao.getById(request.getMaterialVendorId())
-                .ifPresent(builder::materialVendor);
+        if (vendorId != null && !materialVendorDao.existsById(vendorId)) {
+            throw new ResourceNotFoundException("MaterialVendor not found with id " + vendorId);
         }
 
-        if (request.getMaterialTypeId() != null) {
-            materialTypeDao.getById(request.getMaterialTypeId())
-                .ifPresent(builder::materialType);
+        if (manufacturerId != null && !materialManufacturerDao.existsById(manufacturerId)) {
+            throw new ResourceNotFoundException("MaterialManufacturer not found with id " + manufacturerId);
         }
 
-        return builder.build();
+        if (uomId != null && !unitOfMeasurementDao.existsById(uomId)) {
+            throw new ResourceNotFoundException("UnitOfMeasurement not found with id " + uomId);
+        }
     }
 }

@@ -9,6 +9,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import java.util.List;
+
 /**
  * Mapper class for converting between Material entity and DTOs.
  */
@@ -47,4 +49,12 @@ public interface MaterialMapper {
      * @return The mapped MaterialResponse DTO
      */
     MaterialResponse toResponse(Material material);
+
+    /**
+     * Converts a list of Material entities to a list of MaterialResponse DTOs.
+     *
+     * @param materials The source list of Material entities
+     * @return The mapped list of MaterialResponse DTOs
+     */
+    List<MaterialResponse> toResponse(List<Material> materials);
 }
