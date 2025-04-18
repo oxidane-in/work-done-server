@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -40,51 +39,75 @@ public class EveritSchemaValidator implements Validator {
 
     private void handleValidationException(final ValidationException e, final List<SchemaValidationError> errors) {
         if (CollectionUtils.isEmpty(e.getCausingExceptions())) {
-            String name = null;
-            String pointer = e.getPointerToViolation();
-            String errorMsg = e.getErrorMessage();
-            if (Objects.nonNull(pointer) && pointer.startsWith("#")) {
-                pointer = pointer.substring(1);
-            }
-
-            int i;
-            if (e.getKeyword().equals("required")) {
-                i = e.getMessage().indexOf("[") + 1;
-                int j = e.getMessage().indexOf("]", i);
-                name = e.getMessage().substring(i, j);
-            } else {
-                String constValues;
-                if (e.getKeyword().equals("enum")) {
-                    constValues = ((EnumSchema) e.getViolatedSchema()).getPossibleValues().toString();
-                    errorMsg = this.replaceParameters("Enumeration value not allowed. Allowed values are: {param}.", new String[]{constValues});
-                } else if (e.getKeyword().equals("const")) {
-                    constValues = ((ConstSchema) e.getViolatedSchema()).getPermittedValue().toString();
-                    errorMsg = this.replaceParameters("Allowed values are: {param}.", new String[]{constValues});
-                }
-            }
-
-            if (Objects.isNull(name) && Objects.nonNull(pointer)) {
-                i = pointer.lastIndexOf("/");
-                name = pointer.substring(i + 1);
-            }
-
-            if (StringUtils.isNumeric(name)) {
-                name = pointer.substring(1, pointer.lastIndexOf("/"));
-            }
-
-            if (Objects.equals(pointer, "")) {
-                pointer = "/";
-            }
-
-            SchemaValidationError error = new SchemaValidationError(name, errorMsg, pointer);
-            errors.add(error);
+            processSingleValidationException(e, errors);
         } else {
-            Iterator it = e.getCausingExceptions().iterator();
-            while (it.hasNext()) {
-                ValidationException validationException = (ValidationException) it.next();
-                this.handleValidationException(validationException, errors);
-            }
+            processNestedValidationExceptions(e, errors);
         }
+    }
+
+    private void processSingleValidationException(final ValidationException e, final List<SchemaValidationError> errors) {
+        String name = extractName(e);
+        String pointer = extractPointer(e);
+        String errorMsg = extractErrorMessage(e);
+
+        if (Objects.equals(pointer, "")) {
+            pointer = "/";
+        }
+
+        // Ensure errorMsg is not blank
+        if (StringUtils.isBlank(errorMsg)) {
+            errorMsg = e.getMessage(); // Fallback to the default exception message
+        }
+
+        // Do not combine name and errorMsg; keep them separate
+        SchemaValidationError error = new SchemaValidationError(name, pointer, errorMsg);
+        errors.add(error);
+    }
+
+    private void processNestedValidationExceptions(final ValidationException e, final List<SchemaValidationError> errors) {
+        for (ValidationException validationException : e.getCausingExceptions()) {
+            handleValidationException(validationException, errors);
+        }
+    }
+
+    private String extractName(final ValidationException e) {
+        String pointer = e.getPointerToViolation();
+        String name = null;
+
+        if ("required".equals(e.getKeyword())) {
+            int i = e.getMessage().indexOf("[") + 1;
+            int j = e.getMessage().indexOf("]", i);
+            name = e.getMessage().substring(i, j);
+        } else if (StringUtils.isNumeric(pointer)) {
+            name = pointer.substring(1, pointer.lastIndexOf("/"));
+        } else if (Objects.nonNull(pointer)) {
+            int i = pointer.lastIndexOf("/");
+            name = pointer.substring(i + 1);
+        }
+
+        return name;
+    }
+
+    private String extractPointer(final ValidationException e) {
+        String pointer = e.getPointerToViolation();
+        if (Objects.nonNull(pointer) && pointer.startsWith("#")) {
+            pointer = pointer.substring(1);
+        }
+        return pointer;
+    }
+
+    private String extractErrorMessage(final ValidationException e) {
+        String errorMsg = e.getErrorMessage();
+
+        if ("enum".equals(e.getKeyword())) {
+            String constValues = ((EnumSchema) e.getViolatedSchema()).getPossibleValues().toString();
+            errorMsg = replaceParameters("Enumeration value not allowed. Allowed values are: {param}.", constValues);
+        } else if ("const".equals(e.getKeyword())) {
+            String constValues = ((ConstSchema) e.getViolatedSchema()).getPermittedValue().toString();
+            errorMsg = replaceParameters("Allowed values are: {param}.", constValues);
+        }
+
+        return errorMsg;
     }
 
     private String replaceParameters(String msg, String... params) {
@@ -98,12 +121,12 @@ public class EveritSchemaValidator implements Validator {
                 if (Objects.nonNull(params[i])) {
                     param = matcher.group();
                     param = param.substring(1, param.length() - 1);
-                    replacedMsg = replacedMsg.replaceFirst("\\{" + param + "\\}", Matcher.quoteReplacement(params[i]));
+                    replacedMsg = replacedMsg.replaceFirst("\\{" + param + "}", Matcher.quoteReplacement(params[i]));
                     ++i;
                 } else {
                     param = matcher.group();
                     param = param.substring(1, param.length() - 1);
-                    replacedMsg = replacedMsg.replaceFirst("\\{" + param + "\\}", Matcher.quoteReplacement(""));
+                    replacedMsg = replacedMsg.replaceFirst("\\{" + param + "}", Matcher.quoteReplacement(""));
                 }
             }
         }

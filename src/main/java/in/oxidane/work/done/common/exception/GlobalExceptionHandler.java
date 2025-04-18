@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
         ApiErrorResponse errorResponse = ApiErrorResponse.builder()
             .timestamp(LocalDateTime.now())
             .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-            .error("Internal Server Error")
+            .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
             .message("An unexpected error occurred: " + ex.getMessage())
             .path(getRequestPath(request))
             .build();
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
         ApiErrorResponse errorResponse = ApiErrorResponse.builder()
             .timestamp(LocalDateTime.now())
             .status(HttpStatus.NOT_FOUND.value())
-            .error("Not Found")
+            .error(HttpStatus.NOT_FOUND.getReasonPhrase())
             .message(ex.getMessage())
             .path(getRequestPath(request))
             .build();
@@ -70,9 +70,9 @@ public class GlobalExceptionHandler {
         ApiErrorResponse response = ApiErrorResponse.builder()
             .timestamp(LocalDateTime.now())
             .status(HttpStatus.BAD_REQUEST.value())
-            .error("Bad Request")
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
             .message("Validation failed")
-            .errorMessages(ex.getErrors())
+            .errorReasons(ex.getErrors())
             .path(getRequestPath(request))
             .build();
 
@@ -96,9 +96,9 @@ public class GlobalExceptionHandler {
         ApiErrorResponse response = ApiErrorResponse.builder()
             .timestamp(LocalDateTime.now())
             .status(HttpStatus.BAD_REQUEST.value())
-            .error("Bad Request")
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
             .message("Validation failed")
-            .errorMessages(errorList)
+            .errorReasons(errorList)
             .path(getRequestPath(request))
             .build();
 
@@ -121,5 +121,28 @@ public class GlobalExceptionHandler {
             .build();
 
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(SchemaValidationException.class)
+    public ResponseEntity<ApiErrorResponse> handleSchemaValidationException(SchemaValidationException ex, WebRequest request) {
+        setupMDC();
+        log.error("Schema validation error: {}", ex.getMessage());
+
+        List<String> errorList = new ArrayList<>();
+        ex.getErrors().forEach(error -> {
+            String errorMessage = error.getName() + ": " + error.getMessage();
+            errorList.add(errorMessage);
+        });
+
+        ApiErrorResponse response = ApiErrorResponse.builder()
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+            .message("Schema validation failed")
+            .errorReasons(errorList)
+            .path(getRequestPath(request))
+            .build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
