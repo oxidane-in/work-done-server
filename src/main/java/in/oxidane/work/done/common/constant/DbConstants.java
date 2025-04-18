@@ -173,7 +173,7 @@ public class DbConstants {
     // Column names for material table
     public static final String MATERIAL_ID = "material_id";
     public static final String MATERIAL_NAME = "material_name";
-    public static final String MATERIAL_UNIT = "material_unit";
+    public static final String MATERIAL_UOM_ID = "material_uom_id";
     public static final String MATERIAL_PACK_SIZE = "material_pack_size";
     public static final String MATERIAL_RATE_PER_PACK = "material_rate_per_pack";
     public static final String MATERIAL_RATE_PER_UNIT = "material_rate_per_unit";
@@ -241,7 +241,6 @@ public class DbConstants {
     public static final String LINE_ITEM_HEADER_DESC = "line_item_header_desc";
 
     // Column names for WorkOrder_LineItems table
-    public static final String WORK_ORDER_LINE_ITEM_ID = "work_order_line_item_id";
     public static final String WO_ALLOCATED_LINE_ITEM_ID = "wo_allocated_line_item_id";
     public static final String WO_LINE_ITEM_QTY = "wo_line_item_qty";
     public static final String WO_LINE_ITEM_RATE = "wo_line_item_rate";

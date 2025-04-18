@@ -10,7 +10,7 @@
       "description": "Line item header name is required"
     },
     "lineItemHeaderDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "maxLength": 255,
       "description": "Optional description of the line item header"
     }

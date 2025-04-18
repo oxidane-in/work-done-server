@@ -41,10 +41,9 @@ public interface MaterialService {
      *
      * @param materialId The ID of the material to update
      * @param request The material data for update
-     * @return The updated material response
      * @throws ResourceNotFoundException if the material is not found
      */
-    MaterialResponse updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException;
+    void updateMaterial(Long materialId, MaterialRequest request) throws ResourceNotFoundException;
 
     /**
      * Deletes a material by its ID.

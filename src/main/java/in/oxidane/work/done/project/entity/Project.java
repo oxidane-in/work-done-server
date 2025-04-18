@@ -46,7 +46,7 @@ public class Project extends Auditable {
     @Column(name = DbConstants.PROJECT_ID)
     private Long projectId;
 
-    @Column(name = DbConstants.PROJECT_CODE, nullable = false, unique = true)
+    @Column(name = DbConstants.PROJECT_CODE, unique = true)
     private String projectCode;
 
     @Column(name = DbConstants.PROJECT_NAME, nullable = false, unique = true)

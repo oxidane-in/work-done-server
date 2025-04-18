@@ -25,11 +25,10 @@
       "description": "ID of the material type",
       "example": 1
     },
-    "materialUnit": {
-      "type": ["string", "null"],
+    "materialUOM": {
+      "type": ["integer", "null"],
       "description": "Unit of measurement for the material",
-      "example": "kg",
-      "maxLength": 20
+      "example": "1"
     },
     "materialPackSize": {
       "type": ["number","null"],
@@ -41,12 +40,6 @@
       "type": ["number","null"],
       "description": "Rate per pack of the material",
       "example": 350.0
-    },
-    "materialRatePerUnit": {
-      "type": ["number","null"],
-      "description": "Rate per unit of the material",
-      "example": 7.0
     }
-  },
-  "required": ["materialName", "materialPackSize"]
+  }
 }

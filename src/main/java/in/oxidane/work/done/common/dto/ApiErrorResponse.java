@@ -29,5 +29,5 @@ public class ApiErrorResponse {
      * Only populated for validation errors.
      * For non-validation errors, this will be null or empty.
      */
-    private List<String> errorMessages;
+    private List<String> errorReasons;
 }

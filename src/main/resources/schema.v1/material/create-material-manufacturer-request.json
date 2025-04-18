@@ -10,7 +10,7 @@
       "example": "ABC Industries"
     },
     "materialManufacturerDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Material manufacturer description",
       "example": "Leading provider of industrial materials"
     }

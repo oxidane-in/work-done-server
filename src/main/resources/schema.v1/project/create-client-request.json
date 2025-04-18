@@ -20,7 +20,7 @@
     "clientContactNumber": {
       "type": ["string", "null"],
       "maxLength": 15,
-      "pattern": "^[0-9+\-\s]*$",
+      "pattern": "^[0-9+\\-\\s]+$",
       "description": "Contact number of the client",
       "example": "+1234567890"
     },

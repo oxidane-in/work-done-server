@@ -31,7 +31,7 @@ public class MaterialRequest {
     @Schema(description = "ID of the material type", example = "1")
     private Long materialTypeId;
 
-    @Schema(description = "Unit of measurement for the material", example = "kg")
+    @Schema(description = "Unit of measurement for the material", example = "1")
     private Long materialUOMId;
 
     @Schema(description = "Size of the material package", example = "50.0")
@@ -39,7 +39,4 @@ public class MaterialRequest {
 
     @Schema(description = "Rate per pack of the material", example = "350.0")
     private BigDecimal materialRatePerPack;
-
-    @Schema(description = "Rate per unit of the material", example = "7.0")
-    private BigDecimal materialRatePerUnit;
 }

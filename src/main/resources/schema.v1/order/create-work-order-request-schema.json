@@ -16,10 +16,10 @@
       "format": "date"
     },
     "workOrderDesc": {
-      "type": "string",
+      "type": ["string", "null"],
       "maxLength": 500
     }
   },
   "required": ["workOrderCode", "projectId", "workOrderDate"],
   "additionalProperties": false
-} 
+}
